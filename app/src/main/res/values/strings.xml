@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Cat Weather</string>
+    <string name="weather_api_key">ff946992f1ee4f3d80385853210111</string>
 </resources>

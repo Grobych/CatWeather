@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/CatWeather/app/src/main/res/drawable/ic_launcher_background.xml" value="0.4036458333333333" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/CatWeather/app/src/main/res/layout/activity_main.xml" value="0.3875" />
         <entry key="..\:/Users/Alexander/AndroidStudioProjects/CatWeather/app/src/main/res/layout/activity_test.xml" value="0.3713768115942029" />
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/CatWeather/app/src/main/res/layout/current_weather_fragment.xml" value="0.33" />
+        <entry key="..\:/Users/Alexander/AndroidStudioProjects/CatWeather/app/src/main/res/layout/location_fragment.xml" value="0.21979166666666666" />
       </map>
     </option>
   </component>

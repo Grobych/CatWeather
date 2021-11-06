@@ -1,18 +1,16 @@
-package com.globa.catweather.utils
+package com.globa.catweather.utils.location
 
-import android.Manifest
 import android.app.Activity
 import android.content.Context
-import android.content.pm.PackageManager
 import android.location.Location
-import androidx.core.app.ActivityCompat
+import com.google.android.gms.tasks.OnSuccessListener
 
 open abstract class LocationUtil {
     protected val LOCATION_PERMISSION_CODE = 1000
     lateinit var currentLocation: Location
 
-    abstract fun init(context : Context, activity : Activity)
-    abstract fun checkLocation()
+    abstract fun init(activity: Activity)
+    abstract fun checkLocation(context: Context, activity: Activity, listener: OnSuccessListener<Location>)
     abstract fun checkPermission(context : Context, activity : Activity) : Boolean
 }
 
