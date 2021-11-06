@@ -50,7 +50,7 @@ class LocationFragment : Fragment() {
                 val textView : TextView = requireView().findViewById<TextView>(R.id.locationTextView)
                 textView.text = updatedLocation
             })
-            viewModel.updateLocation()
+            viewModel.locationRequestInit()
         }
         //TODO() : add right check permissions
     }
