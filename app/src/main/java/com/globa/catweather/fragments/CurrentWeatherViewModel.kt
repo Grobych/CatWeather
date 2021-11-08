@@ -47,7 +47,7 @@ class CurrentWeatherViewModel : ViewModel() {
             })
         queue.add(stringRequest)
     }
-    fun update(){
+    private fun update(){
         currentT.postValue(currentWeather.temp)
         feelsLike.postValue(currentWeather.feelsLike)
         windDirection.postValue(currentWeather.windDirection)

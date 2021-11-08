@@ -19,7 +19,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
 class LocationFragment : Fragment() {
-    val LOCATION_PERMISSION_CODE = 1000
+    private val LOCATION_PERMISSION_CODE = 1000 // TODO: move to constant strings
 
     companion object {
         fun newInstance() = LocationFragment()
@@ -41,8 +41,6 @@ class LocationFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
 
         viewModel = ViewModelProvider(requireActivity()).get(LocationViewModel::class.java)
-        Log.d("VIEW MODEL", "$viewModel")
-
         if (checkPermission(this.requireContext(), this.requireActivity())){
             viewModel.fusedLocationClient = fusedLocationClient
             viewModel.location.observe(viewLifecycleOwner, Observer {
@@ -50,14 +48,9 @@ class LocationFragment : Fragment() {
                 val textView : TextView = requireView().findViewById<TextView>(R.id.locationTextView)
                 textView.text = updatedLocation
             })
-            viewModel.updateLocation()
+            viewModel.locationRequestInit()
         }
         //TODO() : add right check permissions
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-
     }
 
     private fun checkPermission(context : Context, activity : Activity) : Boolean {
