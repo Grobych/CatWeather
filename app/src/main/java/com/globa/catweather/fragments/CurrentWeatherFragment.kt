@@ -1,7 +1,5 @@
 package com.globa.catweather.fragments
 
-import android.content.res.Resources
-import android.content.res.loader.ResourcesProvider
 import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -12,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
-import com.android.volley.toolbox.ImageLoader
 import com.globa.catweather.R
 import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
 
