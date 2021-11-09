@@ -9,45 +9,41 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/weatherRefreshLayout">
+        android:id="@+id/weatherRefreshLayout"
+        tools:context=".fragments.CurrentWeatherFragment">
 
-        <TableLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".fragments.CurrentWeatherFragment">
+            android:orientation="vertical">
 
             <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_round"
+                android:layout_gravity="center"
                 android:layout_margin="20dp"
                 android:padding="20dp">
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+
                 <LinearLayout>
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/ic_cloud_test"
                         android:layout_marginHorizontal="10dp"
-                        android:layout_marginTop="5dp">
-                    </ImageView>
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/ic_cloud_test"
+                        android:contentDescription="@string/app_name" />
                     <TextView
-                        android:id="@+id/weatherConditionTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="60dp"
-                        android:gravity="center_vertical"
-                        android:text="@{weather.condition, default = 0.0}"
-                        android:textSize="20sp"/>
+                        android:id="@+id/currentTempTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@{Double.toString(weather.temp), default = 0.0}"
+                        android:textSize="20sp"
+                        android:gravity="center_vertical"/>
                 </LinearLayout>
-            </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
 
-            <LinearLayout
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -55,22 +51,16 @@
                     <TextView
                         android:id="@+id/tempDecryptionTextView"
                         android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/current_temp" />
+                        android:layout_height="match_parent"
+                        android:text="@string/current_weather" />
 
                 <TextView
-                    android:id="@+id/currentTempTextView"
+                    android:id="@+id/weatherConditionTextView"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@{Double.toString(weather.temp), default = 0.0}" />
-            </LinearLayout>
+                    android:text="@{weather.condition, default = 0.0}" />
+            </TableRow>
 
-        </TableRow>
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <LinearLayout
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -86,15 +76,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@{Double.toString(weather.feelsLike), default = 0.0}" />
-            </LinearLayout>
+            </TableRow>
 
-        </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" >
-
-            <LinearLayout
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal">
@@ -115,22 +100,22 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{Double.toString(weather.windSpeed), default = 0.0 }" />
-                </LinearLayout>
+                </TableRow>
 
-        </TableRow>
         </TableLayout>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
-                <ImageView
+                <com.github.siyamed.shapeimageview.RoundedImageView
+                    android:contentDescription="@string/app_name"
                     android:id="@+id/currentWeatherImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/cat_weather_test" />
-            </TableRow>
-        </TableLayout>
+                    android:src="@drawable/cat_weather_test"
+                    app:siRadius="30dp"
+                    android:scaleType="fitCenter"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginBottom="20dp"/>
+        </LinearLayout>
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
