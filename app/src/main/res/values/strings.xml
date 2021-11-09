@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">Cat Weather</string>
     <string name="weather_api_key">ff946992f1ee4f3d80385853210111</string>
+    <string name="location_load">Location is loading...</string>
+    <string name="current_temp">Current temperature</string>
+    <string name="feels_like">Feels like</string>
+    <string name="wind">Wind</string>
 </resources>
