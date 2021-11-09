@@ -1,12 +1,16 @@
 package com.globa.catweather.fragments
 
 import android.content.Context
+import android.media.Image
 import android.util.Log
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.volley.Request
+import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.globa.catweather.R
 import com.globa.catweather.models.Weather
 import org.json.JSONObject
 
@@ -17,7 +21,7 @@ class CurrentWeatherViewModel : ViewModel() {
     val windSpeed = MutableLiveData<Double>()
     val condition = MutableLiveData<String>()
     val feelsLike = MutableLiveData<Double>()
-
+    val code = MutableLiveData<Int>()
     var isLoading: Boolean = false
 
 
@@ -38,7 +42,8 @@ class CurrentWeatherViewModel : ViewModel() {
                     json.getDouble("feelslike_c"),
                     json.getDouble("wind_kph"),
                     json.getString("wind_dir"),
-                    json.getJSONObject("condition").getString("text"))
+                    json.getJSONObject("condition").getString("text"),
+                    json.getJSONObject("condition").getInt("code"))
                 update()
             },
             {
@@ -53,5 +58,6 @@ class CurrentWeatherViewModel : ViewModel() {
         windDirection.postValue(currentWeather.windDirection)
         windSpeed.postValue(currentWeather.windSpeed)
         condition.postValue(currentWeather.condition)
+        code.postValue(currentWeather.code)
     }
 }
