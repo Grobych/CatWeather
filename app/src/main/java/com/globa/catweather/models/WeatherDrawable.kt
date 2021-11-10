@@ -1,10 +1,6 @@
 package com.globa.catweather.models
 
-import android.graphics.drawable.Drawable
-import androidx.core.content.ContextCompat
 import com.globa.catweather.R
-import java.util.*
-import kotlin.coroutines.coroutineContext
 
 enum class WeatherDrawable(val code : Int, val drawable: Int) {
     Sunny(1000,R.drawable.sunny),

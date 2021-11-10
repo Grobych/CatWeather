@@ -20,12 +20,12 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
     val geocoder = Geocoder(getApplication(), Locale.getDefault())
     lateinit var fusedLocationClient : FusedLocationProviderClient
 
-    lateinit var locationRequest: LocationRequest
-    lateinit var locationCallback: LocationCallback
+    private lateinit var locationRequest: LocationRequest
+    private lateinit var locationCallback: LocationCallback
 
     @SuppressLint("MissingPermission")
     fun locationRequestInit(){
-        locationRequest = LocationRequest.create();
+        locationRequest = LocationRequest.create()
         locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
         locationRequest.interval = TimeUnit.MINUTES.toMillis(30)
 

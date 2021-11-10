@@ -1,29 +1,23 @@
 package com.globa.catweather.fragments
 
 import android.content.Context
-import android.media.Image
 import android.util.Log
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.android.volley.Request
-import com.android.volley.toolbox.ImageLoader
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.globa.catweather.R
 import com.globa.catweather.models.Weather
 import org.json.JSONObject
 
 class CurrentWeatherViewModel : ViewModel() {
-    lateinit var currentWeather : Weather
+    private lateinit var currentWeather : Weather
     val currentT = MutableLiveData<Double>()
     val windDirection = MutableLiveData<String>()
     val windSpeed = MutableLiveData<Double>()
     val condition = MutableLiveData<String>()
     val feelsLike = MutableLiveData<Double>()
     val code = MutableLiveData<Int>()
-    var isLoading: Boolean = false
-
 
     fun updateWeather(context: Context, city : String){
 
@@ -35,7 +29,7 @@ class CurrentWeatherViewModel : ViewModel() {
             Request.Method.GET, url,
             { response ->
                 Log.i("JSON TEST", response)
-                val json : JSONObject = JSONObject(JSONObject(response).getString("current"))
+                val json = JSONObject(JSONObject(response).getString("current"))
                 Log.d("JSON","$json")
                 currentWeather = Weather(
                     json.getDouble("temp_c"),
