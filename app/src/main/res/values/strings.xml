@@ -5,4 +5,5 @@
     <string name="current_temp">Current temperature</string>
     <string name="feels_like">Feels like</string>
     <string name="wind">Wind</string>
+    <string name="current_weather">Condition</string>
 </resources>
