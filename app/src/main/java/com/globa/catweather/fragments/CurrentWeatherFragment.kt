@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.globa.catweather.R
 import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
+import com.globa.catweather.models.WeatherDrawable
 
 
 class CurrentWeatherFragment : Fragment() {
@@ -68,20 +69,12 @@ class CurrentWeatherFragment : Fragment() {
         }
     }
 
-    private fun updateImage(code : Int){ // TODO: Rewrite with weather code table
-        val drawable : Drawable? = when(code){
-            1000 -> ContextCompat.getDrawable(this.requireContext(), R.drawable.sunny)
-            1003 -> ContextCompat.getDrawable(this.requireContext(), R.drawable.partly_cloudy)
-            1006 -> ContextCompat.getDrawable(this.requireContext(), R.drawable.cloudy)
-            1009 -> ContextCompat.getDrawable(this.requireContext(), R.drawable.overcast)
-            1030 -> ContextCompat.getDrawable(this.requireContext(), R.drawable.mist)
-            1117 -> ContextCompat.getDrawable(this.requireContext(), R.drawable.blizzard)
-            1135 -> ContextCompat.getDrawable(this.requireContext(), R.drawable.fog)
-            1180, 1183 -> ContextCompat.getDrawable(this.requireContext(), R.drawable.light_rain)
-            1186, 1189 -> ContextCompat.getDrawable(this.requireContext(), R.drawable.moderate_rain)
-            1192, 1195 -> ContextCompat.getDrawable(this.requireContext(), R.drawable.heavy_rain)
-            else -> ContextCompat.getDrawable(this.requireContext(), R.drawable.cat_weather_test)
-        }
+    private fun getByCode(code: Int) : Drawable?{
+        WeatherDrawable.values().forEach { wd -> if (wd.code == code) return ContextCompat.getDrawable(this.requireContext(), wd.drawable) }
+        return ContextCompat.getDrawable(this.requireContext(), R.drawable.cat_weather_test)
+    }
+    private fun updateImage(code : Int){
+        val drawable = getByCode(code)
         binding.currentWeatherImage.setImageDrawable(drawable)
     }
 
