@@ -17,93 +17,84 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TableLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/background_round"
-                android:layout_gravity="center"
                 android:layout_margin="20dp"
                 android:padding="20dp"
                 android:backgroundTint="?attr/colorPrimary">
-
-                <LinearLayout>
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="10dp"
                         android:layout_marginTop="5dp"
                         android:background="@drawable/ic_cloud_test"
-                        android:contentDescription="@string/app_name" />
-                    <TextView
-                        android:id="@+id/currentTempTextView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="@{Double.toString(weather.temp), default = 0.0}"
-                        android:textSize="20sp"
-                        android:gravity="center_vertical"/>
-                </LinearLayout>
+                        android:contentDescription="@string/app_name"
+                        android:id="@+id/cloud"/>
 
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/tempDecryptionTextView"
-                        android:layout_width="250dp"
-                        android:layout_height="match_parent"
-                        android:text="@string/current_weather" />
+                <TextView
+                    android:id="@+id/currentTempTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:text="@{Double.toString(weather.temp), default = 0.0}"
+                    android:textSize="20sp"
+                    android:layout_toEndOf="@id/cloud"/>
 
                 <TextView
                     android:id="@+id/weatherConditionTextView"
                     android:layout_width="match_parent"
-                    android:text="@{weather.condition, default = 0.0}" />
-            </TableRow>
+                    android:layout_height="wrap_content"
+                    android:text="@{weather.condition, default = 0.0}"
+                    android:textAlignment="textEnd"/>
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/feelsLikeTempDecryptionTextView"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/feels_like" />
+                <TextView
+                    android:id="@+id/feelsLikeTempDecryptionTextView"
+                    android:layout_width="280dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:text="@string/feels_like"
+                    android:textAlignment="textEnd" />
 
                 <TextView
                     android:id="@+id/feelsLikeTempTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{Double.toString(weather.feelsLike), default = 0.0}" />
-            </TableRow>
+                    android:layout_marginTop="20dp"
+                    android:layout_toEndOf="@+id/feelsLikeTempDecryptionTextView"
+                    android:text="@{Double.toString(weather.feelsLike), default = 0.0}"
+                    android:textAlignment="textEnd" />
 
+                <TextView
+                    android:id="@+id/windDirectionDescTextView"
+                    android:layout_width="263dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="40dp"
+                    android:text="@string/wind"
+                    android:textAlignment="textEnd" />
 
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/windDirectionTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_toEndOf="@+id/windDirectionDescTextView"
+                    android:text="@{weather.windDirection, default = 'N' }"
+                    android:textAlignment="textEnd" />
 
-                    <TextView
-                        android:id="@+id/windDirectionDescTextView"
-                        android:layout_width="250dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/wind"/>
+                <TextView
+                    android:id="@+id/windSpeedTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_toEndOf="@+id/windDirectionTextView"
+                    android:layout_marginTop="40dp"
+                    android:text="@{Double.toString(weather.windSpeed), default = 0.0 }"
+                    android:textAlignment="textEnd" />
 
-                    <TextView
-                        android:id="@+id/windDirectionTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{weather.windDirection, default = 'N' }" />
-                    <TextView
-                        android:id="@+id/windSpeedTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{Double.toString(weather.windSpeed), default = 0.0 }" />
-                </TableRow>
-
-        </TableLayout>
+        </RelativeLayout>
 
                 <com.github.siyamed.shapeimageview.RoundedImageView
                     android:contentDescription="@string/app_name"
