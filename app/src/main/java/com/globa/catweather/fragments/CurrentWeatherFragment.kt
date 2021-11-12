@@ -13,7 +13,7 @@ import androidx.lifecycle.Observer
 import com.globa.catweather.R
 import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
 
-
+//TODO: Make a date for stupid users
 class CurrentWeatherFragment : Fragment() {
     private lateinit var binding: CurrentWeatherFragmentBinding
     private lateinit var viewModel: CurrentWeatherViewModel
