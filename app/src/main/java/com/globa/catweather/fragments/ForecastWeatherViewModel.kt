@@ -27,10 +27,14 @@ class ForecastWeatherViewModel : ViewModel() {
             { response ->
                 Log.i("JSON TEST", response)
                 val forecast = JSONObject(JSONObject(response).getString("forecast"))
-                for (i in 1..days){
-                    val days = JSONArray(forecast)
-                    Log.d("WEATHER FORECAST", days.toString())
-                }
+                val forecastDay = forecast.getString("forecastday")
+                Log.d("FORECAST DAY", forecastDay)
+                val days = JSONArray(forecastDay)
+                Log.d("DAYS", "${days.length()}")
+//                for (i in 1..days){
+//                    val days = JSONArray(forecastDay)
+//                    Log.d("WEATHER FORECAST", days.toString())
+//                }
             },
             {
                 val text = "That didn't work!"

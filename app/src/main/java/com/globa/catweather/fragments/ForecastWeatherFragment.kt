@@ -26,7 +26,10 @@ class ForecastWeatherFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this).get(ForecastWeatherViewModel::class.java)
-        // TODO: Use the ViewModel
+
+
+        viewModel.updateForecast(this.requireContext(), "Minsk")  // TODO: get from location
+
     }
 
 }
