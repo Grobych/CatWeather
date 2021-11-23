@@ -19,7 +19,7 @@ class ForecastWeatherViewModel : ViewModel() {
 
     fun updateForecast(context: Context, city : String){
         val url =
-            "http://api.weatherapi.com/v1/forecast.json?key=ff946992f1ee4f3d80385853210111&q=$city&@days=$days&aqi=no&alerts=no"
+            "http://api.weatherapi.com/v1/forecast.json?key=ff946992f1ee4f3d80385853210111&q=$city&days=$days&aqi=no&alerts=no"
         Log.d("WEATHER URL", url)
         val queue = Volley.newRequestQueue(context)
         val stringRequest = StringRequest(
