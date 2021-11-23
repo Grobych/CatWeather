@@ -15,26 +15,31 @@ class ForecastWeatherViewModel : ViewModel() {
     var forecastList = MutableLiveData<ArrayList<ForecastWeather>>()
     var list = arrayListOf<ForecastWeather>()
 
-    val days : Int = 3 // TODO: add forecast days to constants
+    private val dayNumber : Int = 3 // TODO: add forecast days to constants
 
     fun updateForecast(context: Context, city : String){
         val url =
-            "http://api.weatherapi.com/v1/forecast.json?key=ff946992f1ee4f3d80385853210111&q=$city&days=$days&aqi=no&alerts=no"
+            "http://api.weatherapi.com/v1/forecast.json?key=ff946992f1ee4f3d80385853210111&q=$city&days=$dayNumber&aqi=no&alerts=no"
         Log.d("WEATHER URL", url)
         val queue = Volley.newRequestQueue(context)
         val stringRequest = StringRequest(
             Request.Method.GET, url,
             { response ->
                 Log.i("JSON TEST", response)
+                list.clear()
                 val forecast = JSONObject(JSONObject(response).getString("forecast"))
                 val forecastDay = forecast.getString("forecastday")
-                Log.d("FORECAST DAY", forecastDay)
                 val days = JSONArray(forecastDay)
-                Log.d("DAYS", "${days.length()}")
-//                for (i in 1..days){
-//                    val days = JSONArray(forecastDay)
-//                    Log.d("WEATHER FORECAST", days.toString())
-//                }
+                for (i in 0 until dayNumber){
+                    val day = days.getJSONObject(i).getJSONObject("day")
+                    val minT = day.getDouble("mintemp_c")
+                    val maxT = day.getDouble("maxtemp_c")
+                    val wind = day.getDouble("maxwind_kph")
+                    val condition = day.getJSONObject("condition").getString("text")
+                    val code = day.getJSONObject("condition").getInt("code")
+                    list.add(ForecastWeather(minT,maxT,wind,condition,code))
+                }
+                forecastList.postValue(list)
             },
             {
                 val text = "That didn't work!"
