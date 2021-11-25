@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.ForecastWeatherFragment"
-    android:id="@+id/forecastWeatherRecyclerView"
-    >
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-</androidx.recyclerview.widget.RecyclerView>
+    <data>
+        <variable
+            name="viewModel"
+            type="com.globa.catweather.fragments.ForecastWeatherViewModel" />
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:context=".fragments.ForecastWeatherFragment"
+        tools:listitem="@layout/forecast_weather_fragment_item"
+        android:id="@+id/forecastWeatherRecyclerView"
+        app:layoutManager="LinearLayoutManager"
+        >
+
+    </androidx.recyclerview.widget.RecyclerView>
+
+</layout>
