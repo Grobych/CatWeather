@@ -14,13 +14,8 @@ import com.globa.catweather.adapters.ForecastAdapter
 
 class ForecastWeatherFragment : Fragment() {
 
-    companion object {
-        fun newInstance() = ForecastWeatherFragment()
-    }
-
     private lateinit var viewModel: ForecastWeatherViewModel
     private lateinit var locationViewModel: LocationViewModel
-    private lateinit var adapter : ForecastAdapter
     private lateinit var recyclerView: RecyclerView
 
     override fun onCreateView(
@@ -32,18 +27,15 @@ class ForecastWeatherFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ForecastWeatherViewModel::class.java)
+        viewModel = ViewModelProvider(this)[ForecastWeatherViewModel::class.java]
         locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
         recyclerView = view?.findViewById(R.id.forecastWeatherRecyclerView) ?: RecyclerView(this.requireContext())
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
-        //recyclerView.adapter = ForecastAdapter(viewModel, viewModel.list, this.requireContext())
         viewModel.forecastList.observe(viewLifecycleOwner,{
             Log.i("data",it.toString())
             recyclerView.adapter = ForecastAdapter(viewModel, viewModel.list, this.requireContext()) // TODO: rewrite with notifyDataSetChanged()
         })
         viewModel.updateForecast(this.requireContext(), locationViewModel.location.value.toString())
-//        Log.d("location", "${locationViewModel.location.value.toString()}")
-
     }
 
 }
