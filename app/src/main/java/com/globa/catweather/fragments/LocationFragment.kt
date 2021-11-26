@@ -55,7 +55,7 @@ class LocationFragment : Fragment() {
         ) {
             ActivityCompat.requestPermissions(
                 activity,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), context.resources.getInteger(R.integer.locationPermissionCode)
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), context.resources.getInteger(R.integer.location_permission_code)
             )
             false
         } else true

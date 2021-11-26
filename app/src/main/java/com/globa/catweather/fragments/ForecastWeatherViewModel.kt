@@ -17,7 +17,7 @@ class ForecastWeatherViewModel : ViewModel() {
     var list = arrayListOf<ForecastWeather>()
 
     fun updateForecast(context: Context, city : String){
-        val dayNumber = context.resources.getInteger(R.integer.forecastDayNumber)
+        val dayNumber = context.resources.getInteger(R.integer.forecast_day_number)
         val url =
             "http://api.weatherapi.com/v1/forecast.json?key=ff946992f1ee4f3d80385853210111&q=$city&days=$dayNumber&aqi=no&alerts=no"
         Log.d("WEATHER URL", url)
