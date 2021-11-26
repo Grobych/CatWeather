@@ -29,7 +29,7 @@ class CurrentWeatherFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(CurrentWeatherViewModel::class.java)
-        locationViewModel = ViewModelProvider(requireActivity()).get(LocationViewModel::class.java)
+        locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
         weatherUpdateObserver()
         locationChangedObserver()
         refreshSwipeListener()

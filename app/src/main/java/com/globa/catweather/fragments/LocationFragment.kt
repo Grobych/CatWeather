@@ -34,7 +34,7 @@ class LocationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity)
 
-        viewModel = ViewModelProvider(requireActivity()).get(LocationViewModel::class.java)
+        viewModel = LocationViewModel.getInstance(this.requireActivity().application)
         if (checkPermission(this.requireContext(), this.requireActivity())){
             viewModel.fusedLocationClient = fusedLocationClient
             viewModel.location.observe(viewLifecycleOwner, {

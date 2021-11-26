@@ -5,6 +5,7 @@ import android.app.Application
 import android.location.Geocoder
 import android.os.Looper
 import android.util.Log
+import androidx.annotation.MainThread
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -22,6 +23,16 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
 
     private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
+
+    companion object{
+        private lateinit var instance : LocationViewModel
+
+        @MainThread
+        fun getInstance(application: Application): LocationViewModel{
+            instance = if(::instance.isInitialized) instance else LocationViewModel(application)
+            return instance
+        }
+    }
 
     @SuppressLint("MissingPermission")
     fun locationRequestInit(){
