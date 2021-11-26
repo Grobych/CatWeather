@@ -17,7 +17,7 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 
 class LocationFragment : Fragment() {
-    private val locationPermissionCode = 1000 // TODO: move to constant strings
+//    private val locationPermissionCode = requireContext().resources.getInteger(R.integer.locationPermissionCode)
 
     private lateinit var viewModel: LocationViewModel
     private lateinit var fusedLocationClient : FusedLocationProviderClient
@@ -55,7 +55,7 @@ class LocationFragment : Fragment() {
         ) {
             ActivityCompat.requestPermissions(
                 activity,
-                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), locationPermissionCode
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), context.resources.getInteger(R.integer.locationPermissionCode)
             )
             false
         } else true
