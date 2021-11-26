@@ -11,7 +11,7 @@ import com.globa.catweather.fragments.ForecastWeatherViewModel
 import com.globa.catweather.models.ForecastWeather
 import androidx.databinding.DataBindingUtil
 
-class ForecastAdapter(val viewModel: ForecastWeatherViewModel, val items: ArrayList<ForecastWeather>, val context: Context) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
+class ForecastAdapter(val viewModel: ForecastWeatherViewModel, private val items: ArrayList<ForecastWeather>, val context: Context) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
         val inflater = LayoutInflater.from(parent.context)
