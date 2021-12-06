@@ -10,6 +10,10 @@ import com.globa.catweather.databinding.ForecastWeatherFragmentItemBinding
 import com.globa.catweather.fragments.ForecastWeatherViewModel
 import com.globa.catweather.models.ForecastWeather
 import androidx.databinding.DataBindingUtil
+import java.text.DateFormat
+import java.text.FieldPosition
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ForecastAdapter(val viewModel: ForecastWeatherViewModel, private val items: ArrayList<ForecastWeather>, val context: Context) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
 
@@ -33,10 +37,11 @@ class ForecastAdapter(val viewModel: ForecastWeatherViewModel, private val items
         fun bind(forecastWeather : ForecastWeather){
             Log.i("Binding", "$forecastWeather")
             binding.forecast = forecastWeather
-            binding.forecastMinTemperatureTextView.text = forecastWeather.minT.toString()
-            binding.forecastMaxTemperatureTextView.text = forecastWeather.maxT.toString()
-            binding.forecastMaxWindSpeedTextView.text = forecastWeather.maxWindSpeed.toString()
-            binding.forecastConditionTextView.text = forecastWeather.condition
+            binding.forecastWeatherDataTextView.text = formatDate(forecastWeather.date)
+        }
+
+        private fun formatDate(date : Date) : String{
+            return DateFormat.getDateInstance().format(date,StringBuffer(), FieldPosition(DateFormat.DATE_FIELD)).toString()
         }
     }
 }

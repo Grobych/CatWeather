@@ -17,32 +17,57 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/forecastMinTemperatureTextView"
-            android:text='@{Double.toString(forecast.minT), default = "Min T"}'/>
+            android:id="@+id/forecastWeatherDataTextView" />
 
-        <TextView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/forecastMaxTemperatureTextView"
-            android:text='@{Double.toString(forecast.maxT), default = "Max T"}'/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/ic_cloud_test"
+                android:contentDescription="@string/app_name" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/forecastConditionTextView"
+                android:text='@{forecast.condition, default = "Condition"}'/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/forecastMaxWindSpeedTextView"
-            android:text='@{Double.toString(forecast.maxWindSpeed), default = "Wind Speed"}'/>
+            android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/forecastConditionTextView"
-            android:text='@{forecast.condition, default = "Condition"}'/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/forecastMinTemperatureTextView"
+                android:text='@{Double.toString(forecast.minT), default = "Min T"}'/>
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/forecastMaxTemperatureTextView"
+                android:text='@{Double.toString(forecast.maxT), default = "Max T"}'/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/forecastMaxWindSpeedTextView"
+                android:text='@{Double.toString(forecast.maxWindSpeed), default = "Wind Speed"}'/>
+
+        </LinearLayout>
     </LinearLayout>
 
 </layout>
