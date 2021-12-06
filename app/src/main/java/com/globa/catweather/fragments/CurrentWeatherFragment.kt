@@ -48,12 +48,12 @@ class CurrentWeatherFragment : Fragment() {
     }
     private fun locationChangedObserver(){
         locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
-            if (checkInternetConnection()) viewModel.updateWeather(this.requireContext(),updatedLocation) })
+            if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.updateWeather(this.requireContext(),updatedLocation) })
     }
     private fun refreshSwipeListener(){
         binding.weatherRefreshLayout.setOnRefreshListener {
             val city = locationViewModel.location.value
-            if (checkInternetConnection() && city!= null) {
+            if (NetworkUtil().isNetworkConnected(this.requireContext()) && city!= null) {
                 viewModel.updateWeather(this.requireContext(),city)
             }
             binding.weatherRefreshLayout.isRefreshing = false
@@ -68,15 +68,4 @@ class CurrentWeatherFragment : Fragment() {
         val drawable = getByCode(code)
         binding.currentWeatherImage.setImageDrawable(drawable)
     }
-
-    private fun checkInternetConnection() :Boolean{
-        return if (NetworkUtil().isNetworkConnected(this.requireContext())) true
-        else{
-            Toast.makeText(this.requireContext(), getString(R.string.no_network_connection),Toast.LENGTH_LONG).show()
-            false
-        }
-    }
-
-
-
 }
