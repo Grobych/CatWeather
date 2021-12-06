@@ -11,6 +11,8 @@ import com.globa.catweather.R
 import com.globa.catweather.models.ForecastWeather
 import org.json.JSONArray
 import org.json.JSONObject
+import java.util.*
+import kotlin.collections.ArrayList
 
 class ForecastWeatherViewModel : ViewModel() {
     var forecastList = MutableLiveData<ArrayList<ForecastWeather>>()
@@ -32,13 +34,15 @@ class ForecastWeatherViewModel : ViewModel() {
                 val days = JSONArray(forecastDay)
                 Log.d("DAYS", "$dayNumber")
                 for (i in 0 until dayNumber){
+                    val dateEpoch = days.getJSONObject(i).getString("date_epoch").toLong() * 1000
+                    val date = Date(dateEpoch)
                     val day = days.getJSONObject(i).getJSONObject("day")
                     val minT = day.getDouble("mintemp_c")
                     val maxT = day.getDouble("maxtemp_c")
                     val wind = day.getDouble("maxwind_kph")
                     val condition = day.getJSONObject("condition").getString("text")
                     val code = day.getJSONObject("condition").getInt("code")
-                    list.add(ForecastWeather(minT,maxT,wind,condition,code))
+                    list.add(ForecastWeather(date,minT,maxT,wind,condition,code))
                 }
                 forecastList.postValue(list)
             },
