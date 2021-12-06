@@ -3,14 +3,17 @@ package com.globa.catweather.fragments
 import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.globa.catweather.R
 import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
 import com.globa.catweather.models.WeatherDrawable
+import com.globa.catweather.network.NetworkUtil
 
 
 class CurrentWeatherFragment : Fragment() {
@@ -44,12 +47,15 @@ class CurrentWeatherFragment : Fragment() {
         viewModel.code.observe(viewLifecycleOwner, { updatedCode -> updateImage(updatedCode) })
     }
     private fun locationChangedObserver(){
-        locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation -> viewModel.updateWeather(this.requireContext(),updatedLocation) })
+        locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
+            if (checkInternetConnection()) viewModel.updateWeather(this.requireContext(),updatedLocation) })
     }
     private fun refreshSwipeListener(){
         binding.weatherRefreshLayout.setOnRefreshListener {
-            val city = locationViewModel.location.value ?: return@setOnRefreshListener
-            viewModel.updateWeather(this.requireContext(),city)
+            val city = locationViewModel.location.value
+            if (checkInternetConnection() && city!= null) {
+                viewModel.updateWeather(this.requireContext(),city)
+            }
             binding.weatherRefreshLayout.isRefreshing = false
         }
     }
@@ -61,6 +67,14 @@ class CurrentWeatherFragment : Fragment() {
     private fun updateImage(code : Int){
         val drawable = getByCode(code)
         binding.currentWeatherImage.setImageDrawable(drawable)
+    }
+
+    private fun checkInternetConnection() :Boolean{
+        return if (NetworkUtil().isNetworkConnected(this.requireContext())) true
+        else{
+            Toast.makeText(this.requireContext(), getString(R.string.no_network_connection),Toast.LENGTH_LONG).show()
+            false
+        }
     }
 
 
