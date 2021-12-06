@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="weather_array">
+        <item>image_sunny</item>
+        <item>image_cloudy</item>
+        <item>image_overcast</item>
+        <item>image_fog</item>
+        <item>image_drizzle</item>
+        <item>image_light_rain</item>
+        <item>image_rain</item>
+        <item>image_heavy_rain</item>
+        <item>image_snow</item>
+        <item>image_light_snow</item>
+        <item>image_heavy_snow</item>
+        <item>image_blizzard</item>
+        <item>image_thunder</item>
+        <item>image_sleet</item>
+    </string-array>
+
+
+    <integer-array name="image_sunny">
+        <item>@drawable/sunny</item>
+    </integer-array>
+    <integer-array name="code_sunny">
+        <item>1000</item>
+    </integer-array>
+
+
+    <integer-array name="image_cloudy">
+        <item>@drawable/cloudy</item>
+        <item>@drawable/partly_cloudy</item>
+    </integer-array>
+    <integer-array name="code_cloudy">
+        <item>1003</item>
+        <item>1006</item>
+    </integer-array>
+
+
+    <integer-array name="image_overcast">
+        <item>@drawable/overcast</item>
+    </integer-array>
+    <integer-array name="code_overcast">
+        <item>1009</item>
+    </integer-array>
+
+
+    <integer-array name="image_fog">
+        <item>@drawable/fog</item>
+        <item>@drawable/mist</item>
+    </integer-array>
+    <integer-array name="code_fog">
+        <item>1030</item>
+        <item>1135</item>
+        <item>1147</item>
+    </integer-array>
+
+
+    <integer-array name="image_drizzle">
+    </integer-array>
+    <integer-array name="code_drizzle">
+        <item>1150</item>
+        <item>1153</item>
+        <item>1168</item>
+        <item>1171</item>
+    </integer-array>
+
+
+    <integer-array name="image_light_rain">
+        <item>@drawable/light_rain</item>
+    </integer-array>
+    <integer-array name="code_light_rain">
+        <item>1180</item>
+        <item>1183</item>
+        <item>1198</item>
+        <item>1072</item>
+    </integer-array>
+
+
+    <integer-array name="image_rain">
+        <item>@drawable/light_rain</item>
+        <item>@drawable/moderate_rain</item>
+    </integer-array>
+    <integer-array name="code_rain">
+        <item>1063</item>
+        <item>1186</item>
+        <item>1189</item>
+        <item>1201</item>
+    </integer-array>
+
+
+    <integer-array name="image_heavy_rain">
+        <item>@drawable/heavy_rain</item>
+    </integer-array>
+    <integer-array name="code_heavy_rain">
+        <item>1192</item>
+        <item>1195</item>
+        <item>1189</item>
+        <item>1240</item>
+        <item>1243</item>
+        <item>1246</item>
+    </integer-array>
+
+
+    <integer-array name="image_snow">
+    </integer-array>
+    <integer-array name="code_snow">
+        <item>1066</item>
+        <item>1216</item>
+        <item>1219</item>
+    </integer-array>
+
+
+    <integer-array name="image_light_snow">
+    </integer-array>
+    <integer-array name="code_light_snow">
+        <item>1210</item>
+        <item>1213</item>
+    </integer-array>
+
+
+    <integer-array name="image_heavy_snow">
+    </integer-array>
+    <integer-array name="code_heavy_snow">
+        <item>1222</item>
+        <item>1225</item>
+        <item>1255</item>
+        <item>1258</item>
+    </integer-array>
+
+
+    <integer-array name="image_blizzard">
+        <item>@drawable/blizzard</item>
+        <item>@drawable/blizzard2</item>
+    </integer-array>
+    <integer-array name="code_blizzard">
+        <item>1117</item>
+        <item>1114</item>
+    </integer-array>
+
+
+    <integer-array name="image_thunder">
+    </integer-array>
+    <integer-array name="code_thunder">
+        <item>1087</item>
+        <item>1273</item>
+        <item>1276</item>
+        <item>1279</item>
+        <item>1282</item>
+    </integer-array>
+
+    <integer-array name="image_sleet">
+    </integer-array>
+    <integer-array name="code_sleet">
+        <item>1069</item>
+        <item>1204</item>
+        <item>1207</item>
+        <item>1249</item>
+        <item>1252</item>
+        <item>1237</item>
+        <item>1261</item>
+        <item>1264</item>
+    </integer-array>
+
+</resources>
