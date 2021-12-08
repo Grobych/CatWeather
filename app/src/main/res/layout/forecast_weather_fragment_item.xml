@@ -8,7 +8,7 @@
             type="Integer" />
         <variable
             name="viewModel"
-            type="com.globa.catweather.fragments.ForecastWeatherViewModel" />
+            type="com.globa.catweather.modelviews.ForecastWeatherViewModel" />
         <variable
             name="forecast"
             type="com.globa.catweather.models.ForecastWeather"/>

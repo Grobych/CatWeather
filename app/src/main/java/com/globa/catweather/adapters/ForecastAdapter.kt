@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.globa.catweather.R
 import com.globa.catweather.databinding.ForecastWeatherFragmentItemBinding
-import com.globa.catweather.fragments.ForecastWeatherViewModel
+import com.globa.catweather.modelviews.ForecastWeatherViewModel
 import com.globa.catweather.models.ForecastWeather
 import androidx.databinding.DataBindingUtil
 import java.text.DateFormat

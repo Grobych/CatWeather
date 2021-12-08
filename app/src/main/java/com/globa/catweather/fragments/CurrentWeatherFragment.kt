@@ -12,6 +12,8 @@ import com.globa.catweather.R
 import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
 import com.globa.catweather.models.WeatherCodes
 import com.globa.catweather.models.WeatherDrawable
+import com.globa.catweather.modelviews.CurrentWeatherViewModel
+import com.globa.catweather.modelviews.LocationViewModel
 import com.globa.catweather.network.NetworkUtil
 import kotlin.random.Random
 

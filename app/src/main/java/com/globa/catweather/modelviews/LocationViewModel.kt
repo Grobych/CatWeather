@@ -1,4 +1,4 @@
-package com.globa.catweather.fragments
+package com.globa.catweather.modelviews
 
 import android.annotation.SuppressLint
 import android.app.Application
@@ -28,8 +28,8 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
         private lateinit var instance : LocationViewModel
 
         @MainThread
-        fun getInstance(application: Application): LocationViewModel{
-            instance = if(::instance.isInitialized) instance else LocationViewModel(application)
+        fun getInstance(application: Application): LocationViewModel {
+            instance = if(Companion::instance.isInitialized) instance else LocationViewModel(application)
             return instance
         }
     }

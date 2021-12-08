@@ -1,4 +1,4 @@
-package com.globa.catweather.fragments
+package com.globa.catweather.modelviews
 
 import android.content.Context
 import android.util.Log

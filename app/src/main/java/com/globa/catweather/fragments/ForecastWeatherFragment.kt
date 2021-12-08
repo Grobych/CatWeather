@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.globa.catweather.R
 import com.globa.catweather.adapters.ForecastAdapter
+import com.globa.catweather.modelviews.ForecastWeatherViewModel
+import com.globa.catweather.modelviews.LocationViewModel
 
 class ForecastWeatherFragment : Fragment() {
 
