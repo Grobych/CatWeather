@@ -2,67 +2,89 @@
 <resources>
 
     <integer-array name="image_sunny">
-        <item>@drawable/sunny</item>
+        <item>@drawable/sunny_1</item>
+        <item>@drawable/sunny_2</item>
+        <item>@drawable/sunny_3</item>
+        <item>@drawable/winter_sunny_1</item>
+        <item>@drawable/winter_sunny_2</item>
+        <item>@drawable/winter_sunny_3</item>
     </integer-array>
 
 
     <integer-array name="image_cloudy">
-        <item>@drawable/cloudy</item>
-        <item>@drawable/partly_cloudy</item>
+        <item>@drawable/cloudy_1</item>
+        <item>@drawable/cloudy_2</item>
     </integer-array>
 
 
     <integer-array name="image_overcast">
-        <item>@drawable/overcast</item>
+        <item>@drawable/overcast_1</item>
+        <item>@drawable/overcast_2</item>
     </integer-array>
 
     <integer-array name="image_fog">
-        <item>@drawable/fog</item>
-        <item>@drawable/mist</item>
+        <item>@drawable/fog_1</item>
+        <item>@drawable/fog_2</item>
+        <item>@drawable/fog_3</item>
     </integer-array>
 
 
     <integer-array name="image_drizzle">
+        <item>@drawable/drizzle_1</item>
+        <item>@drawable/drizzle_2</item>
     </integer-array>
 
     <integer-array name="image_light_rain">
-        <item>@drawable/light_rain</item>
+        <item>@drawable/light_rain_1</item>
     </integer-array>
 
 
     <integer-array name="image_rain">
-        <item>@drawable/light_rain</item>
-        <item>@drawable/moderate_rain</item>
+        <item>@drawable/light_rain_1</item>
+        <item>@drawable/moderate_rain_1</item>
     </integer-array>
 
     <integer-array name="image_heavy_rain">
-        <item>@drawable/heavy_rain</item>
+        <item>@drawable/heavy_rain_1</item>
+        <item>@drawable/heavy_rain_2</item>
     </integer-array>
 
 
     <integer-array name="image_snow">
+        <item>@drawable/snow_1</item>
+        <item>@drawable/snow_2</item>
+        <item>@drawable/snow_3</item>
     </integer-array>
 
 
     <integer-array name="image_light_snow">
-        <item>@drawable/snow1</item>
+        <item>@drawable/light_snow_1</item>
+        <item>@drawable/light_snow_2</item>
+        <item>@drawable/light_snow_3</item>
     </integer-array>
 
 
     <integer-array name="image_heavy_snow">
+        <item>@drawable/heavy_snow_1</item>
     </integer-array>
 
 
     <integer-array name="image_blizzard">
-        <item>@drawable/blizzard</item>
-        <item>@drawable/blizzard2</item>
+        <item>@drawable/blizzard_1</item>
+        <item>@drawable/blizzard_2</item>
+        <item>@drawable/blizzard_3</item>
+        <item>@drawable/blizzard_4</item>
     </integer-array>
 
 
     <integer-array name="image_thunder">
+        <item>@drawable/thunder_1</item>
     </integer-array>
 
     <integer-array name="image_sleet">
+        <item>@drawable/sleet_1</item>
+        <item>@drawable/sleet_2</item>
+        <item>@drawable/sleet_3</item>
     </integer-array>
 
 </resources>
