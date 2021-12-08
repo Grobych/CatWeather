@@ -1,17 +1,24 @@
 package com.globa.catweather.models
 
 import com.globa.catweather.R
+import com.globa.catweather.models.WeatherStatus.*
 
-enum class WeatherDrawable(val code : Int, val drawable: Int) {
-    Sunny(1000,R.drawable.sunny),
-    PartlyCloudy(1003, R.drawable.partly_cloudy),
-    Cloudy(1006, R.drawable.cloudy),
-    Overcast(1009,R.drawable.overcast),
-    Mist(1030,R.drawable.mist),
-    Blizzard(1117,R.drawable.blizzard),
-    Fog(1135,R.drawable.fog),
-    LightRain(1180,R.drawable.light_rain),
-    ModerateRain(1186,R.drawable.moderate_rain),
-    HeavyRain(1192,R.drawable.heavy_rain);
+
+class WeatherDrawable {
+    val map = mapOf(
+        Sunny to R.array.image_sunny,
+        Cloudy to R.array.image_cloudy,
+        Overcast to R.array.image_overcast,
+        Fog to R.array.image_fog,
+        Drizzle to R.array.image_drizzle,
+        LightRain to R.array.image_light_rain,
+        Rain to R.array.image_rain,
+        HeavyRain to R.array.image_heavy_rain,
+        Snow to R.array.image_snow,
+        LightSnow to R.array.image_light_snow,
+        HeavySnow to R.array.image_heavy_snow,
+        Blizzard to R.array.image_blizzard,
+        Thunder to R.array.image_thunder,
+        Sleet to R.array.image_sleet
+    )
 }
-

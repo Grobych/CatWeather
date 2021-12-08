@@ -3,17 +3,17 @@ package com.globa.catweather.fragments
 import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.content.ContextCompat
 import com.globa.catweather.R
 import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
+import com.globa.catweather.models.WeatherCodes
 import com.globa.catweather.models.WeatherDrawable
 import com.globa.catweather.network.NetworkUtil
+import kotlin.random.Random
 
 
 class CurrentWeatherFragment : Fragment() {
@@ -61,8 +61,16 @@ class CurrentWeatherFragment : Fragment() {
     }
 
     private fun getByCode(code: Int) : Drawable?{
-        WeatherDrawable.values().forEach { wd -> if (wd.code == code) return ContextCompat.getDrawable(this.requireContext(), wd.drawable) }
-        return ContextCompat.getDrawable(this.requireContext(), R.drawable.cat_weather_test)
+        val weatherStatus = WeatherCodes().getByCode(code)
+        val arrayId = WeatherDrawable().map[weatherStatus]
+        return if (arrayId != null){
+            val ta = resources.obtainTypedArray(arrayId)
+            val id = ta.getResourceId(Random.nextInt(ta.length()),0)
+            ta.recycle()
+            ContextCompat.getDrawable(this.requireContext(), id)
+        }else{
+            ContextCompat.getDrawable(this.requireContext(), R.drawable.cat_weather_test)
+        }
     }
     private fun updateImage(code : Int){
         val drawable = getByCode(code)
