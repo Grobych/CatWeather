@@ -29,7 +29,6 @@ class DetailWeatherViewModel : ViewModel() {
                 Log.i("JSON TEST", response)
                 val json = JSONObject(response)
                 Log.d("JSON","$json")
-
                 val current = getCurrent(json)
                 val astro = getAstro(json)
                 val forecastDay = json.getJSONObject("forecast").getString("forecastday")
@@ -38,7 +37,8 @@ class DetailWeatherViewModel : ViewModel() {
                 val precipitation = day.getDouble("totalprecip_mm")
                 val humidity = day.getDouble("avghumidity")
                 val visibility = day.getDouble("avgvis_km")
-                _detailDayWeather = DetailDayWeather(current, astro, precipitation, humidity, visibility)
+                val pressure = json.getJSONObject("current").getDouble("pressure_mb")
+                _detailDayWeather = DetailDayWeather(current, astro, precipitation, humidity, visibility, pressure)
                 update()
             },
             {

@@ -31,7 +31,7 @@ class DetailWeatherFragment : Fragment() {
         viewModel = ViewModelProvider(this)[DetailWeatherViewModel::class.java]
         locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
         weatherUpdateObserver()
-        locationChangedObserver()
+//        locationChangedObserver()
         getDetailWeather()
     }
 
@@ -40,10 +40,10 @@ class DetailWeatherFragment : Fragment() {
             viewModel.updateWeather(this.requireContext(), locationViewModel.location.value.toString())
     }
 
-    private fun locationChangedObserver() {
-        locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
-            if (NetworkUtil().isNetworkConnected(this.requireContext()))
-                viewModel.updateWeather(this.requireContext(),updatedLocation) })    }
+//    private fun locationChangedObserver() {
+//        locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
+//            if (NetworkUtil().isNetworkConnected(this.requireContext()))
+//                viewModel.updateWeather(this.requireContext(),updatedLocation) })    }
 
     private fun weatherUpdateObserver() {
         viewModel.detailDayWeather.observe(viewLifecycleOwner, {

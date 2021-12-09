@@ -27,6 +27,8 @@
     <string name="detail_weather_humidity_template">%1$.0f%%</string>
     <string name="detail_weather_visibility_label_template">Visibility: </string>
     <string name="detail_weather_visibility_template">%1$.1fkm</string>
+    <string name="detail_weather_pressure_label_template">Pressure: </string>
+    <string name="detail_weather_pressure_template">%1$.2fmm</string>
     <string name="detail_weather_moon_phase_template">Moon phase is:   %1s</string>
     <string name="detail_weather_moon_illumination_template">Moon illumination:   %1s%%</string>
     <!--    detail weather fragment-->
