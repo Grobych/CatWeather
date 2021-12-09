@@ -41,7 +41,10 @@ class CurrentWeatherFragment : Fragment() {
     }
 
     private fun weatherUpdateObserver() {
-        viewModel.currentWeather.observe(viewLifecycleOwner, {updated -> binding.weather = updated})
+        viewModel.currentWeather.observe(viewLifecycleOwner, {
+                updated ->
+            binding.weather = updated
+            updateImage(updated.code)})
     }
     private fun locationChangedObserver(){
         locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
