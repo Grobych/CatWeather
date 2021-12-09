@@ -1,4 +1,4 @@
-package com.globa.catweather.modelviews
+package com.globa.catweather.viewmodels
 
 import android.annotation.SuppressLint
 import android.app.Application

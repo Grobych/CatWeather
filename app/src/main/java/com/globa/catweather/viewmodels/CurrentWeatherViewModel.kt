@@ -1,4 +1,4 @@
-package com.globa.catweather.modelviews
+package com.globa.catweather.viewmodels
 
 import android.content.Context
 import android.util.Log

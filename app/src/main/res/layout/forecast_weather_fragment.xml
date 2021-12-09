@@ -6,7 +6,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.globa.catweather.modelviews.ForecastWeatherViewModel" />
+            type="com.globa.catweather.viewmodels.ForecastWeatherViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView

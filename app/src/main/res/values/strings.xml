@@ -6,7 +6,7 @@
     <string name="feels_like">Feels like</string>
     <string name="wind">Wind</string>
     <string name="current_weather">Condition</string>
-    
+
     <string name="current_weather_temperature_template">%1$.2g° C</string>
     <string name="current_weather_feelslike_template">%1$.2g° C</string>
 
