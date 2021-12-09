@@ -36,12 +36,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/detailWeatherCurrentTemperature"
-                    android:text='@{Double.toString(detailWeather.component1().temp), default = "0.0"}'/>
+                    android:text="@{@string/detail_weather_current_t_template(detailWeather.component1().temp)}"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/detailWeatherFeelslikeTemperature"
-                    android:text="@{Double.toString(detailWeather.component1().feelsLike)}"/>
+                    android:text="@{@string/detail_weather_feelslike_template(detailWeather.component1().feelsLike)}"/>
             </LinearLayout>
         </LinearLayout>
 
@@ -52,20 +52,20 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Wind Speed:"
+                android:text="@string/detail_weather_wind_label_template"
                 android:layout_gravity="left"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/detailWeatherWindSpeedTextView"
-                android:text="@{Double.toString(detailWeather.component1().windSpeed)}"
+                android:text="@{@string/detail_weather_wind_template(detailWeather.component1().windSpeed, detailWeather.component1().windDirection)}"
                 android:layout_gravity="end"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/detailWeatherWindDirectionTextView"
-                android:text="@{detailWeather.component1().windDirection}"
-                android:layout_gravity="end"/>
+<!--            <TextView-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:id="@+id/detailWeatherWindDirectionTextView"-->
+<!--                android:text="@{detailWeather.component1().windDirection}"-->
+<!--                android:layout_gravity="end"/>-->
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -74,13 +74,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Precipitation:"
+                android:text="@string/detail_weather_precipitation_label_template"
                 android:layout_gravity="left"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/detailWeatherPrecipitationTextView"
-                android:text="@{Double.toString(detailWeather.component3())}"
+                android:text="@{@string/detail_weather_precipitation_template(detailWeather.component3())}"
                 android:layout_gravity="right"/>
         </LinearLayout>
         <LinearLayout
@@ -90,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Humidity:"
+                android:text="@string/detail_weather_humidity_label_template"
                 android:layout_gravity="left"/>
 
             <TextView
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:text="@{Double.toString(detailWeather.component4())}" />
+                android:text="@{@string/detail_weather_humidity_template(detailWeather.component4())}"/>
         </LinearLayout>
 
         <LinearLayout
@@ -108,13 +108,13 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Visibility:"
+                android:text="@string/detail_weather_visibility_label_template"
                 android:layout_gravity="left"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/detailWeatherVisibilityTextView"
-                android:text="@{Double.toString(detailWeather.component5())}"
+                android:text="@{@string/detail_weather_visibility_template(detailWeather.component5())}"
                 android:layout_gravity="right"/>
         </LinearLayout>
 
@@ -146,6 +146,7 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/detailWeatherSunsetTextView"
                     android:text="@{detailWeather.component2().component2()}"
+                    android:layout_marginLeft="20dp"
                     android:layout_gravity="end"/>
             </LinearLayout>
             <LinearLayout
@@ -168,18 +169,19 @@
                     android:layout_height="wrap_content"
                     android:id="@+id/detailWeatherMoonsetTextView"
                     android:text="@{detailWeather.component2().component4()}"
+                    android:layout_marginLeft="20dp"
                     android:layout_gravity="end"/>
             </LinearLayout>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/detailWeatherMoonPhaseTextView"
-                android:text="@{detailWeather.component2().component5()}"/>
+                android:text="@{@string/detail_weather_moon_phase_template(detailWeather.component2().component5())}"/>
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:id="@+id/detailWeatherMoonIlluminationTextView"
-                android:text="@{detailWeather.component2().component6()}"/>
+                android:text="@{@string/detail_weather_moon_illumination_template(detailWeather.component2().component6())}"/>
         </LinearLayout>
     </LinearLayout>
 </layout>

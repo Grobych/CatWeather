@@ -7,8 +7,23 @@
     <string name="wind">Wind</string>
     <string name="current_weather">Condition</string>
 
-    <string name="current_weather_temperature_template">%1$.2g° C</string>
-    <string name="current_weather_feelslike_template">%1$.2g° C</string>
+    <string name="current_weather_temperature_template">%1$.1f° C</string>
+    <string name="current_weather_feelslike_template">%1$.1f° C</string>
+
+<!--    detail weather fragment-->
+    <string name="detail_weather_feelslike_template">Feelslike: %1$.1f° C</string>
+    <string name="detail_weather_current_t_template">%1$.1f° C</string>
+    <string name="detail_weather_wind_template">%1$.2fkm/h  %2$s</string>
+    <string name="detail_weather_wind_label_template">Wind speed: </string>
+    <string name="detail_weather_precipitation_label_template">Precipitation: </string>
+    <string name="detail_weather_precipitation_template">%1$.1fmm</string>
+    <string name="detail_weather_humidity_label_template">Humidity: </string>
+    <string name="detail_weather_humidity_template">%1$.0f%%</string>
+    <string name="detail_weather_visibility_label_template">Visibility: </string>
+    <string name="detail_weather_visibility_template">%1$.1fkm</string>
+    <string name="detail_weather_moon_phase_template">Moon phase is:   %1s</string>
+    <string name="detail_weather_moon_illumination_template">Moon illumination:   %1s%%</string>
+    <!--    detail weather fragment-->
 
     <string name="no_network_connection">No network connection. Please, turn it on.</string>
 </resources>
