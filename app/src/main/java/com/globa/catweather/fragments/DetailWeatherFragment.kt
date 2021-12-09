@@ -46,7 +46,13 @@ class DetailWeatherFragment : Fragment() {
                 viewModel.updateWeather(this.requireContext(),updatedLocation) })    }
 
     private fun weatherUpdateObserver() {
-        viewModel.detailDayWeather.observe(viewLifecycleOwner, {updated -> Log.d("DETAIL WEATHER", "$updated")})
+        viewModel.detailDayWeather.observe(viewLifecycleOwner, {
+                updated ->
+            Log.d("DETAIL WEATHER", "$updated")
+            binding.detailWeatherCurrentTemperature.text = "T:  " + updated.current.temp
+            binding.detailWeather = updated
+
+        })
     }
 
 }
