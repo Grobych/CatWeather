@@ -38,7 +38,7 @@
                         android:id="@+id/currentTempTextView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:text="@{Double.toString(weather.temp), default = 0.0}"
+                        android:text="@{@string/current_weather_temperature_template(weather.temp)}"
                         android:textSize="20sp"
                         android:gravity="center_vertical"/>
                 </LinearLayout>
@@ -70,13 +70,13 @@
                         android:id="@+id/feelsLikeTempDecryptionTextView"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/feels_like" />
+                        android:text="@string/current_weather_feelslike_label_template" />
 
                 <TextView
                     android:id="@+id/feelsLikeTempTextView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@{Double.toString(weather.feelsLike), default = 0.0}" />
+                    android:text="@{@string/current_weather_feelslike_template(weather.feelsLike)}" />
             </TableRow>
 
 
@@ -89,18 +89,18 @@
                         android:id="@+id/windDirectionDescTextView"
                         android:layout_width="240dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/wind"/>
+                        android:text="@string/current_weather_wind_label"/>
 
-                    <TextView
-                        android:id="@+id/windDirectionTextView"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{weather.windDirection, default = 'N' }" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/windDirectionTextView"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@{weather.windDirection, default = 'N' }" />-->
                     <TextView
                         android:id="@+id/windSpeedTextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{Double.toString(weather.windSpeed), default = 0.0 }" />
+                        android:text="@{@string/current_weather_wind_template(weather.windSpeed,weather.windDirection) }" />
                 </TableRow>
 
         </TableLayout>

@@ -11,13 +11,8 @@ import com.globa.catweather.models.Weather
 import org.json.JSONObject
 
 class CurrentWeatherViewModel : ViewModel() {
-    private lateinit var currentWeather : Weather
-    val currentT = MutableLiveData<Double>()
-    val windDirection = MutableLiveData<String>()
-    val windSpeed = MutableLiveData<Double>()
-    val condition = MutableLiveData<String>()
-    val feelsLike = MutableLiveData<Double>()
-    val code = MutableLiveData<Int>()
+    private lateinit var _currentWeather : Weather
+    val currentWeather = MutableLiveData<Weather>()
 
     fun updateWeather(context: Context, city : String){
 
@@ -31,7 +26,7 @@ class CurrentWeatherViewModel : ViewModel() {
                 Log.i("JSON TEST", response)
                 val json = JSONObject(JSONObject(response).getString("current"))
                 Log.d("JSON","$json")
-                currentWeather = Weather(
+                _currentWeather = Weather(
                     json.getDouble("temp_c"),
                     json.getDouble("feelslike_c"),
                     json.getDouble("wind_kph"),
@@ -47,11 +42,6 @@ class CurrentWeatherViewModel : ViewModel() {
         queue.add(stringRequest)
     }
     private fun update(){
-        currentT.postValue(currentWeather.temp)
-        feelsLike.postValue(currentWeather.feelsLike)
-        windDirection.postValue(currentWeather.windDirection)
-        windSpeed.postValue(currentWeather.windSpeed)
-        condition.postValue(currentWeather.condition)
-        code.postValue(currentWeather.code)
+        currentWeather.postValue(_currentWeather)
     }
 }

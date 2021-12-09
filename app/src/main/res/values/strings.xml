@@ -7,8 +7,14 @@
     <string name="wind">Wind</string>
     <string name="current_weather">Condition</string>
 
+<!--    current weather fragment-->
     <string name="current_weather_temperature_template">%1$.1f° C</string>
     <string name="current_weather_feelslike_template">%1$.1f° C</string>
+    <string name="current_weather_feelslike_label_template">Feels like: </string>
+    <string name="current_weather_wind_label">Wind: </string>
+    <string name="current_weather_wind_template">%1$.2fkm/h  %2$s</string>
+    <!--    current weather fragment-->
+
 
 <!--    detail weather fragment-->
     <string name="detail_weather_feelslike_template">Feelslike: %1$.1f° C</string>

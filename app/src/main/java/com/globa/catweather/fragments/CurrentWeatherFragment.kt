@@ -41,12 +41,7 @@ class CurrentWeatherFragment : Fragment() {
     }
 
     private fun weatherUpdateObserver() {
-        viewModel.currentT.observe(viewLifecycleOwner, { updatedT -> binding.currentTempTextView.text = requireContext().resources.getString(R.string.current_weather_temperature_template,updatedT) })
-        viewModel.condition.observe(viewLifecycleOwner, { updatedCondition -> binding.weatherConditionTextView.text = updatedCondition })
-        viewModel.windDirection.observe(viewLifecycleOwner, { updatedWindDirection -> binding.windDirectionTextView.text = updatedWindDirection })
-        viewModel.windSpeed.observe(viewLifecycleOwner, { updatedWindSpeed -> binding.windSpeedTextView.text = updatedWindSpeed.toString() })
-        viewModel.feelsLike.observe(viewLifecycleOwner, { updatedFeelsLike -> binding.feelsLikeTempTextView.text = requireContext().resources.getString(R.string.current_weather_feelslike_template,updatedFeelsLike) })
-        viewModel.code.observe(viewLifecycleOwner, { updatedCode -> updateImage(updatedCode) })
+        viewModel.currentWeather.observe(viewLifecycleOwner, {updated -> binding.weather = updated})
     }
     private fun locationChangedObserver(){
         locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
