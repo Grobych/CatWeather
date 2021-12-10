@@ -2,12 +2,10 @@ package com.globa.catweather.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.globa.catweather.R
 import com.globa.catweather.databinding.DetailWeatherFragmentBinding
 import com.globa.catweather.network.NetworkUtil
 import com.globa.catweather.viewmodels.DetailWeatherViewModel
@@ -31,7 +29,6 @@ class DetailWeatherFragment : Fragment() {
         viewModel = ViewModelProvider(this)[DetailWeatherViewModel::class.java]
         locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
         weatherUpdateObserver()
-//        locationChangedObserver()
         getDetailWeather()
     }
 
@@ -40,18 +37,9 @@ class DetailWeatherFragment : Fragment() {
             viewModel.updateWeather(this.requireContext(), locationViewModel.location.value.toString())
     }
 
-//    private fun locationChangedObserver() {
-//        locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
-//            if (NetworkUtil().isNetworkConnected(this.requireContext()))
-//                viewModel.updateWeather(this.requireContext(),updatedLocation) })    }
-
     private fun weatherUpdateObserver() {
         viewModel.detailDayWeather.observe(viewLifecycleOwner, {
-                updated ->
-            Log.d("DETAIL WEATHER", "$updated")
-            binding.detailWeather = updated
-
-        })
+                updated -> binding.detailWeather = updated})
     }
 
 }
