@@ -1,6 +1,6 @@
 package com.globa.catweather.models
 
-enum class WeatherStatus() {
+enum class WeatherStatus {
     Sunny,
     Cloudy,
     Overcast,

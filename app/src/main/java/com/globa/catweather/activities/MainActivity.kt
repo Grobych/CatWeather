@@ -21,7 +21,6 @@ class MainActivity : AppCompatActivity() {
                 super.onSwipeLeft()
                 val intent = Intent(applicationContext, ForecastWeatherActivity::class.java)
                 startActivity(intent)
-
             }
             override fun onSwipeRight() {
                 super.onSwipeRight()

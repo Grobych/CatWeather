@@ -19,7 +19,7 @@ class DetailWeatherFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DetailWeatherFragmentBinding.inflate(layoutInflater, container, false)
         return  binding.root
     }

@@ -7,13 +7,20 @@
     <string name="wind">Wind</string>
     <string name="current_weather">Condition</string>
 
+<!--    images contentDescription -->
+    <string name="current_weather_image_content_description">Current weather condition cat</string>
+    <string name="astro_sun_image_content_description">Sunrise/sunset</string>
+    <string name="astro_moon_image_content_description">Moonrise/moonset</string>
+<!--    images contentDescription -->
+
+
 <!--    current weather fragment-->
     <string name="current_weather_temperature_template">%1$.1f° C</string>
     <string name="current_weather_feelslike_template">%1$.1f° C</string>
     <string name="current_weather_feelslike_label_template">Feels like: </string>
     <string name="current_weather_wind_label">Wind: </string>
     <string name="current_weather_wind_template">%1$.2fkm/h  %2$s</string>
-    <!--    current weather fragment-->
+<!--    current weather fragment-->
 
 
 <!--    detail weather fragment-->
@@ -31,7 +38,8 @@
     <string name="detail_weather_pressure_template">%1$.2fmm</string>
     <string name="detail_weather_moon_phase_template">Moon phase is:   %1s</string>
     <string name="detail_weather_moon_illumination_template">Moon illumination:   %1s%%</string>
-    <!--    detail weather fragment-->
+    <string name="detail_weather_astro_label">Astro:</string>
+<!--    detail weather fragment-->
 
     <string name="no_network_connection">No network connection. Please, turn it on.</string>
 </resources>

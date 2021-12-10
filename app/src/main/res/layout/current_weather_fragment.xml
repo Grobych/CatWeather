@@ -106,7 +106,7 @@
         </TableLayout>
 
                 <com.github.siyamed.shapeimageview.RoundedImageView
-                    android:contentDescription="@string/app_name"
+                    android:contentDescription="@string/current_weather_image_content_description"
                     android:id="@+id/currentWeatherImage"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
