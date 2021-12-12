@@ -3,13 +3,16 @@ package com.globa.catweather.fragments
 import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.globa.catweather.R
 import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
+import com.globa.catweather.interfaces.ClickInterface
 import com.globa.catweather.models.WeatherCodes
 import com.globa.catweather.models.WeatherDrawable
 import com.globa.catweather.viewmodels.CurrentWeatherViewModel
@@ -22,12 +25,25 @@ class CurrentWeatherFragment : Fragment() {
     private lateinit var binding: CurrentWeatherFragmentBinding
     private lateinit var viewModel: CurrentWeatherViewModel
     private lateinit var locationViewModel: LocationViewModel
+    private lateinit var clickInterface: ClickInterface
+
+    fun setInterface(click: ClickInterface){
+        clickInterface = click
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         binding = CurrentWeatherFragmentBinding.inflate(layoutInflater, container, false)
+        binding.root.setOnTouchListener { v, event ->
+            if (event.actionMasked == MotionEvent.ACTION_DOWN) {
+                clickInterface.clicked()
+                v.performClick()
+            }
+            true
+        }
         return binding.root
     }
 
