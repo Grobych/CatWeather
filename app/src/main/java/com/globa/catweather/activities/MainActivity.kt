@@ -25,7 +25,6 @@ class MainActivity : AppCompatActivity(), ClickInterface {
     private lateinit var currentWeatherFragment: CurrentWeatherFragment
     private lateinit var detailWeatherFragment: DetailWeatherFragment
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -49,11 +48,6 @@ class MainActivity : AppCompatActivity(), ClickInterface {
                 val intent = Intent(applicationContext, ForecastWeatherActivity::class.java)
                 startActivity(intent)
             }
-            override fun onSwipeRight() {
-                super.onSwipeRight()
-                val intent = Intent(applicationContext, DetailWeatherActivity::class.java)
-                startActivity(intent)
-            }
         })
     }
 
@@ -62,13 +56,11 @@ class MainActivity : AppCompatActivity(), ClickInterface {
     }
 
     private fun changeFragment(){
-        if (currentFragment == currentWeatherFragment){
-            supportFragmentManager.commit {
-                detailWeatherFragment = DetailWeatherFragment()
-                replace(R.id.currentWeatherFragmentContainerView, detailWeatherFragment)
-                setReorderingAllowed(true)
-                addToBackStack(null)
-            }
+        supportFragmentManager.commit {
+            detailWeatherFragment = DetailWeatherFragment()
+            replace(R.id.currentWeatherFragmentContainerView, detailWeatherFragment)
+            setReorderingAllowed(true)
+            addToBackStack(null)
         }
     }
 }

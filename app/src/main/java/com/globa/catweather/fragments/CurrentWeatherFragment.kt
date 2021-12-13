@@ -4,11 +4,8 @@ import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import com.globa.catweather.R
 import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
@@ -25,8 +22,10 @@ class CurrentWeatherFragment : Fragment() {
     private lateinit var binding: CurrentWeatherFragmentBinding
     private lateinit var viewModel: CurrentWeatherViewModel
     private lateinit var locationViewModel: LocationViewModel
-    private lateinit var clickInterface: ClickInterface
 
+    private val gestureDetector = GestureDetector(this.context, DoubleTapGestureDetector())
+
+    private lateinit var clickInterface: ClickInterface
     fun setInterface(click: ClickInterface){
         clickInterface = click
     }
@@ -38,10 +37,8 @@ class CurrentWeatherFragment : Fragment() {
     ): View {
         binding = CurrentWeatherFragmentBinding.inflate(layoutInflater, container, false)
         binding.root.setOnTouchListener { v, event ->
-            if (event.actionMasked == MotionEvent.ACTION_DOWN) {
-                clickInterface.clicked()
-                v.performClick()
-            }
+            gestureDetector.onTouchEvent(event)
+            v.performClick()
             true
         }
         return binding.root
@@ -91,5 +88,13 @@ class CurrentWeatherFragment : Fragment() {
     private fun updateImage(code : Int){
         val drawable = getByCode(code)
         binding.currentWeatherImage.setImageDrawable(drawable)
+    }
+
+    inner class DoubleTapGestureDetector : GestureDetector.SimpleOnGestureListener() {
+        override fun onDoubleTap(e: MotionEvent): Boolean {
+            Log.d("TAG", "Double Tap Detected ...")
+            clickInterface.clicked()
+            return true
+        }
     }
 }
