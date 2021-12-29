@@ -50,7 +50,7 @@ class CurrentWeatherFragment : Fragment() {
         locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
         weatherUpdateObserver()
         locationChangedObserver()
-        refreshSwipeListener()
+//        refreshSwipeListener()
     }
 
     private fun weatherUpdateObserver() {
@@ -63,13 +63,20 @@ class CurrentWeatherFragment : Fragment() {
         locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
             if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.updateWeather(this.requireContext(),updatedLocation) })
     }
-    private fun refreshSwipeListener(){
-        binding.weatherRefreshLayout.setOnRefreshListener {
-            val city = locationViewModel.location.value
-            if (NetworkUtil().isNetworkConnected(this.requireContext()) && city!= null) {
-                viewModel.updateWeather(this.requireContext(),city)
-            }
-            binding.weatherRefreshLayout.isRefreshing = false
+//    private fun refreshSwipeListener(){
+//        binding.weatherRefreshLayout.setOnRefreshListener {
+//            val city = locationViewModel.location.value
+//            if (NetworkUtil().isNetworkConnected(this.requireContext()) && city!= null) {
+//                viewModel.updateWeather(this.requireContext(),city)
+//            }
+//            binding.weatherRefreshLayout.isRefreshing = false
+//        }
+//    }
+
+    fun refreshWeather(){
+        val city = locationViewModel.location.value
+        if (NetworkUtil().isNetworkConnected(this.requireContext()) && city!= null) {
+            viewModel.updateWeather(this.requireContext(),city)
         }
     }
 

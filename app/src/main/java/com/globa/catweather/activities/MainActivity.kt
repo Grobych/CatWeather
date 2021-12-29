@@ -9,6 +9,7 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.*
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.globa.catweather.R
 import com.globa.catweather.fragments.CurrentWeatherFragment
 import com.globa.catweather.fragments.DetailWeatherFragment
@@ -25,6 +26,8 @@ class MainActivity : AppCompatActivity(), ClickInterface {
     private lateinit var currentWeatherFragment: CurrentWeatherFragment
     private lateinit var detailWeatherFragment: DetailWeatherFragment
 
+    private lateinit var mainRefreshLayout : SwipeRefreshLayout
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -39,6 +42,9 @@ class MainActivity : AppCompatActivity(), ClickInterface {
                 add(R.id.currentWeatherFragmentContainerView,currentWeatherFragment)
             }
         }
+
+        mainRefreshLayout = findViewById(R.id.mainRefreshLayout)
+        refreshSwipeListener()
 
 
         mainActivityLayout = findViewById(R.id.mainActivityLayout)
@@ -61,6 +67,13 @@ class MainActivity : AppCompatActivity(), ClickInterface {
             replace(R.id.currentWeatherFragmentContainerView, detailWeatherFragment)
             setReorderingAllowed(true)
             addToBackStack(null)
+        }
+    }
+
+        private fun refreshSwipeListener(){
+        mainRefreshLayout.setOnRefreshListener {
+            currentWeatherFragment.refreshWeather()
+            mainRefreshLayout.isRefreshing = false
         }
     }
 }
