@@ -1,5 +1,8 @@
 package com.globa.catweather.interfaces
 
+import androidx.fragment.app.Fragment
+
 interface ClickInterface {
-    fun clicked()
+    enum class To {LEFT, RIGHT}
+    fun clicked(to : To, from : Fragment)
 }

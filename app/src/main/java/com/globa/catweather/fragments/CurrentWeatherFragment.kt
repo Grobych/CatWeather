@@ -100,7 +100,19 @@ class CurrentWeatherFragment : Fragment() {
     inner class DoubleTapGestureDetector : GestureDetector.SimpleOnGestureListener() {
         override fun onDoubleTap(e: MotionEvent): Boolean {
             Log.d("TAG", "Double Tap Detected ...")
-            clickInterface.clicked()
+            clickInterface.clicked(ClickInterface.To.RIGHT, this@CurrentWeatherFragment)
+            return true
+        }
+
+        override fun onScroll(
+            e1: MotionEvent?,
+            e2: MotionEvent?,
+            distanceX: Float,
+            distanceY: Float
+        ): Boolean {
+            Log.d("TAG", "Scroll detected... $distanceX    $distanceY")
+            if ((distanceY < 20) && (distanceX > 50)) clickInterface.clicked(ClickInterface.To.RIGHT, this@CurrentWeatherFragment)
+            if ((distanceY < 20) && (distanceX < -50)) clickInterface.clicked(ClickInterface.To.LEFT, this@CurrentWeatherFragment)
             return true
         }
     }
