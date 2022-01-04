@@ -64,6 +64,7 @@ class MainActivity : AppCompatActivity(), ClickInterface {
     private fun changeFragment(){
         supportFragmentManager.commit {
             detailWeatherFragment = DetailWeatherFragment()
+            setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
             replace(R.id.currentWeatherFragmentContainerView, detailWeatherFragment)
             setReorderingAllowed(true)
             addToBackStack(null)
