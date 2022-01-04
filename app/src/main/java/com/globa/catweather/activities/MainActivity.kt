@@ -55,8 +55,8 @@ class MainActivity : AppCompatActivity(), ClickInterface {
         refreshSwipeListener()
     }
 
-    override fun clicked(to : ClickInterface.To, from : Fragment) {
-        Log.d("CLick", "$to  :::: $from")
+    override fun clicked(to : ClickInterface.To) {
+        Log.d("SWIPE", "$to ")
         changeFragment(to)
     }
 

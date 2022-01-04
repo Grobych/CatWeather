@@ -15,6 +15,7 @@ import com.globa.catweather.models.WeatherDrawable
 import com.globa.catweather.viewmodels.CurrentWeatherViewModel
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.globa.catweather.network.NetworkUtil
+import com.globa.catweather.utils.SwipeGestureDetector
 import kotlin.random.Random
 
 
@@ -23,11 +24,11 @@ class CurrentWeatherFragment : Fragment() {
     private lateinit var viewModel: CurrentWeatherViewModel
     private lateinit var locationViewModel: LocationViewModel
 
-    private val gestureDetector = GestureDetector(this.context, DoubleTapGestureDetector())
-
+    private lateinit var gestureDetector: GestureDetector
     private lateinit var clickInterface: ClickInterface
     fun setInterface(click: ClickInterface){
         clickInterface = click
+        gestureDetector = GestureDetector(this.context, SwipeGestureDetector(clickInterface))
     }
 
 
@@ -95,25 +96,5 @@ class CurrentWeatherFragment : Fragment() {
     private fun updateImage(code : Int){
         val drawable = getByCode(code)
         binding.currentWeatherImage.setImageDrawable(drawable)
-    }
-
-    inner class DoubleTapGestureDetector : GestureDetector.SimpleOnGestureListener() {
-        override fun onDoubleTap(e: MotionEvent): Boolean {
-            Log.d("TAG", "Double Tap Detected ...")
-            clickInterface.clicked(ClickInterface.To.RIGHT, this@CurrentWeatherFragment)
-            return true
-        }
-
-        override fun onScroll(
-            e1: MotionEvent?,
-            e2: MotionEvent?,
-            distanceX: Float,
-            distanceY: Float
-        ): Boolean {
-            Log.d("TAG", "Scroll detected... $distanceX    $distanceY")
-            if ((distanceY < 20) && (distanceX > 50)) clickInterface.clicked(ClickInterface.To.RIGHT, this@CurrentWeatherFragment)
-            if ((distanceY < 20) && (distanceX < -50)) clickInterface.clicked(ClickInterface.To.LEFT, this@CurrentWeatherFragment)
-            return true
-        }
     }
 }
