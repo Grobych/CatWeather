@@ -1,10 +1,15 @@
 package com.globa.catweather.fragments
 
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
 import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
 import android.view.*
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import com.globa.catweather.R
@@ -15,6 +20,7 @@ import com.globa.catweather.models.WeatherDrawable
 import com.globa.catweather.viewmodels.CurrentWeatherViewModel
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.globa.catweather.network.NetworkUtil
+import com.globa.catweather.notifications.CurrentWeatherNotification
 import com.globa.catweather.utils.SwipeGestureDetector
 import kotlin.random.Random
 
@@ -57,6 +63,7 @@ class CurrentWeatherFragment : Fragment() {
     private fun weatherUpdateObserver() {
         viewModel.currentWeather.observe(viewLifecycleOwner, {
                 updated ->
+            CurrentWeatherNotification().generateCurrentWeatherNotification(this.requireContext(),updated)
             binding.weather = updated
             updateImage(updated.code)})
     }
@@ -97,4 +104,5 @@ class CurrentWeatherFragment : Fragment() {
         val drawable = getByCode(code)
         binding.currentWeatherImage.setImageDrawable(drawable)
     }
+
 }
