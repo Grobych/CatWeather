@@ -18,10 +18,10 @@ class FragmentSelector(private val list: List<Fragment>) {
         return list[current]
     }
 
-    fun to(to: ClickInterface.To) : Fragment{
-        return when (to){
-            ClickInterface.To.LEFT -> toLeft()
-            ClickInterface.To.RIGHT -> toRight()
+    fun to(direction: ClickInterface.Direction) : Fragment{
+        return when (direction){
+            ClickInterface.Direction.LEFT -> toLeft()
+            ClickInterface.Direction.RIGHT -> toRight()
         }
     }
     fun getCurrent() = list[current]

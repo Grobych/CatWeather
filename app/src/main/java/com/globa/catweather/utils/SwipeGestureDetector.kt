@@ -12,8 +12,8 @@ class SwipeGestureDetector(private val clickInterface: ClickInterface) : Gesture
         distanceX: Float,
         distanceY: Float
     ): Boolean {
-        if ((distanceY < 20) && (distanceX > 50)) clickInterface.clicked(ClickInterface.To.RIGHT)
-        if ((distanceY < 20) && (distanceX < -50)) clickInterface.clicked(ClickInterface.To.LEFT)
+        if ((distanceY < 20) && (distanceX > 50)) clickInterface.clicked(ClickInterface.Direction.RIGHT)
+        if ((distanceY < 20) && (distanceX < -50)) clickInterface.clicked(ClickInterface.Direction.LEFT)
         return true
     }
 }

@@ -1,23 +1,16 @@
 package com.globa.catweather.activities
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.fragment.app.*
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.globa.catweather.R
 import com.globa.catweather.fragments.CurrentWeatherFragment
 import com.globa.catweather.fragments.DetailWeatherFragment
 import com.globa.catweather.fragments.ForecastWeatherFragment
 import com.globa.catweather.interfaces.ClickInterface
 import com.globa.catweather.utils.FragmentSelector
-import com.globa.catweather.view.OnSwipeTouchListener
-
+import com.globa.catweather.R
 
 class MainActivity : AppCompatActivity(), ClickInterface {
 
@@ -55,18 +48,18 @@ class MainActivity : AppCompatActivity(), ClickInterface {
         refreshSwipeListener()
     }
 
-    override fun clicked(to : ClickInterface.To) {
-        Log.d("SWIPE", "$to ")
-        changeFragment(to)
+    override fun clicked(direction : ClickInterface.Direction) {
+        Log.d("SWIPE", "$direction ")
+        changeFragment(direction)
     }
 
-    private fun changeFragment(to: ClickInterface.To){
+    private fun changeFragment(direction: ClickInterface.Direction){
         supportFragmentManager.commit {
-            when (to){
-                ClickInterface.To.RIGHT -> setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out)
-                ClickInterface.To.LEFT -> setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out)
+            when (direction){
+                ClickInterface.Direction.RIGHT -> setCustomAnimations(R.anim.slide_left_in, R.anim.slide_left_out)
+                ClickInterface.Direction.LEFT -> setCustomAnimations(R.anim.slide_right_in, R.anim.slide_right_out)
             }
-            replace(R.id.currentWeatherFragmentContainerView, fragmentSelector.to(to))
+            replace(R.id.currentWeatherFragmentContainerView, fragmentSelector.to(direction))
             setReorderingAllowed(true)
             addToBackStack(null)
         }
