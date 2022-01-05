@@ -46,8 +46,9 @@ class CurrentWeatherNotification {
             val channel = NotificationChannel(
                 channelId,
                 "CatWeather notification channel",
-                NotificationManager.IMPORTANCE_LOW
+                NotificationManager.IMPORTANCE_HIGH
             )
+            channel.lockscreenVisibility = Notification.VISIBILITY_PUBLIC
             mNotificationManager.createNotificationChannel(channel)
             mBuilder.setChannelId(channelId)
         }
