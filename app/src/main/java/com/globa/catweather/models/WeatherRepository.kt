@@ -17,7 +17,7 @@ import kotlin.collections.ArrayList
 object WeatherRepository {
     private lateinit var currentWeather : Weather
     private var forecastWeather = arrayListOf<ForecastWeather>()
-    private var detailDayWeather: DetailDayWeather? = null
+    private lateinit var detailDayWeather: DetailDayWeather
 
     private var latestCity = ""
     private var currentWeatherUptime = 0L
@@ -87,6 +87,24 @@ object WeatherRepository {
         queue.add(stringRequest)
     }
 
+    fun updateDetail(context: Context, city : String, updating : MutableLiveData<DetailDayWeather>){
+        latestCity = city
+        detailWeatherUptime = System.currentTimeMillis()
+
+        val url =
+            "http://api.weatherapi.com/v1/forecast.json?key=ff946992f1ee4f3d80385853210111&q=$city&days=1&aqi=no&alerts=no"
+        Log.d("WEATHER URL", url)
+        val queue = Volley.newRequestQueue(context)
+        val stringRequest = StringRequest(
+            Request.Method.GET, url,
+            listenerDetail(updating),
+            {
+                val text = "That didn't work!"
+                Log.e("Weather update", text)
+            })
+        queue.add(stringRequest)
+    }
+
     private fun listenerCurrent(updating: MutableLiveData<Weather>) = Response.Listener<String> { response ->
         Log.i("JSON TEST", response)
         val json = JSONObject(JSONObject(response).getString("current"))
@@ -119,5 +137,48 @@ object WeatherRepository {
         }
         Log.d("REPOSITORY", "$forecastWeather")
         updating.postValue(forecastWeather)
+    }
+
+    private fun listenerDetail(updating: MutableLiveData<DetailDayWeather>) = Response.Listener<String> { response ->
+        Log.i("JSON TEST", response)
+        val json = JSONObject(response)
+        Log.d("JSON","$json")
+        val current = getCurrent(json)
+        val astro = getAstro(json)
+        val forecastDay = json.getJSONObject("forecast").getString("forecastday")
+        val days = JSONArray(forecastDay)
+        val day = days.getJSONObject(0).getJSONObject("day")
+        val precipitation = day.getDouble("totalprecip_mm")
+        val humidity = day.getDouble("avghumidity")
+        val visibility = day.getDouble("avgvis_km")
+        val pressure = json.getJSONObject("current").getDouble("pressure_mb")
+        detailDayWeather = DetailDayWeather(current, astro, precipitation, humidity, visibility, pressure)
+        updating.postValue(detailDayWeather)
+    }
+
+    private fun getCurrent(json: JSONObject): Weather {
+        val jsonCurrent = json.getJSONObject("current")
+        return Weather(
+            jsonCurrent.getDouble("temp_c"),
+            jsonCurrent.getDouble("feelslike_c"),
+            jsonCurrent.getDouble("wind_kph"),
+            jsonCurrent.getString("wind_dir"),
+            jsonCurrent.getJSONObject("condition").getString("text"),
+            jsonCurrent.getJSONObject("condition").getInt("code")
+        )
+    }
+    private fun getAstro(json: JSONObject) : Astro{
+        val forecast = JSONObject(json.getString("forecast"))
+        val forecastDay = forecast.getString("forecastday")
+        val days = JSONArray(forecastDay)
+        val jsonAstro = days.getJSONObject(0).getJSONObject("astro")
+        return Astro(
+            jsonAstro.getString("sunrise"),
+            jsonAstro.getString("sunset"),
+            jsonAstro.getString("moonrise"),
+            jsonAstro.getString("moonset"),
+            jsonAstro.getString("moon_phase"),
+            jsonAstro.getString("moon_illumination"),
+        )
     }
 }
