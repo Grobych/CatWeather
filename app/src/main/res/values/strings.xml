@@ -3,6 +3,7 @@
     <string name="weather_api_key">ff946992f1ee4f3d80385853210111</string>
     <string name="location_load">Location is loading…</string>
     <string name="current_weather">Condition</string>
+    <string name="temperature">Temperature</string>
 
 <!--    images contentDescription -->
     <string name="current_weather_image_content_description">Current weather condition cat</string>
@@ -21,21 +22,21 @@
 
 
 <!--    detail weather fragment-->
-    <string name="detail_weather_feelslike_template">Feelslike: %1$.1f° C</string>
+    <string name="detail_weather_feelslike_template">Feels like %1$.1f° C</string>
     <string name="detail_weather_current_t_template">%1$.1f° C</string>
     <string name="detail_weather_wind_template">%1$.2fkm/h  %2$s</string>
-    <string name="detail_weather_wind_label_template">Wind speed: </string>
-    <string name="detail_weather_precipitation_label_template">Precipitation: </string>
+    <string name="detail_weather_wind_label_template">Wind speed </string>
+    <string name="detail_weather_precipitation_label_template">Precipitation </string>
     <string name="detail_weather_precipitation_template">%1$.1fmm</string>
-    <string name="detail_weather_humidity_label_template">Humidity: </string>
+    <string name="detail_weather_humidity_label_template">Humidity </string>
     <string name="detail_weather_humidity_template">%1$.0f%%</string>
-    <string name="detail_weather_visibility_label_template">Visibility: </string>
+    <string name="detail_weather_visibility_label_template">Visibility </string>
     <string name="detail_weather_visibility_template">%1$.1fkm</string>
-    <string name="detail_weather_pressure_label_template">Pressure: </string>
+    <string name="detail_weather_pressure_label_template">Pressure </string>
     <string name="detail_weather_pressure_template">%1$.2fmm</string>
-    <string name="detail_weather_moon_phase_template">Moon phase is:   %1s</string>
-    <string name="detail_weather_moon_illumination_template">Moon illumination:   %1s%%</string>
-    <string name="detail_weather_astro_label">Astro:</string>
+    <string name="detail_weather_moon_phase_template">Moon phase is   %1s</string>
+    <string name="detail_weather_moon_illumination_template">Moon illumination   %1s%%</string>
+    <string name="detail_weather_astro_label">Astro</string>
 <!--    detail weather fragment-->
 
     <string name="no_network_connection">No network connection. Please, turn it on.</string>
