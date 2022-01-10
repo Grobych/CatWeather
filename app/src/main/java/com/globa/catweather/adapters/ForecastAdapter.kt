@@ -10,12 +10,13 @@ import com.globa.catweather.databinding.ForecastWeatherFragmentItemBinding
 import com.globa.catweather.viewmodels.ForecastWeatherViewModel
 import com.globa.catweather.models.ForecastWeather
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
 import java.text.DateFormat
 import java.text.FieldPosition
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ForecastAdapter(val viewModel: ForecastWeatherViewModel, private val items: ArrayList<ForecastWeather>, val context: Context) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
+class ForecastAdapter(val viewModel: ForecastWeatherViewModel, private val items: MutableLiveData<ArrayList<ForecastWeather>>, val context: Context) : RecyclerView.Adapter<ForecastAdapter.ForecastViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ForecastViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -25,11 +26,11 @@ class ForecastAdapter(val viewModel: ForecastWeatherViewModel, private val items
     }
 
     override fun onBindViewHolder(holder: ForecastViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(items.value!![position])
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return items.value!!.size
     }
 
 

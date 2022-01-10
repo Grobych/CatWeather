@@ -48,7 +48,7 @@ class ForecastWeatherFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         viewModel.forecastList.observe(viewLifecycleOwner,{
             Log.i("data",it.toString())
-            recyclerView.adapter = ForecastAdapter(viewModel, viewModel.list, this.requireContext()) // TODO: rewrite with notifyDataSetChanged()
+            recyclerView.adapter = ForecastAdapter(viewModel, viewModel.forecastList, this.requireContext()) // TODO: rewrite with notifyDataSetChanged()
         })
         viewModel.updateForecast(this.requireContext(), locationViewModel.location.value.toString())
     }
