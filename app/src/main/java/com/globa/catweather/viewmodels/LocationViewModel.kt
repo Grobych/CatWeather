@@ -42,9 +42,6 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-//                if (locationResult == null) {
-//                    return
-//                }
                 for (l in locationResult.locations) {
                     if (l != null) {
                         val addresses = geocoder.getFromLocation(l.latitude, l.longitude, 1)
