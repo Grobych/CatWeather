@@ -35,7 +35,7 @@ class CurrentWeatherNotification {
 //        mBuilder.setContentIntent(pendingIntent)
         mBuilder.setSmallIcon(R.drawable.ic_cloud_test)
         mBuilder.setContentTitle("Title")
-        mBuilder.setContentText("Feelslike: " + context.getString(R.string.current_weather_feelslike_template,weather.feelsLike))
+        mBuilder.setContentText("Feels like: " + context.getString(R.string.current_weather_feelslike_template,weather.feelsLike))
         mBuilder.priority = Notification.PRIORITY_DEFAULT
         mBuilder.setStyle(bigText)
 
