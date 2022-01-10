@@ -65,6 +65,17 @@ class MainActivity : AppCompatActivity(), ClickInterface {
         }
     }
 
+    override fun onBackPressed() {
+        clearBackStack()
+        super.onBackPressed()
+    }
+    private fun clearBackStack() {
+        if (supportFragmentManager.backStackEntryCount > 1) {
+            val first = supportFragmentManager.getBackStackEntryAt(1)
+            supportFragmentManager.popBackStack(first.id, FragmentManager.POP_BACK_STACK_INCLUSIVE)
+        }
+    }
+
         private fun refreshSwipeListener(){
         mainRefreshLayout.setOnRefreshListener {
             currentWeatherFragment.refreshWeather()
