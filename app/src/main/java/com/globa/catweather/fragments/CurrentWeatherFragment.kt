@@ -37,7 +37,6 @@ class CurrentWeatherFragment : Fragment() {
         gestureDetector = GestureDetector(this.context, SwipeGestureDetector(clickInterface))
     }
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,7 +56,6 @@ class CurrentWeatherFragment : Fragment() {
         locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
         weatherUpdateObserver()
         locationChangedObserver()
-//        refreshSwipeListener()
     }
 
     private fun weatherUpdateObserver() {
@@ -67,19 +65,11 @@ class CurrentWeatherFragment : Fragment() {
             binding.weather = updated
             updateImage(updated.code)})
     }
+
     private fun locationChangedObserver(){
         locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
             if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.updateWeather(this.requireContext(),updatedLocation) })
     }
-//    private fun refreshSwipeListener(){
-//        binding.weatherRefreshLayout.setOnRefreshListener {
-//            val city = locationViewModel.location.value
-//            if (NetworkUtil().isNetworkConnected(this.requireContext()) && city!= null) {
-//                viewModel.updateWeather(this.requireContext(),city)
-//            }
-//            binding.weatherRefreshLayout.isRefreshing = false
-//        }
-//    }
 
     fun refreshWeather(){
         val city = locationViewModel.location.value
@@ -100,9 +90,9 @@ class CurrentWeatherFragment : Fragment() {
             ContextCompat.getDrawable(this.requireContext(), R.drawable.cat_weather_test)
         }
     }
+
     private fun updateImage(code : Int){
         val drawable = getByCode(code)
         binding.currentWeatherImage.setImageDrawable(drawable)
     }
-
 }
