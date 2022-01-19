@@ -44,11 +44,11 @@ class ForecastWeatherFragment : Fragment() {
         return root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[ForecastWeatherViewModel::class.java]
         locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
-        recyclerView = view?.findViewById(R.id.forecastWeatherRecyclerView) ?: RecyclerView(this.requireContext())
+        recyclerView = view.findViewById(R.id.forecastWeatherRecyclerView) ?: RecyclerView(this.requireContext())
         recyclerView.layoutManager = LinearLayoutManager(this.requireContext())
         viewModel.forecastList.observe(viewLifecycleOwner,{
             Log.i("data",it.toString())
