@@ -44,8 +44,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textSize="17sp"
-                        android:textAlignment="textEnd"
-                        android:gravity="center_vertical"
+                        android:gravity="center|end"
                         android:textColor="?attr/colorSecondary"
                         android:id="@+id/detailWeatherConditionTextView"
                         android:text='@{detailWeather.component1().condition, default = ""}'/>
@@ -75,8 +74,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:textSize="17sp"
-                        android:textAlignment="textEnd"
-                        android:gravity="center_vertical"
+                        android:gravity="center|end"
                         android:textColor="?attr/colorSecondary"
                         android:id="@+id/detailWeatherCurrentTemperature"
                         android:text="@{@string/detail_weather_current_t_template(detailWeather.component1().temp)}"/>
@@ -117,8 +115,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="17sp"
-                            android:textAlignment="textEnd"
-                            android:gravity="center_vertical"
+                            android:gravity="center|end"
                             android:textColor="?attr/colorSecondary"
                             android:id="@+id/detailWeatherWindSpeedTextView"
                             android:text="@{@string/detail_weather_wind_template(detailWeather.component1().windSpeed, detailWeather.component1().windDirection)}" />
@@ -150,8 +147,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="17sp"
-                            android:textAlignment="textEnd"
-                            android:gravity="center_vertical"
+                            android:gravity="center|end"
                             android:textColor="?attr/colorSecondary"
                             android:id="@+id/detailWeatherPrecipitationTextView"
                             android:text="@{@string/detail_weather_precipitation_template(detailWeather.component3())}" />
@@ -183,8 +179,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="17sp"
-                            android:textAlignment="textEnd"
-                            android:gravity="center_vertical"
+                            android:gravity="center|end"
                             android:textColor="?attr/colorSecondary"
                             android:id="@+id/detailWeatherHumidityTextView"
                             android:text="@{@string/detail_weather_humidity_template(detailWeather.component4())}"/>
@@ -216,8 +211,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="17sp"
-                            android:textAlignment="textEnd"
-                            android:gravity="center_vertical"
+                            android:gravity="center|end"
                             android:textColor="?attr/colorSecondary"
                             android:id="@+id/detailWeatherVisibilityTextView"
                             android:text="@{@string/detail_weather_visibility_template(detailWeather.component5())}" />
@@ -249,8 +243,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:textSize="17sp"
-                            android:textAlignment="textEnd"
-                            android:gravity="center_vertical"
+                            android:gravity="center|end"
                             android:textColor="?attr/colorSecondary"
                             android:id="@+id/detailWeatherPressureTextView"
                             android:text="@{@string/detail_weather_pressure_template(detailWeather.component6())}" />
