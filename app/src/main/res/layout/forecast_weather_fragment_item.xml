@@ -15,13 +15,18 @@
     </data>
 
     <LinearLayout
+        android:background="@drawable/background_round"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:backgroundTint="?attr/colorPrimary">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:textSize="15sp"
             android:id="@+id/forecastWeatherDataTextView" />
 
         <LinearLayout
@@ -37,37 +42,48 @@
                 android:background="@drawable/ic_cloud_test"
                 android:contentDescription="@string/app_name" />
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical|start"
+                android:layout_marginStart="10dp"
+                android:textSize="16sp"
                 android:id="@+id/forecastConditionTextView"
                 android:text='@{forecast.condition, default = "Condition"}'/>
 
         </LinearLayout>
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:stretchColumns="2"
+            android:textSize="15sp"
+            android:layout_marginStart="20dp">
+            <TableRow>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/forecastMinTemperatureTextView"
+                    android:text='@{Double.toString(forecast.minT), default = "Min T"}'/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/forecastMinTemperatureTextView"
-                android:text='@{Double.toString(forecast.minT), default = "Min T"}'/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:id="@+id/forecastMaxTemperatureTextView"
+                    android:text='@{Double.toString(forecast.maxT), default = "Max T"}'/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/forecastMaxTemperatureTextView"
-                android:text='@{Double.toString(forecast.maxT), default = "Max T"}'/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="10dp"
+                    android:id="@+id/forecastMaxWindSpeedTextView"
+                    android:text='@{Double.toString(forecast.maxWindSpeed), default = "Wind Speed"}'/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/forecastMaxWindSpeedTextView"
-                android:text='@{Double.toString(forecast.maxWindSpeed), default = "Wind Speed"}'/>
+            </TableRow>
 
-        </LinearLayout>
+
+        </TableLayout>
     </LinearLayout>
 
 </layout>
