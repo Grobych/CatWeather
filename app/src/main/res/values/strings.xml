@@ -36,7 +36,7 @@
     <string name="detail_weather_pressure_template">%1$.2fmm</string>
     <string name="detail_weather_moon_phase_template">Moon phase is   %1s</string>
     <string name="detail_weather_moon_illumination_template">Moon illumination   %1s%%</string>
-    <string name="detail_weather_astro_label">Astro</string>
+    <string name="detail_weather_astro_label">Astro:</string>
 <!--    detail weather fragment-->
 
     <string name="no_network_connection">No network connection. Please, turn it on.</string>

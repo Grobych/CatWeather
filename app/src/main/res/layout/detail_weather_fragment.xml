@@ -269,17 +269,24 @@
 
         </TableLayout>
 
-        <LinearLayout
+        <TableLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@drawable/background_round"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:padding="20dp"
+            android:stretchColumns="2"
+            android:backgroundTint="?attr/colorPrimary">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_weather_astro_label" />
+                android:text="@string/detail_weather_astro_label"
+                android:textSize="18sp"/>
 
-            <LinearLayout
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -292,22 +299,22 @@
                     android:contentDescription="@string/astro_sun_image_content_description" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:id="@+id/detailWeatherSunriseTextView"
                     android:text="@{detailWeather.component2().component1()}"
-                    android:layout_gravity="end" />
+                    android:gravity="center_vertical" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:id="@+id/detailWeatherSunsetTextView"
                     android:text="@{detailWeather.component2().component2()}"
                     android:layout_marginStart="20dp"
-                    android:layout_gravity="end" />
-            </LinearLayout>
+                    android:gravity="center_vertical" />
+            </TableRow>
 
-            <LinearLayout
+            <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
@@ -320,20 +327,20 @@
                     android:contentDescription="@string/astro_moon_image_content_description" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:id="@+id/detailWeatherMoonriseTextView"
                     android:text="@{detailWeather.component2().component3()}"
-                    android:layout_gravity="end" />
+                    android:gravity="center_vertical" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
                     android:id="@+id/detailWeatherMoonsetTextView"
                     android:text="@{detailWeather.component2().component4()}"
                     android:layout_marginStart="20dp"
-                    android:layout_gravity="end" />
-            </LinearLayout>
+                    android:gravity="center_vertical" />
+            </TableRow>
 
             <TextView
                 android:layout_width="match_parent"
@@ -346,6 +353,6 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/detailWeatherMoonIlluminationTextView"
                 android:text="@{@string/detail_weather_moon_illumination_template(detailWeather.component2().component6())}" />
-        </LinearLayout>
+        </TableLayout>
     </LinearLayout>
 </layout>
