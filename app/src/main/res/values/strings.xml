@@ -39,5 +39,10 @@
     <string name="detail_weather_astro_label">Astro:</string>
 <!--    detail weather fragment-->
 
+<!--    forecast weather fragment item-->
+    <string name="forecast_weather_fragment_item_wind_template">Wind speed: %1$.1fkm/h</string>
+    <string name="forecast_weather_fragment_item_temperature_template">Temperature: min %1$.2f° max %2$.2f° C</string>
+<!--    forecast weather fragment item-->
+
     <string name="no_network_connection">No network connection. Please, turn it on.</string>
 </resources>
