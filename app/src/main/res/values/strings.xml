@@ -36,8 +36,13 @@
     <string name="detail_weather_pressure_template">%1$.2fmm</string>
     <string name="detail_weather_moon_phase_template">Moon phase is   %1s</string>
     <string name="detail_weather_moon_illumination_template">Moon illumination   %1s%%</string>
-    <string name="detail_weather_astro_label">Astro</string>
+    <string name="detail_weather_astro_label">Astro:</string>
 <!--    detail weather fragment-->
+
+<!--    forecast weather fragment item-->
+    <string name="forecast_weather_fragment_item_wind_template">Wind speed: %1$.1fkm/h</string>
+    <string name="forecast_weather_fragment_item_temperature_template">Temperature: min %1$.2f° max %2$.2f° C</string>
+<!--    forecast weather fragment item-->
 
     <string name="no_network_connection">No network connection. Please, turn it on.</string>
 </resources>

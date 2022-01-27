@@ -28,6 +28,10 @@ class DetailWeatherFragment : Fragment() {
         gestureDetector = GestureDetector(this.context, SwipeGestureDetector(clickInterface))
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        retainInstance = true
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,8 +45,8 @@ class DetailWeatherFragment : Fragment() {
         return  binding.root
     }
 
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         viewModel = ViewModelProvider(this)[DetailWeatherViewModel::class.java]
         locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
         weatherUpdateObserver()

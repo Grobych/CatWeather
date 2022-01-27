@@ -11,14 +11,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
         <TableLayout
-            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/background_round"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
             android:padding="20dp"
             android:stretchColumns="2"
             android:backgroundTint="?attr/colorPrimary">
@@ -37,14 +37,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center_vertical"
                     android:text="@string/current_weather" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:textColor="?attr/colorSecondary"
                     android:gravity="center_vertical|end"
                     android:id="@+id/detailWeatherConditionTextView"
@@ -72,14 +72,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center_vertical"
                     android:text="@string/temperature" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center_vertical|end"
                     android:textColor="?attr/colorSecondary"
                     android:id="@+id/detailWeatherCurrentTemperature"
@@ -108,14 +108,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center_vertical"
                     android:text="@string/detail_weather_wind_label_template" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center|end"
                     android:textColor="?attr/colorSecondary"
                     android:id="@+id/detailWeatherWindSpeedTextView"
@@ -145,14 +145,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center_vertical"
                     android:text="@string/detail_weather_precipitation_label_template" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center|end"
                     android:textColor="?attr/colorSecondary"
                     android:id="@+id/detailWeatherPrecipitationTextView"
@@ -181,14 +181,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center_vertical"
                     android:text="@string/detail_weather_humidity_label_template" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center|end"
                     android:textColor="?attr/colorSecondary"
                     android:id="@+id/detailWeatherHumidityTextView"
@@ -217,14 +217,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center_vertical"
                     android:text="@string/detail_weather_visibility_label_template" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center|end"
                     android:textColor="?attr/colorSecondary"
                     android:id="@+id/detailWeatherVisibilityTextView"
@@ -253,14 +253,14 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center_vertical"
                     android:text="@string/detail_weather_pressure_label_template" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:textSize="17sp"
+                    android:textSize="15sp"
                     android:gravity="center|end"
                     android:textColor="?attr/colorSecondary"
                     android:id="@+id/detailWeatherPressureTextView"
@@ -270,12 +270,13 @@
         </TableLayout>
 
         <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="@drawable/background_round"
             android:layout_gravity="center"
-            android:layout_margin="20dp"
+            android:layout_marginStart="20dp"
             android:padding="20dp"
             android:stretchColumns="2"
             android:backgroundTint="?attr/colorPrimary">

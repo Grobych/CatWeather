@@ -1,6 +1,9 @@
 package com.globa.catweather.utils
 
 import androidx.fragment.app.Fragment
+import com.globa.catweather.fragments.CurrentWeatherFragment
+import com.globa.catweather.fragments.DetailWeatherFragment
+import com.globa.catweather.fragments.ForecastWeatherFragment
 import com.globa.catweather.interfaces.ClickInterface
 
 class FragmentSelector(private val list: List<Fragment>) {
@@ -25,4 +28,12 @@ class FragmentSelector(private val list: List<Fragment>) {
         }
     }
     fun getCurrent() = list[current]
+
+    fun setInterface(clickInterface : ClickInterface){
+        list.forEach { f ->
+            if (f is CurrentWeatherFragment) f.setInterface(clickInterface)
+            if (f is DetailWeatherFragment) f.setInterface(clickInterface)
+            if (f is ForecastWeatherFragment) f.setInterface(clickInterface)
+        }
+    }
 }
