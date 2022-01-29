@@ -17,6 +17,7 @@ import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
 import com.globa.catweather.interfaces.ClickInterface
 import com.globa.catweather.models.WeatherCodes
 import com.globa.catweather.models.WeatherDrawable
+import com.globa.catweather.models.WeatherIcon
 import com.globa.catweather.viewmodels.CurrentWeatherViewModel
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.globa.catweather.network.NetworkUtil
@@ -67,7 +68,9 @@ class CurrentWeatherFragment : Fragment() {
                 updated ->
             CurrentWeatherNotification().generateCurrentWeatherNotification(this.requireContext(),updated)
             binding.weather = updated
-            updateImage(updated.code)})
+            updateImage(updated.code)
+            updateIcon(updated.code)
+        })
     }
 
     private fun locationChangedObserver(){
@@ -84,7 +87,7 @@ class CurrentWeatherFragment : Fragment() {
 
     private fun getByCode(code: Int) : Drawable?{
         val weatherStatus = WeatherCodes().getByCode(code)
-        val arrayId = WeatherDrawable().map[weatherStatus]
+        val arrayId = WeatherDrawable.map[weatherStatus]
         return if (arrayId != null){
             val ta = resources.obtainTypedArray(arrayId)
             val id = ta.getResourceId(Random.nextInt(ta.length()),0)
@@ -98,5 +101,11 @@ class CurrentWeatherFragment : Fragment() {
     private fun updateImage(code : Int){
         val drawable = getByCode(code)
         binding.currentWeatherImage.setImageDrawable(drawable)
+    }
+    private fun updateIcon(code : Int){
+        val id = WeatherIcon.getByWeatherStatus(WeatherCodes().getByCode(code))
+        val icon = if (id != null) {ContextCompat.getDrawable(this.requireContext(),id)}
+            else {ContextCompat.getDrawable(this.requireContext(),R.drawable.ic_cloud_test)}
+        binding.currentWeatherConditionIcon.setImageDrawable(icon)
     }
 }
