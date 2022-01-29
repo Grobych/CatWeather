@@ -4,6 +4,7 @@ import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.globa.catweather.R
 import com.globa.catweather.databinding.ForecastWeatherFragmentItemBinding
@@ -11,6 +12,8 @@ import com.globa.catweather.viewmodels.ForecastWeatherViewModel
 import com.globa.catweather.models.ForecastWeather
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
+import com.globa.catweather.models.WeatherCodes
+import com.globa.catweather.models.WeatherIcon
 import java.text.DateFormat
 import java.text.FieldPosition
 import java.util.*
@@ -39,10 +42,20 @@ class ForecastAdapter(val viewModel: ForecastWeatherViewModel, private val items
             Log.i("Binding", "$forecastWeather")
             binding.forecast = forecastWeather
             binding.forecastWeatherDataTextView.text = formatDate(forecastWeather.date)
+            updateIcon(forecastWeather.code)
         }
 
         private fun formatDate(date : Date) : String{
             return DateFormat.getDateInstance().format(date,StringBuffer(), FieldPosition(DateFormat.DATE_FIELD)).toString()
+        }
+
+        private fun updateIcon(code : Int){
+            val id = WeatherIcon.getByWeatherStatus(WeatherCodes().getByCode(code))
+            val icon = if (id != null) {
+                ContextCompat.getDrawable(context,id)}
+            else {
+                ContextCompat.getDrawable(context,R.drawable.ic_cloud_test)}
+            binding.forecastWeatherItemConditionIcon.setImageDrawable(icon)
         }
     }
 }
