@@ -4,7 +4,7 @@ import com.globa.catweather.R
 import com.globa.catweather.models.WeatherStatus.*
 
 
-class WeatherDrawable {
+object WeatherDrawable {
     val map = mapOf(
         Sunny to R.array.image_sunny,
         Cloudy to R.array.image_cloudy,
