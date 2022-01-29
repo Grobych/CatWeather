@@ -13,7 +13,12 @@ import android.view.MotionEvent
 import android.view.GestureDetector
 import android.view.GestureDetector.SimpleOnGestureListener
 import android.view.View.OnTouchListener
+import androidx.core.content.ContextCompat
+import com.globa.catweather.R
 import com.globa.catweather.interfaces.ClickInterface
+import com.globa.catweather.models.WeatherCodes
+import com.globa.catweather.models.WeatherIcon
+import com.globa.catweather.models.WeatherStatus
 import com.globa.catweather.utils.SwipeGestureDetector
 
 class DetailWeatherFragment : Fragment() {
@@ -60,7 +65,19 @@ class DetailWeatherFragment : Fragment() {
 
     private fun weatherUpdateObserver() {
         viewModel.detailDayWeather.observe(viewLifecycleOwner, {
-                updated -> binding.detailWeather = updated})
+                updated ->
+            binding.detailWeather = updated
+            updateConditionIcon(updated.current.code)
+        })
+    }
+
+    private fun updateConditionIcon(code : Int){
+        val id = WeatherIcon.getByWeatherStatus(WeatherCodes().getByCode(code))
+        val icon = if (id != null) {
+            ContextCompat.getDrawable(this.requireContext(),id)}
+        else {
+            ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_cloud_test)}
+        binding.detailWeatherConditionIcon.setImageDrawable(icon)
     }
 }
 
