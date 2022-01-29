@@ -30,7 +30,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="5dp"
-                android:background="@drawable/ic_cloud_test"
+                android:src="@drawable/ic_cloud_test"
                 android:contentDescription="@string/app_name" />
 
             <TextView
