@@ -79,7 +79,7 @@ class CurrentWeatherFragment : Fragment(), UpdateInterface {
             if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.updateWeather(this.requireContext(),updatedLocation) })
     }
 
-    fun refreshWeather(){
+    private fun refreshWeather(){
         val city = locationViewModel.location.value
         if (NetworkUtil().isNetworkConnected(this.requireContext()) && city!= null) {
             viewModel.updateWeather(this.requireContext(),city)

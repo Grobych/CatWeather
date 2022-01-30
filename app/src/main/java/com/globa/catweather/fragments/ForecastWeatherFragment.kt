@@ -55,7 +55,7 @@ class ForecastWeatherFragment : Fragment(), UpdateInterface {
             Log.i("data",it.toString())
             recyclerView.adapter = ForecastAdapter(viewModel, viewModel.forecastList, this.requireContext()) // TODO: rewrite with notifyDataSetChanged()
         })
-        viewModel.updateForecast(this.requireContext(), locationViewModel.location.value.toString())
+        update()
     }
 
     override fun update() {
