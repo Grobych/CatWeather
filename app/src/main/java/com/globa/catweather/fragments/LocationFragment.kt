@@ -16,6 +16,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import com.globa.catweather.R
+import com.globa.catweather.network.NetworkUtil
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -80,7 +81,7 @@ class LocationFragment : Fragment() {
     ) {
         if ((requestCode == R.integer.location_permission_code) && (permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION))){
             Log.d(tag,"Permission granted")
-            viewModel.locationRequestInit()
+            if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
         }
     }
 
