@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.globa.catweather.R
 import com.globa.catweather.adapters.ForecastAdapter
 import com.globa.catweather.interfaces.ClickInterface
+import com.globa.catweather.interfaces.UpdateInterface
 import com.globa.catweather.utils.SwipeGestureDetector
 import com.globa.catweather.viewmodels.ForecastWeatherViewModel
 import com.globa.catweather.viewmodels.LocationViewModel
 
-class ForecastWeatherFragment : Fragment() {
+class ForecastWeatherFragment : Fragment(), UpdateInterface {
 
     private lateinit var viewModel: ForecastWeatherViewModel
     private lateinit var locationViewModel: LocationViewModel
@@ -55,6 +56,10 @@ class ForecastWeatherFragment : Fragment() {
             recyclerView.adapter = ForecastAdapter(viewModel, viewModel.forecastList, this.requireContext()) // TODO: rewrite with notifyDataSetChanged()
         })
         viewModel.updateForecast(this.requireContext(), locationViewModel.location.value.toString())
+    }
+
+    override fun update() {
+        viewModel.updateForecast(this.requireContext(),locationViewModel.location.value.toString())
     }
 
 }

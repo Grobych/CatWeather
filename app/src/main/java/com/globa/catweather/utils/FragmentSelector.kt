@@ -5,6 +5,7 @@ import com.globa.catweather.fragments.CurrentWeatherFragment
 import com.globa.catweather.fragments.DetailWeatherFragment
 import com.globa.catweather.fragments.ForecastWeatherFragment
 import com.globa.catweather.interfaces.ClickInterface
+import com.globa.catweather.interfaces.UpdateInterface
 
 class FragmentSelector(private val list: List<Fragment>) {
     var current = 0
@@ -35,5 +36,10 @@ class FragmentSelector(private val list: List<Fragment>) {
             if (f is DetailWeatherFragment) f.setInterface(clickInterface)
             if (f is ForecastWeatherFragment) f.setInterface(clickInterface)
         }
+    }
+
+    fun update(){
+        val current = list[current]
+        if (current is UpdateInterface) current.update()
     }
 }

@@ -2,26 +2,22 @@ package com.globa.catweather.fragments
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import com.globa.catweather.databinding.DetailWeatherFragmentBinding
 import com.globa.catweather.network.NetworkUtil
 import com.globa.catweather.viewmodels.DetailWeatherViewModel
 import com.globa.catweather.viewmodels.LocationViewModel
-import android.view.MotionEvent
 import android.view.GestureDetector
-import android.view.GestureDetector.SimpleOnGestureListener
-import android.view.View.OnTouchListener
 import androidx.core.content.ContextCompat
 import com.globa.catweather.R
 import com.globa.catweather.interfaces.ClickInterface
+import com.globa.catweather.interfaces.UpdateInterface
 import com.globa.catweather.models.WeatherCodes
 import com.globa.catweather.models.WeatherIcon
-import com.globa.catweather.models.WeatherStatus
 import com.globa.catweather.utils.SwipeGestureDetector
 
-class DetailWeatherFragment : Fragment() {
+class DetailWeatherFragment : Fragment(), UpdateInterface {
     private lateinit var binding : DetailWeatherFragmentBinding
     private lateinit var viewModel: DetailWeatherViewModel
     private lateinit var locationViewModel: LocationViewModel
@@ -55,10 +51,10 @@ class DetailWeatherFragment : Fragment() {
         viewModel = ViewModelProvider(this)[DetailWeatherViewModel::class.java]
         locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
         weatherUpdateObserver()
-        getDetailWeather()
+        updateDetailWeather()
     }
 
-    private fun getDetailWeather() {
+    private fun updateDetailWeather() {
         if (NetworkUtil().isNetworkConnected(this.requireContext()))
             viewModel.updateWeather(this.requireContext(), locationViewModel.location.value.toString())
     }
@@ -78,6 +74,10 @@ class DetailWeatherFragment : Fragment() {
         else {
             ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_cloud_test)}
         binding.detailWeatherConditionIcon.setImageDrawable(icon)
+    }
+
+    override fun update() {
+        updateDetailWeather()
     }
 }
 

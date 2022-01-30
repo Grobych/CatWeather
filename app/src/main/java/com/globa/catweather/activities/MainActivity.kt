@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity(), ClickInterface {
 
         private fun refreshSwipeListener(){
         mainRefreshLayout.setOnRefreshListener {
-            if (viewModel.fragmentSelector.getCurrent() is CurrentWeatherFragment) (viewModel.fragmentSelector.getCurrent() as CurrentWeatherFragment).refreshWeather()
+            viewModel.fragmentSelector.update()
             mainRefreshLayout.isRefreshing = false
         }
     }

@@ -15,6 +15,7 @@ import androidx.core.content.ContextCompat
 import com.globa.catweather.R
 import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
 import com.globa.catweather.interfaces.ClickInterface
+import com.globa.catweather.interfaces.UpdateInterface
 import com.globa.catweather.models.WeatherCodes
 import com.globa.catweather.models.WeatherDrawable
 import com.globa.catweather.models.WeatherIcon
@@ -26,7 +27,7 @@ import com.globa.catweather.utils.SwipeGestureDetector
 import kotlin.random.Random
 
 
-class CurrentWeatherFragment : Fragment() {
+class CurrentWeatherFragment : Fragment(), UpdateInterface {
     private lateinit var binding: CurrentWeatherFragmentBinding
     private lateinit var viewModel: CurrentWeatherViewModel
     private lateinit var locationViewModel: LocationViewModel
@@ -107,5 +108,9 @@ class CurrentWeatherFragment : Fragment() {
         val icon = if (id != null) {ContextCompat.getDrawable(this.requireContext(),id)}
             else {ContextCompat.getDrawable(this.requireContext(),R.drawable.ic_cloud_test)}
         binding.currentWeatherConditionIcon.setImageDrawable(icon)
+    }
+
+    override fun update() {
+        refreshWeather()
     }
 }
