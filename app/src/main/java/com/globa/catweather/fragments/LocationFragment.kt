@@ -2,35 +2,28 @@ package com.globa.catweather.fragments
 
 import android.Manifest
 import android.app.Activity
-import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.View.OnFocusChangeListener
-import android.view.ViewGroup
-import android.view.WindowManager
+import android.view.*
+import android.view.View.*
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
+import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.globa.catweather.R
 import com.globa.catweather.network.NetworkUtil
+import com.globa.catweather.utils.KeyboardUtil
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import androidx.core.content.ContextCompat.getSystemService
-
-
-
 
 
 class LocationFragment : Fragment() {
@@ -49,15 +42,29 @@ class LocationFragment : Fragment() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity as Activity)
         viewModel = LocationViewModel.getInstance(this.requireActivity().application)
 
-        val editText = getView()?.findViewById(R.id.locationTextView) as EditText
+        val textView = getView()?.findViewById(R.id.locationTextView) as TextView
+        val editText = getView()?.findViewById(R.id.locationTextEdit) as EditText
+
+        val layout = getView()?.findViewById(R.id.locationLinearLayout) as LinearLayout
+        layout.setOnClickListener {
+            if (editText.visibility == GONE){
+                textView.visibility = GONE
+                editText.visibility = VISIBLE
+                editText.text.clear()
+                editText.requestFocus()
+            }
+        }
         editText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
             val input : String
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 input = v.text.toString()
                 Log.d("LOCATION INPUT", "Post $input")
                 viewModel.location.postValue(input)
-                closeKeyboard(requireActivity())
+                KeyboardUtil.closeKeyboard(requireActivity())
                 editText.clearFocus()
+                editText.visibility = GONE
+                textView.visibility = VISIBLE
+                KeyboardUtil.openKeyboard(requireActivity())
                 return@OnEditorActionListener true
             }
             false // pass on to other listeners.
@@ -65,7 +72,6 @@ class LocationFragment : Fragment() {
 
         viewModel.fusedLocationClient = fusedLocationClient
         viewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
-            val textView: TextView = requireView().findViewById(R.id.locationTextView)
             textView.text = updatedLocation
         })
 
@@ -118,14 +124,5 @@ class LocationFragment : Fragment() {
             Log.d(tag,"Permission granted")
             if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
         }
-    }
-
-    private fun closeKeyboard(activity: Activity) {
-        val imm = activity.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        var view = activity.currentFocus
-        if (view == null) {
-            view = View(activity)
-        }
-        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
