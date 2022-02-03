@@ -9,7 +9,6 @@ import android.util.Log
 import android.view.*
 import android.view.View.*
 import android.view.inputmethod.EditorInfo
-import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -54,7 +53,7 @@ class LocationFragment : Fragment() {
                 editText.requestFocus()
             }
         }
-        editText.setOnEditorActionListener(OnEditorActionListener { v, actionId, event ->
+        editText.setOnEditorActionListener(OnEditorActionListener { v, actionId, _ ->
             val input : String
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 input = v.text.toString()
