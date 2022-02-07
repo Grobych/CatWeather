@@ -64,6 +64,7 @@
                 android:layout_height="match_parent">
 
                 <ImageView
+                    android:id="@+id/detailWeatherTemperatureIcon"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:src="@drawable/ic_cloud_test"
@@ -102,7 +103,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_cloud_test"
+                    android:src="@drawable/ic_wind"
                     android:contentDescription="@string/app_name" />
 
                 <TextView
@@ -293,9 +294,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_cloud_test"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_sunset"
                     android:layout_gravity="start"
                     android:contentDescription="@string/astro_sun_image_content_description" />
 
@@ -321,9 +322,9 @@
                 android:orientation="horizontal">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_cloud_test"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/ic_moonrise"
                     android:layout_gravity="start"
                     android:contentDescription="@string/astro_moon_image_content_description" />
 
