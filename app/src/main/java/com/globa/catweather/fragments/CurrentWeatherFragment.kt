@@ -1,15 +1,9 @@
 package com.globa.catweather.fragments
 
-import android.app.NotificationManager
-import android.content.Context
-import android.content.Context.NOTIFICATION_SERVICE
 import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import android.view.*
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import com.globa.catweather.R
@@ -100,7 +94,15 @@ class CurrentWeatherFragment : Fragment(), UpdateInterface {
     }
 
     private fun updateImage(code : Int){
-        val drawable = getByCode(code)
+        val drawable : Drawable?
+        val status = WeatherCodes().getByCode(code)
+        if ((viewModel.currentType != null) && (viewModel.currentType == status)){
+            drawable = viewModel.currentImageDrawable
+        } else{
+            drawable = getByCode(code)
+            viewModel.currentType = status
+            viewModel.currentImageDrawable = drawable
+        }
         binding.currentWeatherImage.setImageDrawable(drawable)
     }
     private fun updateIcon(code : Int){
