@@ -1,5 +1,6 @@
 package com.globa.catweather.fragments
 
+import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
@@ -64,6 +65,7 @@ class DetailWeatherFragment : Fragment(), UpdateInterface {
                 updated ->
             binding.detailWeather = updated
             updateConditionIcon(updated.current.code)
+            updateTemperatureIcon(updated.current.temp)
         })
     }
 
@@ -74,6 +76,17 @@ class DetailWeatherFragment : Fragment(), UpdateInterface {
         else {
             ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_cloud_test)}
         binding.detailWeatherConditionIcon.setImageDrawable(icon)
+    }
+
+    private fun updateTemperatureIcon(t : Double){
+        lateinit var icon : Drawable
+        when (t){
+            in Double.MIN_VALUE..-20.0 -> icon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_empty_temp)!!
+            in -20.0..5.0 -> icon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_temp_low)!!
+            in 5.0..25.0 -> icon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_temp_moderate)!!
+            in 25.0..Double.MAX_VALUE -> icon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_temp_high)!!
+        }
+        binding.detailWeatherTemperatureIcon?.setImageDrawable(icon)
     }
 
     override fun update() {
