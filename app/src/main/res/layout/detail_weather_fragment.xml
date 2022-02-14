@@ -139,7 +139,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_cloud_test"
+                    android:src="@drawable/ic_precipitation"
                     android:contentDescription="@string/app_name" />
 
                 <TextView
@@ -175,7 +175,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_cloud_test"
+                    android:src="@drawable/ic_humidity"
                     android:contentDescription="@string/app_name" />
 
                 <TextView
@@ -211,7 +211,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_cloud_test"
+                    android:src="@drawable/ic_visibility"
                     android:contentDescription="@string/app_name" />
 
                 <TextView
