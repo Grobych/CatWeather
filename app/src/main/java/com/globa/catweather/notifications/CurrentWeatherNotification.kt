@@ -24,7 +24,9 @@ class CurrentWeatherNotification {
 
     fun generateCurrentWeatherNotification(context: Context, weather : Weather){
         val mBuilder = NotificationCompat.Builder(context.applicationContext, "notify_001")
-        val ii = Intent(context.applicationContext, MainActivity::class.java)
+        val ii = Intent(context.applicationContext, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
         val pendingIntent = PendingIntent.getActivity(context, 0, ii, 0)
 
         val bigText = NotificationCompat.BigTextStyle()
@@ -38,6 +40,7 @@ class CurrentWeatherNotification {
         mBuilder.setContentText("Feels like: " + context.getString(R.string.current_weather_feelslike_template,weather.feelsLike))
         mBuilder.priority = Notification.PRIORITY_DEFAULT
         mBuilder.setStyle(bigText)
+        mBuilder.setContentIntent(pendingIntent)
 
         val mNotificationManager: NotificationManager = context.applicationContext.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
