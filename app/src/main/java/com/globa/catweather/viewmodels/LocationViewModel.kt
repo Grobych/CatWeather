@@ -59,6 +59,8 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
                 }
             }
         }
-        fusedLocationClient.requestLocationUpdates(locationRequest,locationCallback,Looper.myLooper())
+        fusedLocationClient.requestLocationUpdates(locationRequest,locationCallback,
+            Looper.myLooper()!!
+        )
     }
 }
