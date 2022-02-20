@@ -247,7 +247,7 @@
                 <ImageView
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    android:src="@drawable/ic_cloud_test"
+                    android:src="@drawable/ic_pressure"
                     android:contentDescription="@string/app_name" />
 
                 <TextView
