@@ -9,7 +9,8 @@
             type="com.globa.catweather.models.Weather" />
     </data>
 
-    <LinearLayout
+    <github.hotstu.autoskeleton.SkeletonLinearLayout
+        android:id="@+id/skeletonLinearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
@@ -107,6 +108,16 @@
             android:layout_gravity="center"
             android:layout_marginHorizontal="20dp"
             android:layout_marginBottom="20dp" />
-    </LinearLayout>
+
+    </github.hotstu.autoskeleton.SkeletonLinearLayout>
+
+
+<!--    <LinearLayout-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:orientation="vertical">-->
+
+<!--        -->
+<!--    </LinearLayout>-->
 
 </layout>

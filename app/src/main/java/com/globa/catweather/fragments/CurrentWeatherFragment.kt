@@ -16,6 +16,7 @@ import com.globa.catweather.viewmodels.CurrentWeatherViewModel
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.globa.catweather.network.NetworkUtil
 import com.globa.catweather.notifications.CurrentWeatherNotification
+import github.hotstu.autoskeleton.SkeletonDelegate
 import kotlin.random.Random
 
 
@@ -23,6 +24,7 @@ class CurrentWeatherFragment : Fragment(), UpdateInterface {
     private lateinit var binding: CurrentWeatherFragmentBinding
     private lateinit var viewModel: CurrentWeatherViewModel
     private lateinit var locationViewModel: LocationViewModel
+    lateinit var skeletonDelegate: SkeletonDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +40,7 @@ class CurrentWeatherFragment : Fragment(), UpdateInterface {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         viewModel = ViewModelProvider(requireActivity())[CurrentWeatherViewModel::class.java]
         locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
         if (viewModel.currentImageDrawable != null) binding.currentWeatherImage.setImageDrawable(viewModel.currentImageDrawable)
@@ -48,6 +51,7 @@ class CurrentWeatherFragment : Fragment(), UpdateInterface {
     private fun weatherUpdateObserver() {
         viewModel.currentWeather.observe(viewLifecycleOwner, {
                 updated ->
+            binding.skeletonLinearLayout.hideSkeleton()
             CurrentWeatherNotification().generateCurrentWeatherNotification(this.requireContext(),updated)
             binding.weather = updated
             updateImage(updated.code)
