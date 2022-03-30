@@ -8,362 +8,375 @@
             type="com.globa.catweather.models.DetailDayWeather" />
     </data>
 
-    <github.hotstu.autoskeleton.SkeletonLinearLayout
-        android:id="@+id/skeletonLinearLayout"
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TableLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/background_round"
-            android:layout_gravity="center"
-            android:layout_margin="20dp"
-            android:padding="20dp"
-            android:stretchColumns="2"
-            android:backgroundTint="?attr/colorPrimary">
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/detailWeatherConditionIcon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_cloud_test"
-                    android:contentDescription="@string/app_name" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:textSize="17sp"
-                    android:gravity="center_vertical"
-                    android:text="@string/current_weather" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="17sp"
-                    android:textColor="?attr/colorSecondary"
-                    android:gravity="center_vertical|end"
-                    android:id="@+id/detailWeatherConditionTextView"
-                    android:text='@{detailWeather.component1().condition, default = ""}' />
-            </TableRow>
-
-            <View
-                android:layout_width="260dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="?attr/colorSecondaryVariant" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <ImageView
-                    android:id="@+id/detailWeatherTemperatureIcon"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_cloud_test"
-                    android:contentDescription="@string/app_name" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:textSize="17sp"
-                    android:gravity="center_vertical"
-                    android:text="@string/temperature" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="17sp"
-                    android:gravity="center_vertical|end"
-                    android:textColor="?attr/colorSecondary"
-                    android:id="@+id/detailWeatherCurrentTemperature"
-                    android:text="@{@string/detail_weather_current_t_template(detailWeather.component1().temp)}" />
-            </TableRow>
-
-            <View
-                android:layout_width="260dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="?attr/colorSecondaryVariant" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_wind"
-                    android:contentDescription="@string/app_name" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:textSize="17sp"
-                    android:gravity="center_vertical"
-                    android:text="@string/detail_weather_wind_label_template" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="17sp"
-                    android:gravity="center|end"
-                    android:textColor="?attr/colorSecondary"
-                    android:id="@+id/detailWeatherWindSpeedTextView"
-                    android:text="@{@string/detail_weather_wind_template(detailWeather.component1().windSpeed, detailWeather.component1().windDirection)}" />
-            </TableRow>
-
-            <View
-                android:layout_width="260dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="?attr/colorSecondaryVariant" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_precipitation"
-                    android:contentDescription="@string/app_name" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:textSize="17sp"
-                    android:gravity="center_vertical"
-                    android:text="@string/detail_weather_precipitation_label_template" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="17sp"
-                    android:gravity="center|end"
-                    android:textColor="?attr/colorSecondary"
-                    android:id="@+id/detailWeatherPrecipitationTextView"
-                    android:text="@{@string/detail_weather_precipitation_template(detailWeather.component3())}" />
-            </TableRow>
-
-            <View
-                android:layout_width="260dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="?attr/colorSecondaryVariant" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_humidity"
-                    android:contentDescription="@string/app_name" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:textSize="17sp"
-                    android:gravity="center_vertical"
-                    android:text="@string/detail_weather_humidity_label_template" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="17sp"
-                    android:gravity="center|end"
-                    android:textColor="?attr/colorSecondary"
-                    android:id="@+id/detailWeatherHumidityTextView"
-                    android:text="@{@string/detail_weather_humidity_template(detailWeather.component4())}" />
-            </TableRow>
-
-            <View
-                android:layout_width="260dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="?attr/colorSecondaryVariant" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_visibility"
-                    android:contentDescription="@string/app_name" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:textSize="17sp"
-                    android:gravity="center_vertical"
-                    android:text="@string/detail_weather_visibility_label_template" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="17sp"
-                    android:gravity="center|end"
-                    android:textColor="?attr/colorSecondary"
-                    android:id="@+id/detailWeatherVisibilityTextView"
-                    android:text="@{@string/detail_weather_visibility_template(detailWeather.component5())}" />
-            </TableRow>
-
-            <View
-                android:layout_width="260dp"
-                android:layout_gravity="center_horizontal"
-                android:layout_height="1dp"
-                android:layout_margin="3dp"
-                android:background="?attr/colorSecondaryVariant" />
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:src="@drawable/ic_pressure"
-                    android:contentDescription="@string/app_name" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:layout_marginStart="10dp"
-                    android:textSize="17sp"
-                    android:gravity="center_vertical"
-                    android:text="@string/detail_weather_pressure_label_template" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:textSize="17sp"
-                    android:gravity="center|end"
-                    android:textColor="?attr/colorSecondary"
-                    android:id="@+id/detailWeatherPressureTextView"
-                    android:text="@{@string/detail_weather_pressure_template(detailWeather.component6())}" />
-            </TableRow>
-
-        </TableLayout>
-
-        <TableLayout
+        <github.hotstu.autoskeleton.SkeletonLinearLayout
+            android:id="@+id/skeletonLinearLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:background="@drawable/background_round"
-            android:layout_gravity="center"
             android:layout_margin="20dp"
             android:padding="20dp"
-            android:stretchColumns="2"
-            android:backgroundTint="?attr/colorPrimary">
+            android:backgroundTint="?attr/colorPrimary"
+            android:layout_gravity="center">
 
-            <TextView
+
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/detail_weather_astro_label"
-                android:textSize="18sp"/>
+                android:stretchColumns="2">
 
-            <TableRow
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/detailWeatherConditionIcon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_cloud_test"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:textSize="17sp"
+                        android:gravity="center_vertical"
+                        android:text="@string/current_weather" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="17sp"
+                        android:textColor="?attr/colorSecondary"
+                        android:gravity="center_vertical|end"
+                        android:id="@+id/detailWeatherConditionTextView"
+                        android:text='@{detailWeather.component1().condition, default = ""}' />
+                </TableRow>
+
+                <View
+                    android:layout_width="260dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="1dp"
+                    android:layout_margin="3dp"
+                    android:background="?attr/colorSecondaryVariant" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/detailWeatherTemperatureIcon"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_cloud_test"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:textSize="17sp"
+                        android:gravity="center_vertical"
+                        android:text="@string/temperature" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="17sp"
+                        android:gravity="center_vertical|end"
+                        android:textColor="?attr/colorSecondary"
+                        android:id="@+id/detailWeatherCurrentTemperature"
+                        android:text="@{@string/detail_weather_current_t_template(detailWeather.component1().temp)}" />
+                </TableRow>
+
+                <View
+                    android:layout_width="260dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="1dp"
+                    android:layout_margin="3dp"
+                    android:background="?attr/colorSecondaryVariant" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_wind"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:textSize="17sp"
+                        android:gravity="center_vertical"
+                        android:text="@string/detail_weather_wind_label_template" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="17sp"
+                        android:gravity="center|end"
+                        android:textColor="?attr/colorSecondary"
+                        android:id="@+id/detailWeatherWindSpeedTextView"
+                        android:text="@{@string/detail_weather_wind_template(detailWeather.component1().windSpeed, detailWeather.component1().windDirection)}" />
+                </TableRow>
+
+                <View
+                    android:layout_width="260dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="1dp"
+                    android:layout_margin="3dp"
+                    android:background="?attr/colorSecondaryVariant" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_precipitation"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:textSize="17sp"
+                        android:gravity="center_vertical"
+                        android:text="@string/detail_weather_precipitation_label_template" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="17sp"
+                        android:gravity="center|end"
+                        android:textColor="?attr/colorSecondary"
+                        android:id="@+id/detailWeatherPrecipitationTextView"
+                        android:text="@{@string/detail_weather_precipitation_template(detailWeather.component3())}" />
+                </TableRow>
+
+                <View
+                    android:layout_width="260dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="1dp"
+                    android:layout_margin="3dp"
+                    android:background="?attr/colorSecondaryVariant" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_humidity"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:textSize="17sp"
+                        android:gravity="center_vertical"
+                        android:text="@string/detail_weather_humidity_label_template" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="17sp"
+                        android:gravity="center|end"
+                        android:textColor="?attr/colorSecondary"
+                        android:id="@+id/detailWeatherHumidityTextView"
+                        android:text="@{@string/detail_weather_humidity_template(detailWeather.component4())}" />
+                </TableRow>
+
+                <View
+                    android:layout_width="260dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="1dp"
+                    android:layout_margin="3dp"
+                    android:background="?attr/colorSecondaryVariant" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_visibility"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:textSize="17sp"
+                        android:gravity="center_vertical"
+                        android:text="@string/detail_weather_visibility_label_template" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="17sp"
+                        android:gravity="center|end"
+                        android:textColor="?attr/colorSecondary"
+                        android:id="@+id/detailWeatherVisibilityTextView"
+                        android:text="@{@string/detail_weather_visibility_template(detailWeather.component5())}" />
+                </TableRow>
+
+                <View
+                    android:layout_width="260dp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_height="1dp"
+                    android:layout_margin="3dp"
+                    android:background="?attr/colorSecondaryVariant" />
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@drawable/ic_pressure"
+                        android:contentDescription="@string/app_name" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginStart="10dp"
+                        android:textSize="17sp"
+                        android:gravity="center_vertical"
+                        android:text="@string/detail_weather_pressure_label_template" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:textSize="17sp"
+                        android:gravity="center|end"
+                        android:textColor="?attr/colorSecondary"
+                        android:id="@+id/detailWeatherPressureTextView"
+                        android:text="@{@string/detail_weather_pressure_template(detailWeather.component6())}" />
+                </TableRow>
+
+            </TableLayout>
+        </github.hotstu.autoskeleton.SkeletonLinearLayout>
+
+
+        <github.hotstu.autoskeleton.SkeletonLinearLayout
+            android:id="@+id/skeletonLinearLayoutAstro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/background_round"
+            android:layout_margin="20dp"
+            android:padding="20dp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:layout_gravity="center">
+
+
+            <TableLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_sunset"
-                    android:layout_gravity="start"
-                    android:contentDescription="@string/astro_sun_image_content_description" />
+                android:orientation="vertical"
+                android:stretchColumns="2">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/detailWeatherSunriseTextView"
-                    android:text="@{detailWeather.component2().component1()}"
-                    android:gravity="center_vertical" />
+                    android:layout_height="wrap_content"
+                    android:text="@string/detail_weather_astro_label"
+                    android:textSize="18sp"/>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_sunset"
+                        android:layout_gravity="start"
+                        android:contentDescription="@string/astro_sun_image_content_description" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/detailWeatherSunriseTextView"
+                        android:text="@{detailWeather.component2().component1()}"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/detailWeatherSunsetTextView"
+                        android:text="@{detailWeather.component2().component2()}"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="0dp"
+                        android:gravity="center_vertical" />
+                </TableRow>
+
+                <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:src="@drawable/ic_moonrise"
+                        android:layout_gravity="start"
+                        android:contentDescription="@string/astro_moon_image_content_description" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/detailWeatherMoonriseTextView"
+                        android:text="@{detailWeather.component2().component3()}"
+                        android:gravity="center_vertical" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/detailWeatherMoonsetTextView"
+                        android:text="@{detailWeather.component2().component4()}"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="0dp"
+                        android:gravity="center_vertical" />
+                </TableRow>
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/detailWeatherSunsetTextView"
-                    android:text="@{detailWeather.component2().component2()}"
-                    android:layout_marginStart="20dp"
-                    android:gravity="center_vertical" />
-            </TableRow>
-
-            <TableRow
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@drawable/ic_moonrise"
-                    android:layout_gravity="start"
-                    android:contentDescription="@string/astro_moon_image_content_description" />
+                    android:layout_height="wrap_content"
+                    android:id="@+id/detailWeatherMoonPhaseTextView"
+                    android:text="@{@string/detail_weather_moon_phase_template(detailWeather.component2().component5())}" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/detailWeatherMoonriseTextView"
-                    android:text="@{detailWeather.component2().component3()}"
-                    android:gravity="center_vertical" />
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/detailWeatherMoonsetTextView"
-                    android:text="@{detailWeather.component2().component4()}"
-                    android:layout_marginStart="20dp"
-                    android:gravity="center_vertical" />
-            </TableRow>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/detailWeatherMoonPhaseTextView"
-                android:text="@{@string/detail_weather_moon_phase_template(detailWeather.component2().component5())}" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/detailWeatherMoonIlluminationTextView"
-                android:text="@{@string/detail_weather_moon_illumination_template(detailWeather.component2().component6())}" />
-        </TableLayout>
-
-    </github.hotstu.autoskeleton.SkeletonLinearLayout>
-
-<!--    <LinearLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:orientation="vertical">-->
+                    android:layout_height="wrap_content"
+                    android:id="@+id/detailWeatherMoonIlluminationTextView"
+                    android:text="@{@string/detail_weather_moon_illumination_template(detailWeather.component2().component6())}" />
+            </TableLayout>
+        </github.hotstu.autoskeleton.SkeletonLinearLayout>
 
 
-<!--    </LinearLayout>-->
+
+    </LinearLayout>
 </layout>

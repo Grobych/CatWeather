@@ -50,6 +50,7 @@ class DetailWeatherFragment : Fragment(), UpdateInterface {
         viewModel.detailDayWeather.observe(viewLifecycleOwner, {
                 updated ->
             binding.skeletonLinearLayout.hideSkeleton()
+            binding.skeletonLinearLayoutAstro.hideSkeleton()
             binding.detailWeather = updated
             updateConditionIcon(updated.current.code)
             updateTemperatureIcon(updated.current.temp)
