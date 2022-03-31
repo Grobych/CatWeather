@@ -29,6 +29,9 @@ class LocationFragment : Fragment() {
     private lateinit var viewModel: LocationViewModel
     private lateinit var fusedLocationClient : FusedLocationProviderClient
 
+    private lateinit var textView: TextView
+    private lateinit var editText: EditText
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,40 +43,17 @@ class LocationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity as Activity)
         viewModel = LocationViewModel.getInstance(this.requireActivity().application)
-
-        val textView = getView()?.findViewById(R.id.locationTextView) as TextView
-        val editText = getView()?.findViewById(R.id.locationTextEdit) as EditText
-
-        val layout = getView()?.findViewById(R.id.locationLinearLayout) as LinearLayout
-        layout.setOnClickListener {
-            if (editText.visibility == GONE){
-                textView.visibility = GONE
-                editText.visibility = VISIBLE
-                editText.text.clear()
-                editText.requestFocus()
-            }
-        }
-        editText.setOnEditorActionListener(OnEditorActionListener { v, actionId, _ ->
-            val input : String
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                input = v.text.toString()
-                Log.d("LOCATION INPUT", "Post $input")
-                viewModel.location.postValue(input)
-                KeyboardUtil.closeKeyboard(requireActivity())
-                editText.clearFocus()
-                editText.visibility = GONE
-                textView.visibility = VISIBLE
-                KeyboardUtil.openKeyboard(requireActivity())
-                return@OnEditorActionListener true
-            }
-            false // pass on to other listeners.
-        })
-
         viewModel.fusedLocationClient = fusedLocationClient
-        viewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
-            textView.text = updatedLocation
-        })
 
+        textView = view.findViewById(R.id.locationTextView) as TextView
+        editText = view.findViewById(R.id.locationTextEdit) as EditText
+
+        setListeners()
+        requestPermissions()
+        setObserver()
+    }
+
+    private fun requestPermissions(){
         val locationPermissionRequest = registerForActivityResult(
             ActivityResultContracts.RequestMultiplePermissions()
         ) { permissions ->
@@ -113,7 +93,6 @@ class LocationFragment : Fragment() {
             )
         )
     }
-
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -123,5 +102,36 @@ class LocationFragment : Fragment() {
             Log.d(tag,"Permission granted")
             if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
         }
+    }
+    private fun setListeners(){
+        val layout = view?.findViewById(R.id.locationLinearLayout) as LinearLayout
+        layout.setOnClickListener {
+            if (editText.visibility == GONE){
+                textView.visibility = GONE
+                editText.visibility = VISIBLE
+                editText.text.clear()
+                editText.requestFocus()
+            }
+        }
+        editText.setOnEditorActionListener(OnEditorActionListener { v, actionId, _ ->
+            val input : String
+            if (actionId == EditorInfo.IME_ACTION_DONE) {
+                input = v.text.toString()
+                Log.d("LOCATION INPUT", "Post $input")
+                viewModel.location.postValue(input)
+                KeyboardUtil.closeKeyboard(requireActivity())
+                editText.clearFocus()
+                editText.visibility = GONE
+                textView.visibility = VISIBLE
+                KeyboardUtil.openKeyboard(requireActivity())
+                return@OnEditorActionListener true
+            }
+            false // pass on to other listeners.
+        })
+    }
+    private fun setObserver(){
+        viewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
+            textView.text = updatedLocation
+        })
     }
 }
