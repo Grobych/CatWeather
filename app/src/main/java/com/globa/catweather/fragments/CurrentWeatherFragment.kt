@@ -10,7 +10,6 @@ import com.globa.catweather.R
 import com.globa.catweather.databinding.CurrentWeatherFragmentBinding
 import com.globa.catweather.interfaces.UpdateInterface
 import com.globa.catweather.models.WeatherCodes
-import com.globa.catweather.models.WeatherDrawable
 import com.globa.catweather.models.WeatherIcon
 import com.globa.catweather.viewmodels.CurrentWeatherViewModel
 import com.globa.catweather.viewmodels.LocationViewModel
@@ -18,7 +17,6 @@ import com.globa.catweather.network.NetworkUtil
 import com.globa.catweather.notifications.NotificationUtil
 import com.globa.catweather.utils.ImageUtil
 import github.hotstu.autoskeleton.SkeletonDelegate
-import kotlin.random.Random
 
 
 class CurrentWeatherFragment : Fragment(), UpdateInterface {
@@ -57,7 +55,9 @@ class CurrentWeatherFragment : Fragment(), UpdateInterface {
             updateImage(updated.code)
             updateIcon(updated.code)
 
-            NotificationUtil.postCurrentWeatherNotification(this.requireContext(),updated)
+            val icon : Drawable =
+                (viewModel.currentImageDrawable ?: ContextCompat.getDrawable(this.requireContext(),R.drawable.ic_cloud_test)) as Drawable
+            NotificationUtil.postCurrentWeatherNotification(this.requireContext(),updated, icon)
         })
     }
 
