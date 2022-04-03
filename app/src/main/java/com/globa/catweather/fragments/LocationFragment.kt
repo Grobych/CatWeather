@@ -2,6 +2,8 @@ package com.globa.catweather.fragments
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -23,6 +25,16 @@ import com.globa.catweather.utils.KeyboardUtil
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import android.content.Intent
+
+import android.content.DialogInterface
+
+import android.location.LocationManager
+import android.provider.Settings
+import androidx.lifecycle.ViewModelProvider
+import com.globa.catweather.services.LocationUpdateService
+import com.globa.catweather.viewmodels.DetailWeatherViewModel
+import java.lang.Exception
 
 
 class LocationFragment : Fragment() {
@@ -50,7 +62,10 @@ class LocationFragment : Fragment() {
 
         setListeners()
         requestPermissions()
+        checkLocationProvider()
         setObserver()
+
+//        activity!!.startService(Intent(context,LocationUpdateService::class.java))
     }
 
     private fun requestPermissions(){
@@ -60,7 +75,7 @@ class LocationFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 when {
                     permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                        viewModel.locationRequestInit()
+                        viewModel.locationRequest()
                     }
                     permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                         // Only approximate location access granted.
@@ -83,7 +98,7 @@ class LocationFragment : Fragment() {
                         this.requireContext().resources.getInteger(R.integer.location_permission_code)
                     )
                 } else {
-                    viewModel.locationRequestInit()
+                    viewModel.locationRequest()
                 }
             }
         }
@@ -100,7 +115,7 @@ class LocationFragment : Fragment() {
     ) {
         if ((requestCode == R.integer.location_permission_code) && (permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION))){
             Log.d(tag,"Permission granted")
-            if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
+            if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequest()
         }
     }
     private fun setListeners(){
@@ -133,5 +148,38 @@ class LocationFragment : Fragment() {
         viewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
             textView.text = updatedLocation
         })
+    }
+    private fun checkLocationProvider(){
+        val lm = context!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        var gpsEnabled = false
+        var networkEnabled = false
+
+        try {
+            gpsEnabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        } catch (ex: Exception) {
+        }
+
+        try {
+            networkEnabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        } catch (ex: Exception) {
+        }
+
+        if (!gpsEnabled && !networkEnabled) {
+            // notify user
+            AlertDialog.Builder(context)
+                .setMessage(R.string.gps_network_not_enabled)
+                .setPositiveButton(R.string.open_location_settings,
+                    DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
+                        context!!.startActivity(
+                            Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                        )
+                    })
+                .setNegativeButton(R.string.Cancel, null)
+                .show()
+        }
+    }
+
+    fun locationRequest(){
+        viewModel.locationRequest()
     }
 }
