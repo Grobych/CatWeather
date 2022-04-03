@@ -7,12 +7,16 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
+import android.graphics.BitmapFactory
+import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationCompat
+import androidx.core.graphics.drawable.toBitmap
 import com.globa.catweather.R
 import com.globa.catweather.activities.MainActivity
 import com.globa.catweather.models.Weather
+import com.globa.catweather.utils.ImageUtil
 
 object NotificationUtil {
 
@@ -43,7 +47,7 @@ object NotificationUtil {
         )
     }
 
-    private fun getCurrentWeatherNotification(context: Context, weather : Weather) : Notification{
+    private fun getCurrentWeatherNotification(context: Context, weather : Weather, icon : Drawable) : Notification{
         if (!initialized) init(context)
 
         val builder =  NotificationCompat.Builder(context, channelId)
@@ -59,20 +63,22 @@ object NotificationUtil {
 
         builder.setContentIntent(pendingIntent)
         builder.setSmallIcon(R.drawable.ic_cloud_test)
-        builder.setContentTitle("Title")
+        builder.setContentTitle(context.getString(R.string.current_weather_temperature_template,weather.temp))
         builder.setContentText("Feels like: " + context.getString(R.string.current_weather_feelslike_template,weather.feelsLike))
         builder.priority = Notification.PRIORITY_DEFAULT
         builder.setStyle(bigText)
         builder.setContentIntent(pendingIntent)
+        builder.setLargeIcon(icon.toBitmap())
+        builder.setAutoCancel(true)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             builder.setChannelId(channelId)
         }
         return builder.build()
     }
-    fun postCurrentWeatherNotification(context: Context, weather: Weather){
+    fun postCurrentWeatherNotification(context: Context, weather: Weather, icon: Drawable){
         if (!initialized) init(context)
         notificationManager.notify(currentWeatherNotificationId,
-            getCurrentWeatherNotification(context, weather)
+            getCurrentWeatherNotification(context, weather, icon)
         )
     }
 
