@@ -75,7 +75,7 @@ class LocationFragment : Fragment() {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 when {
                     permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                        viewModel.locationRequest()
+                        viewModel.locationRequestInit()
                     }
                     permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
                         // Only approximate location access granted.
@@ -98,7 +98,7 @@ class LocationFragment : Fragment() {
                         this.requireContext().resources.getInteger(R.integer.location_permission_code)
                     )
                 } else {
-                    viewModel.locationRequest()
+                    viewModel.locationRequestInit()
                 }
             }
         }
@@ -115,7 +115,7 @@ class LocationFragment : Fragment() {
     ) {
         if ((requestCode == R.integer.location_permission_code) && (permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION))){
             Log.d(tag,"Permission granted")
-            if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequest()
+            if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
         }
     }
     private fun setListeners(){
@@ -180,6 +180,6 @@ class LocationFragment : Fragment() {
     }
 
     fun locationRequest(){
-        viewModel.locationRequest()
+        viewModel.locationRequestInit()
     }
 }
