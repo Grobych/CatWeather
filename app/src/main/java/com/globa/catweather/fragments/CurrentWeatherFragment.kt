@@ -15,7 +15,7 @@ import com.globa.catweather.models.WeatherIcon
 import com.globa.catweather.viewmodels.CurrentWeatherViewModel
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.globa.catweather.network.NetworkUtil
-import com.globa.catweather.notifications.CurrentWeatherNotification
+import com.globa.catweather.notifications.NotificationUtil
 import github.hotstu.autoskeleton.SkeletonDelegate
 import kotlin.random.Random
 
@@ -52,10 +52,11 @@ class CurrentWeatherFragment : Fragment(), UpdateInterface {
         viewModel.currentWeather.observe(viewLifecycleOwner, {
                 updated ->
             binding.skeletonLinearLayout.hideSkeleton()
-            CurrentWeatherNotification().generateCurrentWeatherNotification(this.requireContext(),updated)
             binding.weather = updated
             updateImage(updated.code)
             updateIcon(updated.code)
+
+            NotificationUtil.postCurrentWeatherNotification(this.requireContext(),updated)
         })
     }
 

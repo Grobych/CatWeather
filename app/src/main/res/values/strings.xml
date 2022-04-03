@@ -45,4 +45,8 @@
     <!--    forecast weather fragment item-->
 
     <string name="no_network_connection">No network connection. Please, turn it on.</string>
+    <string name="Cancel">Cancel</string>
+    <string name="gps_network_not_enabled">GPS is not enabled. Please, turn it on.</string>
+    <string name="open_location_settings">Open setting...</string>
+    <string name="notificationChannelName">CatWeather notification channel</string>
 </resources>
