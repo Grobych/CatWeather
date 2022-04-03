@@ -16,6 +16,7 @@ import com.globa.catweather.viewmodels.CurrentWeatherViewModel
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.globa.catweather.network.NetworkUtil
 import com.globa.catweather.notifications.NotificationUtil
+import com.globa.catweather.utils.ImageUtil
 import github.hotstu.autoskeleton.SkeletonDelegate
 import kotlin.random.Random
 
@@ -72,26 +73,13 @@ class CurrentWeatherFragment : Fragment(), UpdateInterface {
         }
     }
 
-    private fun getByCode(code: Int) : Drawable?{
-        val weatherStatus = WeatherCodes().getByCode(code)
-        val arrayId = WeatherDrawable.map[weatherStatus]
-        return if (arrayId != null){
-            val ta = resources.obtainTypedArray(arrayId)
-            val id = ta.getResourceId(Random.nextInt(ta.length()),0)
-            ta.recycle()
-            ContextCompat.getDrawable(this.requireContext(), id)
-        }else{
-            ContextCompat.getDrawable(this.requireContext(), R.drawable.cat_weather_test)
-        }
-    }
-
     private fun updateImage(code : Int){
         val drawable : Drawable?
         val status = WeatherCodes().getByCode(code)
         if ((viewModel.currentType != null) && (viewModel.currentType == status)){
             drawable = viewModel.currentImageDrawable
         } else{
-            drawable = getByCode(code)
+            drawable = ImageUtil.getByCode(code,requireContext())
             viewModel.currentType = status
             viewModel.currentImageDrawable = drawable
         }
