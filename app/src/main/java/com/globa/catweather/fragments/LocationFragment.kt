@@ -31,13 +31,13 @@ import android.content.DialogInterface
 
 import android.location.LocationManager
 import android.provider.Settings
-import androidx.lifecycle.ViewModelProvider
-import com.globa.catweather.services.LocationUpdateService
-import com.globa.catweather.viewmodels.DetailWeatherViewModel
+import com.globa.catweather.utils.LocationPermissionsUtil
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
 import java.lang.Exception
 
 
-class LocationFragment : Fragment() {
+class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var viewModel: LocationViewModel
     private lateinit var fusedLocationClient : FusedLocationProviderClient
 
@@ -65,59 +65,39 @@ class LocationFragment : Fragment() {
         checkLocationProvider()
         setObserver()
 
+        viewModel.locationRequestInit()
+
 //        activity!!.startService(Intent(context,LocationUpdateService::class.java))
     }
 
     private fun requestPermissions(){
-        val locationPermissionRequest = registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                when {
-                    permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                        viewModel.locationRequestInit()
-                    }
-                    permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                        // Only approximate location access granted.
-                    }
-                    else -> {
-                        Toast.makeText(this.requireContext(), "No permissions", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-            } else {
-                if (ActivityCompat.checkSelfPermission(
-                        this.requireContext(),
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    )
-                    != PackageManager.PERMISSION_GRANTED
-                ) {
-                    ActivityCompat.requestPermissions(
-                        this.requireActivity(),
-                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                        this.requireContext().resources.getInteger(R.integer.location_permission_code)
-                    )
-                } else {
-                    viewModel.locationRequestInit()
-                }
-            }
-        }
-        locationPermissionRequest.launch(
-            arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-        )
+        LocationPermissionsUtil.requestPermissions(context!!,activity!!)
     }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
         grantResults: IntArray
     ) {
-        if ((requestCode == R.integer.location_permission_code) && (permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION))){
-            Log.d(tag,"Permission granted")
-            if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        Log.d(tag,"Permission granted")
+        if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if(EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            AppSettingsDialog.Builder(this).build().show()
+        } else {
+            requestPermissions()
         }
     }
+
+
+
     private fun setListeners(){
         val layout = view?.findViewById(R.id.locationLinearLayout) as LinearLayout
         layout.setOnClickListener {
