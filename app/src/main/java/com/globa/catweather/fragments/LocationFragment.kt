@@ -92,7 +92,7 @@ class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         Log.d(tag,"Permission granted")
-        if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
+//        if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
@@ -164,9 +164,5 @@ class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
                 .setNegativeButton(R.string.Cancel, null)
                 .show()
         }
-    }
-
-    fun locationRequest(){
-        viewModel.locationRequestInit()
     }
 }

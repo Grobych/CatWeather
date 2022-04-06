@@ -8,6 +8,8 @@ import android.util.Log
 import androidx.annotation.MainThread
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.globa.catweather.services.LocationBackgroundService
+import com.globa.catweather.utils.LocationUtil
 import com.google.android.gms.location.FusedLocationProviderClient
 import java.util.*
 import com.google.android.gms.location.LocationCallback
@@ -42,21 +44,13 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult) {
-                for (l in locationResult.locations) {
-                    if (l != null) {
-                        val addresses = geocoder.getFromLocation(l.latitude, l.longitude, 1)
-                        val cityName = addresses[0].locality
-                        val region = addresses[0].getAddressLine(1)
-                        val countryName = addresses[0].getAddressLine(2)
-                        Log.d(tag, "City: $cityName  Region: $region  Country: $countryName")
-                        Log.d(tag, "${location.value} :::: $cityName")
-                        if (!location.value.equals(cityName)){
-                            Log.d(tag,"Posting location")
-                            location.postValue(cityName)
-                        }
-                        Log.i(tag, "Get new location: $location")
-                    }
+                val cityName = LocationUtil.getCity(locationResult,geocoder)
+                Log.d(tag, "${location.value} :::: $cityName")
+                if (!location.value.equals(cityName)){
+                    Log.d(tag,"Posting location")
+                    location.postValue(cityName)
                 }
+                Log.i(tag, "Get new location: $location")
             }
         }
         fusedLocationClient.requestLocationUpdates(locationRequest,locationCallback,
