@@ -31,6 +31,7 @@ import android.content.DialogInterface
 
 import android.location.LocationManager
 import android.provider.Settings
+import com.globa.catweather.services.LocationBackgroundService
 import com.globa.catweather.utils.LocationPermissionsUtil
 import pub.devrel.easypermissions.AppSettingsDialog
 import pub.devrel.easypermissions.EasyPermissions
@@ -67,7 +68,13 @@ class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
 
         viewModel.locationRequestInit()
 
-//        activity!!.startService(Intent(context,LocationUpdateService::class.java))
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val res = context?.startForegroundService((Intent(context,
+                LocationBackgroundService::class.java)))
+            Log.d("SERVICE", "$res")
+        } else{
+            context!!.startService(Intent(context, LocationBackgroundService::class.java))
+        }
     }
 
     private fun requestPermissions(){
@@ -149,7 +156,7 @@ class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
             AlertDialog.Builder(context)
                 .setMessage(R.string.gps_network_not_enabled)
                 .setPositiveButton(R.string.open_location_settings,
-                    DialogInterface.OnClickListener { paramDialogInterface, paramInt ->
+                    DialogInterface.OnClickListener { _, paramInt ->
                         context!!.startActivity(
                             Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
                         )

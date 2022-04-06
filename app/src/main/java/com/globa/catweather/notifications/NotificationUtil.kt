@@ -21,7 +21,8 @@ import com.globa.catweather.utils.ImageUtil
 object NotificationUtil {
 
     private const val channelId = "CatWeatherNotificationChannel"
-    private const val currentWeatherNotificationId = 1
+    const val currentWeatherNotificationId = 1
+    const val locationServiceNotificationId = 2
     private var initialized = false
 
     private lateinit var channel: NotificationChannel
@@ -80,6 +81,29 @@ object NotificationUtil {
         notificationManager.notify(currentWeatherNotificationId,
             getCurrentWeatherNotification(context, weather, icon)
         )
+    }
+
+    fun getLocationServiceNotification(context: Context) : Notification{
+        if (!initialized) init(context)
+
+        val builder =  NotificationCompat.Builder(context, channelId)
+
+        val intent = Intent(context.applicationContext, MainActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent,0)
+
+        builder.setContentIntent(pendingIntent)
+        builder.setSmallIcon(R.drawable.ic_cloud_test)
+        builder.setContentTitle("Getting location...")
+        builder.setContentText("Tap to open app")
+        builder.priority = Notification.PRIORITY_DEFAULT
+        builder.setContentIntent(pendingIntent)
+        builder.setAutoCancel(true)
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            builder.setChannelId(channelId)
+        }
+        return builder.build()
     }
 
 }
