@@ -31,7 +31,7 @@ object WeatherRepository {
         return isAllow(city, forecastWeatherUptime)
     }
     fun isDetailAllow(city : String) : Boolean{
-       return isAllow(city, detailWeatherUptime)
+        return isAllow(city, detailWeatherUptime)
     }
     private fun isAllow(city: String, uptime : Long) :Boolean{
         return !((uptime == 0L)
@@ -50,11 +50,7 @@ object WeatherRepository {
     }
 
 
-
     fun updateCurrent(context: Context, city : String, updating : MutableLiveData<Weather>){
-        latestCity = city
-        currentWeatherUptime = System.currentTimeMillis()
-
         val url = "http://api.weatherapi.com/v1/current.json?key=ff946992f1ee4f3d80385853210111&q=$city&aqi=no"
         Log.d("WEATHER URL", url)
         val queue = Volley.newRequestQueue(context)
@@ -69,9 +65,6 @@ object WeatherRepository {
     }
 
     fun updateForecast(context: Context, city :String, updating: MutableLiveData<ArrayList<ForecastWeather>>){
-        latestCity = city
-        forecastWeatherUptime = System.currentTimeMillis()
-
         val dayNumber = context.resources.getInteger(R.integer.forecast_day_number)
         val url =
             "http://api.weatherapi.com/v1/forecast.json?key=ff946992f1ee4f3d80385853210111&q=$city&days=$dayNumber&aqi=no&alerts=no"
@@ -88,9 +81,6 @@ object WeatherRepository {
     }
 
     fun updateDetail(context: Context, city : String, updating : MutableLiveData<DetailDayWeather>){
-        latestCity = city
-        detailWeatherUptime = System.currentTimeMillis()
-
         val url =
             "http://api.weatherapi.com/v1/forecast.json?key=ff946992f1ee4f3d80385853210111&q=$city&days=1&aqi=no&alerts=no"
         Log.d("WEATHER URL", url)
@@ -116,6 +106,9 @@ object WeatherRepository {
             json.getJSONObject("condition").getString("text"),
             json.getJSONObject("condition").getInt("code"))
         updating.postValue(currentWeather)
+
+        latestCity = JSONObject(response).getJSONObject("location").getString("region")
+        currentWeatherUptime = System.currentTimeMillis()
     }
 
     private fun listenerForecast(updating: MutableLiveData<ArrayList<ForecastWeather>>, dayNumber : Int) = Response.Listener<String> { response ->
@@ -137,6 +130,9 @@ object WeatherRepository {
         }
         Log.d("REPOSITORY", "$forecastWeather")
         updating.postValue(forecastWeather)
+
+        latestCity = JSONObject(response).getJSONObject("location").getString("region")
+        forecastWeatherUptime = System.currentTimeMillis()
     }
 
     private fun listenerDetail(updating: MutableLiveData<DetailDayWeather>) = Response.Listener<String> { response ->
@@ -154,6 +150,9 @@ object WeatherRepository {
         val pressure = json.getJSONObject("current").getDouble("pressure_mb")
         detailDayWeather = DetailDayWeather(current, astro, precipitation, humidity, visibility, pressure)
         updating.postValue(detailDayWeather)
+
+        latestCity = json.getJSONObject("location").getString("region")
+        detailWeatherUptime = System.currentTimeMillis()
     }
 
     private fun getCurrent(json: JSONObject): Weather {

@@ -5,23 +5,23 @@
     <string name="current_weather">Condition</string>
     <string name="temperature">Temperature</string>
 
-<!--    images contentDescription -->
+    <!--    images contentDescription -->
     <string name="current_weather_image_content_description">Current weather condition cat</string>
     <string name="astro_sun_image_content_description">Sunrise/sunset</string>
     <string name="astro_moon_image_content_description">Moonrise/moonset</string>
-<!--    images contentDescription -->
+    <!--    images contentDescription -->
 
 
-<!--    current weather fragment-->
+    <!--    current weather fragment-->
     <string name="current_weather_temperature_template">%1$.1f° C</string>
     <string name="current_weather_feelslike_template">%1$.1f° C</string>
     <string name="current_weather_feelslike_label_template">Feels like</string>
     <string name="current_weather_wind_label">Wind</string>
     <string name="current_weather_wind_template">%1$.2fkm/h  %2$s</string>
-<!--    current weather fragment-->
+    <!--    current weather fragment-->
 
 
-<!--    detail weather fragment-->
+    <!--    detail weather fragment-->
     <string name="detail_weather_feelslike_template">Feels like %1$.1f° C</string>
     <string name="detail_weather_current_t_template">%1$.1f° C</string>
     <string name="detail_weather_wind_template">%1$.2fkm/h  %2$s</string>
@@ -37,12 +37,16 @@
     <string name="detail_weather_moon_phase_template">Moon phase is   %1s</string>
     <string name="detail_weather_moon_illumination_template">Moon illumination   %1s%%</string>
     <string name="detail_weather_astro_label">Astro:</string>
-<!--    detail weather fragment-->
+    <!--    detail weather fragment-->
 
-<!--    forecast weather fragment item-->
+    <!--    forecast weather fragment item-->
     <string name="forecast_weather_fragment_item_wind_template">Wind speed: %1$.1fkm/h</string>
     <string name="forecast_weather_fragment_item_temperature_template">Temperature: min %1$.2f° max %2$.2f° C</string>
-<!--    forecast weather fragment item-->
+    <!--    forecast weather fragment item-->
 
     <string name="no_network_connection">No network connection. Please, turn it on.</string>
+    <string name="Cancel">Cancel</string>
+    <string name="gps_network_not_enabled">GPS is not enabled. Please, turn it on.</string>
+    <string name="open_location_settings">Open setting...</string>
+    <string name="notificationChannelName">CatWeather notification channel</string>
 </resources>

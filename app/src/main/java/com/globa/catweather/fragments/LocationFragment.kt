@@ -2,6 +2,8 @@ package com.globa.catweather.fragments
 
 import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.Context
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -23,11 +25,25 @@ import com.globa.catweather.utils.KeyboardUtil
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
+import android.content.Intent
+
+import android.content.DialogInterface
+
+import android.location.LocationManager
+import android.provider.Settings
+import com.globa.catweather.services.LocationBackgroundService
+import com.globa.catweather.utils.LocationPermissionsUtil
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
+import java.lang.Exception
 
 
-class LocationFragment : Fragment() {
+class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
     private lateinit var viewModel: LocationViewModel
     private lateinit var fusedLocationClient : FusedLocationProviderClient
+
+    private lateinit var textView: TextView
+    private lateinit var editText: EditText
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,11 +56,57 @@ class LocationFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity as Activity)
         viewModel = LocationViewModel.getInstance(this.requireActivity().application)
+        viewModel.fusedLocationClient = fusedLocationClient
 
-        val textView = getView()?.findViewById(R.id.locationTextView) as TextView
-        val editText = getView()?.findViewById(R.id.locationTextEdit) as EditText
+        textView = view.findViewById(R.id.locationTextView) as TextView
+        editText = view.findViewById(R.id.locationTextEdit) as EditText
 
-        val layout = getView()?.findViewById(R.id.locationLinearLayout) as LinearLayout
+        setListeners()
+        requestPermissions()
+        checkLocationProvider()
+        setObserver()
+
+//        viewModel.locationRequestInit()
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val res = context?.startForegroundService((Intent(context,
+                LocationBackgroundService::class.java)))
+            Log.d("SERVICE", "$res")
+        } else{
+            context!!.startService(Intent(context, LocationBackgroundService::class.java))
+        }
+    }
+
+    private fun requestPermissions(){
+        LocationPermissionsUtil.requestPermissions(context!!,activity!!)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        Log.d(tag,"Permission granted")
+//        if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        if(EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            AppSettingsDialog.Builder(this).build().show()
+        } else {
+            requestPermissions()
+        }
+    }
+
+
+
+    private fun setListeners(){
+        val layout = view?.findViewById(R.id.locationLinearLayout) as LinearLayout
         layout.setOnClickListener {
             if (editText.visibility == GONE){
                 textView.visibility = GONE
@@ -68,60 +130,39 @@ class LocationFragment : Fragment() {
             }
             false // pass on to other listeners.
         })
-
-        viewModel.fusedLocationClient = fusedLocationClient
+    }
+    private fun setObserver(){
         viewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
             textView.text = updatedLocation
         })
-
-        val locationPermissionRequest = registerForActivityResult(
-            ActivityResultContracts.RequestMultiplePermissions()
-        ) { permissions ->
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                when {
-                    permissions.getOrDefault(Manifest.permission.ACCESS_FINE_LOCATION, false) -> {
-                        viewModel.locationRequestInit()
-                    }
-                    permissions.getOrDefault(Manifest.permission.ACCESS_COARSE_LOCATION, false) -> {
-                        // Only approximate location access granted.
-                    }
-                    else -> {
-                        Toast.makeText(this.requireContext(), "No permissions", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-                }
-            } else {
-                if (ActivityCompat.checkSelfPermission(
-                        this.requireContext(),
-                        Manifest.permission.ACCESS_FINE_LOCATION
-                    )
-                    != PackageManager.PERMISSION_GRANTED
-                ) {
-                    ActivityCompat.requestPermissions(
-                        this.requireActivity(),
-                        arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
-                        this.requireContext().resources.getInteger(R.integer.location_permission_code)
-                    )
-                } else {
-                    viewModel.locationRequestInit()
-                }
-            }
-        }
-        locationPermissionRequest.launch(
-            arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION
-            )
-        )
     }
+    private fun checkLocationProvider(){
+        val lm = context!!.getSystemService(Context.LOCATION_SERVICE) as LocationManager
+        var gpsEnabled = false
+        var networkEnabled = false
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        if ((requestCode == R.integer.location_permission_code) && (permissions.contains(Manifest.permission.ACCESS_FINE_LOCATION))){
-            Log.d(tag,"Permission granted")
-            if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
+        try {
+            gpsEnabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER)
+        } catch (ex: Exception) {
+        }
+
+        try {
+            networkEnabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER)
+        } catch (ex: Exception) {
+        }
+
+        if (!gpsEnabled && !networkEnabled) {
+            // notify user
+            AlertDialog.Builder(context)
+                .setMessage(R.string.gps_network_not_enabled)
+                .setPositiveButton(R.string.open_location_settings,
+                    DialogInterface.OnClickListener { _, paramInt ->
+                        context!!.startActivity(
+                            Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                        )
+                    })
+                .setNegativeButton(R.string.Cancel, null)
+                .show()
         }
     }
 }

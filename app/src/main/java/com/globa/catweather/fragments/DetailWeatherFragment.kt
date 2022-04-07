@@ -38,6 +38,7 @@ class DetailWeatherFragment : Fragment(), UpdateInterface {
         locationViewModel = LocationViewModel.getInstance(this.requireActivity().application)
         weatherUpdateObserver()
         updateDetailWeather()
+        locationChangedObserver()
     }
 
     private fun updateDetailWeather() {
@@ -48,12 +49,18 @@ class DetailWeatherFragment : Fragment(), UpdateInterface {
     private fun weatherUpdateObserver() {
         viewModel.detailDayWeather.observe(viewLifecycleOwner, {
                 updated ->
+            binding.skeletonLinearLayout.hideSkeleton()
+            binding.skeletonLinearLayoutAstro.hideSkeleton()
             binding.detailWeather = updated
             updateConditionIcon(updated.current.code)
             updateTemperatureIcon(updated.current.temp)
         })
     }
 
+    private fun locationChangedObserver(){
+        locationViewModel.location.observe(viewLifecycleOwner, { updatedLocation ->
+            if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.updateWeather(this.requireContext(),updatedLocation) })
+    }
     private fun updateConditionIcon(code : Int){
         val id = WeatherIcon.getByWeatherStatus(WeatherCodes().getByCode(code))
         val icon = if (id != null) {
