@@ -17,6 +17,7 @@
         tools:listitem="@layout/forecast_weather_fragment_item"
         android:id="@+id/forecastWeatherRecyclerView"
         app:layoutManager="LinearLayoutManager"
+
         >
 
     </androidx.recyclerview.widget.RecyclerView>
