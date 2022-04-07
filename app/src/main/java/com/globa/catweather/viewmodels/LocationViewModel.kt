@@ -2,6 +2,7 @@ package com.globa.catweather.viewmodels
 
 import android.annotation.SuppressLint
 import android.app.Application
+import android.content.Context
 import android.location.Geocoder
 import android.os.Looper
 import android.util.Log
@@ -9,6 +10,7 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.globa.catweather.services.LocationBackgroundService
+import com.globa.catweather.utils.LocationPermissionsUtil
 import com.globa.catweather.utils.LocationUtil
 import com.google.android.gms.location.FusedLocationProviderClient
 import java.util.*
@@ -37,24 +39,29 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
     }
 
     @SuppressLint("MissingPermission")
-    fun locationRequestInit(){
-        locationRequest = LocationRequest.create()
-        locationRequest.priority = LocationRequest.PRIORITY_HIGH_ACCURACY
-        locationRequest.interval = TimeUnit.MINUTES.toMillis(30)
-
-        locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                val cityName = LocationUtil.getCity(locationResult,geocoder)
-                Log.d(tag, "${location.value} :::: $cityName")
-                if (!location.value.equals(cityName)){
-                    Log.d(tag,"Posting location")
-                    location.postValue(cityName)
-                }
-                Log.i(tag, "Get new location: $location")
+    fun locationRequestInit(context: Context){
+        if(LocationPermissionsUtil.hasLocationPermissions(context)) {
+            val request = LocationRequest().apply {
+                interval = TimeUnit.MINUTES.toMillis(30)
+                fastestInterval = TimeUnit.MINUTES.toMillis(10)
+                priority = LocationRequest.PRIORITY_HIGH_ACCURACY
             }
+            locationCallback = object : LocationCallback() {
+                override fun onLocationResult(locationResult: LocationResult) {
+                    val cityName = LocationUtil.getCity(locationResult,geocoder)
+                    Log.d(tag, "${location.value} :::: $cityName")
+                    if (!location.value.equals(cityName)){
+                        Log.d(tag,"Posting location")
+                        location.postValue(cityName)
+                    }
+                    Log.i(tag, "Get new location: $location")
+                }
+            }
+            fusedLocationClient.requestLocationUpdates(request,locationCallback,
+                Looper.getMainLooper()
+            )
         }
-        fusedLocationClient.requestLocationUpdates(locationRequest,locationCallback,
-            Looper.myLooper()!!
-        )
+
+
     }
 }
