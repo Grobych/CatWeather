@@ -1,10 +1,9 @@
 package com.globa.catweather.fragments
 
-import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.content.ComponentName
 import android.content.Context
-import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -15,20 +14,14 @@ import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.TextView.OnEditorActionListener
-import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import com.globa.catweather.R
-import com.globa.catweather.network.NetworkUtil
 import com.globa.catweather.utils.KeyboardUtil
 import com.globa.catweather.viewmodels.LocationViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import android.content.Intent
-
 import android.content.DialogInterface
-
 import android.location.LocationManager
 import android.provider.Settings
 import com.globa.catweather.services.LocationBackgroundService
@@ -67,14 +60,16 @@ class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         setObserver()
 
 //        viewModel.locationRequestInit()
-
+        val res : ComponentName?
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val res = context?.startForegroundService((Intent(context,
+            res = context?.startForegroundService((Intent(context,
                 LocationBackgroundService::class.java)))
             Log.d("SERVICE", "$res")
         } else{
-            context!!.startService(Intent(context, LocationBackgroundService::class.java))
+            res = context!!.startService(Intent(context, LocationBackgroundService::class.java))
+            Log.d("SERVICE", "$res")
         }
+        if (res == null) viewModel.locationRequestInit(context!!)
     }
 
     private fun requestPermissions(){
