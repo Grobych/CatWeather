@@ -4,6 +4,7 @@ import android.graphics.drawable.Drawable
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.view.*
+import android.view.View.VISIBLE
 import androidx.fragment.app.Fragment
 import androidx.core.content.ContextCompat
 import com.globa.catweather.R
@@ -50,6 +51,7 @@ class CurrentWeatherFragment : Fragment(), UpdateInterface {
     private fun weatherUpdateObserver() {
         viewModel.currentWeather.observe(viewLifecycleOwner, {
                 updated ->
+            binding.currentWeatherHeadBlock.visibility = VISIBLE
             binding.skeletonLinearLayout.hideSkeleton()
             binding.weather = updated
             updateImage(updated.code)
