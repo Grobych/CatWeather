@@ -12,6 +12,7 @@ import androidx.lifecycle.MutableLiveData
 import com.globa.catweather.models.Weather
 import com.globa.catweather.models.WeatherRepository
 import com.globa.catweather.notifications.NotificationUtil
+import com.globa.catweather.utils.ImageUtil
 import com.globa.catweather.utils.LocationPermissionsUtil
 import com.globa.catweather.utils.LocationUtil
 import com.globa.catweather.viewmodels.LocationViewModel
@@ -68,8 +69,8 @@ class LocationBackgroundService : LifecycleService() {
         if(isTracking) {
             if(LocationPermissionsUtil.hasLocationPermissions(this)) {
                 val request = LocationRequest().apply {
-                    interval = TimeUnit.MINUTES.toMillis(2)
-                    fastestInterval = TimeUnit.MINUTES.toMillis(1)
+                    interval = TimeUnit.MINUTES.toMillis(30)
+                    fastestInterval = TimeUnit.MINUTES.toMillis(10)
                     priority = PRIORITY_HIGH_ACCURACY
                 }
                 fusedLocationProviderClient.requestLocationUpdates(
@@ -92,6 +93,11 @@ class LocationBackgroundService : LifecycleService() {
     private val locationCallback = object : LocationCallback() {
         override fun onLocationResult(result: LocationResult) {
             super.onLocationResult(result)
+            val weather = MutableLiveData<Weather>()
+            weather.observe(this@LocationBackgroundService, { updated ->
+                NotificationUtil.postCurrentWeatherNotification(this@LocationBackgroundService,updated,
+                    ImageUtil.getByCode(updated.code,this@LocationBackgroundService)!!)
+            })
             result.locations.let { locations ->
                 for(location in locations) {
                     Log.d("LOCATION SERVICE","NEW LOCATION: ${location.latitude}, ${location.longitude}")
@@ -99,7 +105,7 @@ class LocationBackgroundService : LifecycleService() {
                     WeatherRepository.updateCurrent(
                         applicationContext,
                         LocationUtil.getCity(location,Geocoder(applicationContext, Locale.getDefault())),
-                        MutableLiveData(Weather(0.0,0.0,0.0,"","",0))
+                        weather
                     )
                 }
             }

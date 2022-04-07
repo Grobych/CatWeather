@@ -66,7 +66,7 @@ class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         checkLocationProvider()
         setObserver()
 
-        viewModel.locationRequestInit()
+//        viewModel.locationRequestInit()
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val res = context?.startForegroundService((Intent(context,
