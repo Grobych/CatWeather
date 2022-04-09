@@ -1,17 +1,28 @@
 package com.globa.catweather.activities
 
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
+import androidx.work.PeriodicWorkRequestBuilder
+import androidx.work.WorkManager
 import com.globa.catweather.R
 import com.globa.catweather.adapters.ViewPagerAdapter
+import com.globa.catweather.fragments.LocationFragment
 import com.globa.catweather.interfaces.UpdateInterface
+import com.globa.catweather.services.UpdateWorker
 import com.globa.catweather.viewmodels.MainActivityViewModel
+import pub.devrel.easypermissions.AppSettingsDialog
+import pub.devrel.easypermissions.EasyPermissions
+import java.util.concurrent.TimeUnit
 
-class MainActivity : FragmentActivity() {
+class MainActivity : FragmentActivity(), EasyPermissions.PermissionCallbacks, EasyPermissions.RationaleCallbacks {
 
     private lateinit var mainRefreshLayout : SwipeRefreshLayout
     private lateinit var viewModel : MainActivityViewModel
@@ -19,6 +30,7 @@ class MainActivity : FragmentActivity() {
     private lateinit var adapter: FragmentStateAdapter
     private lateinit var viewPager : ViewPager2
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -30,7 +42,6 @@ class MainActivity : FragmentActivity() {
         adapter = ViewPagerAdapter(this)
         viewPager = findViewById(R.id.mainViewPager)
         viewPager.adapter = adapter
-
     }
 
         private fun refreshSwipeListener(){
@@ -41,7 +52,52 @@ class MainActivity : FragmentActivity() {
         }
     }
 
+    override fun onDestroy() {
+        val workRequest = PeriodicWorkRequestBuilder<UpdateWorker>(30,TimeUnit.MINUTES).build()
+        Log.d("WORKER", "On destroy")
+        WorkManager.getInstance(this).enqueue(workRequest)
+        super.onDestroy()
+    }
+
     private fun ViewPager2.findCurrentFragment(fragmentManager: FragmentManager): Fragment? {
         return fragmentManager.findFragmentByTag("f$currentItem")
+    }
+
+    private fun requestPermissions(){
+        Log.d("LOCATION PERMISSION", "request permissions")
+        Log.d("LOCATION PERMISSION", "$this")
+//        LocationPermissionsUtil.requestPermissions(this, this)
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        Log.d("LOCATION PERMISSION", "on request permissions result: $requestCode")
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    }
+
+    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
+        Log.d("LOCATION PERMISSION","on permission granted ${perms[0]}")
+        val locationFragmentContainerView = findViewById<FragmentContainerView>(R.id.locationFragmentContainerView)
+        locationFragmentContainerView.getFragment<LocationFragment>().requestLocation()
+    }
+
+    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
+        Log.d("LOCATION PERMISSION", "on permissions denied ${perms[0]}")
+        if(EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
+            AppSettingsDialog.Builder(this).build().show()
+        }
+    }
+
+    override fun onRationaleAccepted(requestCode:Int) {
+        Log.d("LOCATION PERMISSION", "onRationaleAccepted: $requestCode")
+        val locationFragmentContainerView = findViewById<FragmentContainerView>(R.id.locationFragmentContainerView)
+        locationFragmentContainerView.getFragment<LocationFragment>().requestLocation()
+    }
+    override fun onRationaleDenied(requestCode:Int) {
+        Log.d("LOCATION PERMISSION", "onRationaleDenied: $requestCode")
     }
 }
