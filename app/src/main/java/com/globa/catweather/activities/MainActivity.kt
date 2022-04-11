@@ -52,11 +52,13 @@ class MainActivity : FragmentActivity(), EasyPermissions.PermissionCallbacks, Ea
         }
     }
 
-    override fun onDestroy() {
-        val workRequest = PeriodicWorkRequestBuilder<UpdateWorker>(30,TimeUnit.MINUTES).build()
-        Log.d("WORKER", "On destroy")
-        WorkManager.getInstance(this).enqueue(workRequest)
-        super.onDestroy()
+    override fun onStop() {
+        val workRequest = PeriodicWorkRequestBuilder<UpdateWorker>(30,TimeUnit.MINUTES)
+
+        Log.d("WORKER", "On stop")
+        WorkManager.getInstance(this).enqueue(workRequest.build())
+
+        super.onStop()
     }
 
     private fun ViewPager2.findCurrentFragment(fragmentManager: FragmentManager): Fragment? {
