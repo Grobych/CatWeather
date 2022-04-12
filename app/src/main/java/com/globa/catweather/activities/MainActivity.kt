@@ -1,8 +1,11 @@
 package com.globa.catweather.activities
 
+import android.app.PendingIntent
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.*
@@ -42,6 +45,12 @@ class MainActivity : FragmentActivity(), EasyPermissions.PermissionCallbacks, Ea
         adapter = ViewPagerAdapter(this)
         viewPager = findViewById(R.id.mainViewPager)
         viewPager.adapter = adapter
+
+        val aboutIconImageView = findViewById<ImageView>(R.id.aboutIconImageView)
+        aboutIconImageView.setOnClickListener {
+            val intent = Intent(this, AboutActivity::class.java)
+            startActivity(intent)
+        }
     }
 
         private fun refreshSwipeListener(){

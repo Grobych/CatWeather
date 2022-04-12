@@ -47,6 +47,20 @@
     <string name="no_network_connection">No network connection. Please, turn it on.</string>
     <string name="Cancel">Cancel</string>
     <string name="gps_network_not_enabled">GPS is not enabled. Please, turn it on.</string>
-    <string name="open_location_settings">Open setting...</string>
+    <string name="open_location_settings">Open setting…</string>
     <string name="notificationChannelName">CatWeather notification channel</string>
+
+    <!--    about page-->
+    <string name="aboutPageHelpText">Swipe right to get getailed and forecat weather. Double click on location to type your city manually.</string>
+    <string name="aboutPageCatOfferText">If your have good cat\'s photo for app, you can send me on email:</string>
+    <string name="mailTo">grobych@gmail.com</string>
+    <string name="aboutPageContactsText">Cantacts:</string>
+    <string name="githubToText">GitHub:</string>
+    <string name="linkedinToText">LinkedIn:</string>
+    <string name="apiPowered">"Powered by "</string>
+    <string name="weatherAPILink">Powered by <a href="https://www.weatherapi.com/">Free Weather API</a></string>
+    <string name="githubToLink">https://github.com/Grobych</string>
+    <string name="linkedinToLink">https://www.linkedin.com/in/a-globa/</string>
+    <!--    about page-->
+
 </resources>
