@@ -16,7 +16,7 @@
         tools:context=".activities.MainActivity"
         android:orientation="vertical">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
@@ -24,18 +24,19 @@
             <androidx.fragment.app.FragmentContainerView
                 android:id="@+id/locationFragmentContainerView"
                 android:name="com.globa.catweather.fragments.LocationFragment"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="start"/>
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <ImageView
                 android:id="@+id/aboutIconImageView"
+                android:layout_alignEnd="@id/locationFragmentContainerView"
                 android:layout_width="40dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="20dp"
                 android:layout_height="40dp"
-                android:src="@drawable/ic_launcher_foreground"
                 android:contentDescription="@string/app_name"
-                android:layout_gravity="center_vertical|end" />
-        </LinearLayout>
+                android:src="@drawable/ic_info2" />
+        </RelativeLayout>
 
 
 
