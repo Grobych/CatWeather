@@ -40,9 +40,17 @@
             android:orientation="vertical">
 
             <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="17sp"
+                android:textColor="?attr/colorSecondary"
+                android:id="@+id/forecastWeatherDataTextView" />
+
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_vertical|start"
+                android:textSize="17sp"
                 android:id="@+id/forecastConditionTextView"
                 android:text='@{forecast.condition, default = "Condition"}'/>
 
@@ -59,15 +67,6 @@
                 android:text='@{@string/forecast_weather_fragment_item_wind_template(forecast.maxWindSpeed)}'/>
 
         </LinearLayout>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:textSize="15sp"
-            android:textColor="?attr/colorSecondary"
-            android:gravity="end"
-            android:layout_marginTop="20dp"
-            android:id="@+id/forecastWeatherDataTextView" />
 
     </LinearLayout>
 
