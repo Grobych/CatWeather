@@ -51,10 +51,10 @@
     <string name="notificationChannelName">CatWeather notification channel</string>
 
     <!--    about page-->
-    <string name="aboutPageHelpText">Swipe right to get getailed and forecat weather. Double click on location to type your city manually.</string>
-    <string name="aboutPageCatOfferText">If your have good cat\'s photo for app, you can send me on email:</string>
+    <string name="aboutPageHelpText">Swipe right to get detailed weather and forecat. Double click on location to type your city manually.</string>
+    <string name="aboutPageCatOfferText">If your have good photos of cats for app, you can send it on email:</string>
     <string name="mailTo">grobych@gmail.com</string>
-    <string name="aboutPageContactsText">Cantacts:</string>
+    <string name="aboutPageContactsText">Contacts</string>
     <string name="githubToText">GitHub:</string>
     <string name="linkedinToText">LinkedIn:</string>
     <string name="apiPowered">"Powered by "</string>
