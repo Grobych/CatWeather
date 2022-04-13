@@ -67,7 +67,7 @@ class LocationFragment : Fragment() {
     }
 
     fun requestLocation(){
-        viewModel!!.locationRequestInit(context!!)
+        viewModel.locationRequestInit(context!!)
     }
 
 
@@ -121,12 +121,12 @@ class LocationFragment : Fragment() {
             // notify user
             AlertDialog.Builder(context)
                 .setMessage(R.string.gps_network_not_enabled)
-                .setPositiveButton(R.string.open_location_settings,
-                    DialogInterface.OnClickListener { _, paramInt ->
-                        context!!.startActivity(
-                            Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
-                        )
-                    })
+                .setPositiveButton(R.string.open_location_settings
+                ) { _, _ ->
+                    context!!.startActivity(
+                        Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS)
+                    )
+                }
                 .setNegativeButton(R.string.Cancel, null)
                 .show()
         }

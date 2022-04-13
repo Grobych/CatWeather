@@ -1,12 +1,10 @@
 package com.globa.catweather.activities
 
-import android.app.PendingIntent
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.*
 import androidx.lifecycle.ViewModelProvider
@@ -72,12 +70,6 @@ class MainActivity : FragmentActivity(), EasyPermissions.PermissionCallbacks, Ea
 
     private fun ViewPager2.findCurrentFragment(fragmentManager: FragmentManager): Fragment? {
         return fragmentManager.findFragmentByTag("f$currentItem")
-    }
-
-    private fun requestPermissions(){
-        Log.d("LOCATION PERMISSION", "request permissions")
-        Log.d("LOCATION PERMISSION", "$this")
-//        LocationPermissionsUtil.requestPermissions(this, this)
     }
 
     override fun onRequestPermissionsResult(

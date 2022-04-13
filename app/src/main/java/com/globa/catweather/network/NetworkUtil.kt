@@ -22,12 +22,4 @@ class NetworkUtil {
             false
         }
     }
-    fun isInternetAvailable(): Boolean {
-        return try {
-            val ip: InetAddress = InetAddress.getByName("google.com")
-            !ip.equals("")
-        } catch (e: Exception) {
-            false
-        }
-    }
 }

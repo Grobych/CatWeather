@@ -15,7 +15,7 @@ object LocationUtil {
         }
         return "undefined"
     }
-    fun getCity(l: Location, geocoder: Geocoder) : String{
+    private fun getCity(l: Location, geocoder: Geocoder) : String{
         val addresses = geocoder.getFromLocation(l.latitude, l.longitude, 1)
         val cityName = addresses[0].locality
         val region = addresses[0].getAddressLine(1)

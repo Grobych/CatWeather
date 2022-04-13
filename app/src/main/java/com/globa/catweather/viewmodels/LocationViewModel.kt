@@ -24,7 +24,6 @@ class LocationViewModel(application: Application) : AndroidViewModel(application
     val geocoder = Geocoder(getApplication(), Locale.getDefault())
     lateinit var fusedLocationClient : FusedLocationProviderClient
 
-    private lateinit var locationRequest: LocationRequest
     private lateinit var locationCallback: LocationCallback
 
     companion object{

@@ -1,6 +1,7 @@
 package com.globa.catweather.utils
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
 import android.os.Build
@@ -21,6 +22,7 @@ object LocationPermissionsUtil {
                 Manifest.permission.ACCESS_COARSE_LOCATION,)
         }
 
+    @SuppressLint("NonConstantResourceId")
     @AfterPermissionGranted(location_permission_code)
     fun requestPermissions(context: Context, activity: Activity) {
         if(checkSimplePermission(context)) {

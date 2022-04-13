@@ -78,7 +78,7 @@ class DetailWeatherFragment : Fragment(), UpdateInterface {
             in 5.0..25.0 -> icon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_temp_moderate)!!
             in 25.0..Double.MAX_VALUE -> icon = ContextCompat.getDrawable(this.requireContext(), R.drawable.ic_temp_high)!!
         }
-        binding.detailWeatherTemperatureIcon?.setImageDrawable(icon)
+        binding.detailWeatherTemperatureIcon.setImageDrawable(icon)
     }
 
     override fun update() {

@@ -5,6 +5,7 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.app.PendingIntent.FLAG_MUTABLE
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
@@ -21,7 +22,6 @@ object NotificationUtil {
 
     private const val channelId = "CatWeatherNotificationChannel"
     const val currentWeatherNotificationId = 1
-    const val locationServiceNotificationId = 2
     private var initialized = false
 
     private lateinit var channel: NotificationChannel
@@ -90,7 +90,7 @@ object NotificationUtil {
         val intent = Intent(context.applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent,0)
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_IMMUTABLE)
 
         builder.setContentIntent(pendingIntent)
         builder.setSmallIcon(R.drawable.ic_cloud_test)
