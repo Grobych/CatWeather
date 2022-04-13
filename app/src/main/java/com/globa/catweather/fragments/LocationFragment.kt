@@ -2,7 +2,6 @@ package com.globa.catweather.fragments
 
 import android.app.Activity
 import android.app.AlertDialog
-import android.content.ComponentName
 import android.content.Context
 import android.os.Build
 import android.os.Bundle
@@ -24,14 +23,12 @@ import android.content.Intent
 import android.content.DialogInterface
 import android.location.LocationManager
 import android.provider.Settings
-import com.globa.catweather.services.LocationBackgroundService
+import androidx.annotation.RequiresApi
 import com.globa.catweather.utils.LocationPermissionsUtil
-import pub.devrel.easypermissions.AppSettingsDialog
-import pub.devrel.easypermissions.EasyPermissions
 import java.lang.Exception
 
 
-class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
+class LocationFragment : Fragment() {
     private lateinit var viewModel: LocationViewModel
     private lateinit var fusedLocationClient : FusedLocationProviderClient
 
@@ -45,6 +42,7 @@ class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         return inflater.inflate(R.layout.location_fragment, container, false)
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(activity as Activity)
@@ -59,45 +57,18 @@ class LocationFragment : Fragment(), EasyPermissions.PermissionCallbacks {
         checkLocationProvider()
         setObserver()
 
-//        viewModel.locationRequestInit()
-        val res : ComponentName?
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            res = context?.startForegroundService((Intent(context,
-                LocationBackgroundService::class.java)))
-            Log.d("SERVICE", "$res")
-        } else{
-            res = context!!.startService(Intent(context, LocationBackgroundService::class.java))
-            Log.d("SERVICE", "$res")
-        }
-        if (res == null) viewModel.locationRequestInit(context!!)
+        if (LocationPermissionsUtil.hasLocationPermissions(context!!)) requestLocation()
     }
 
     private fun requestPermissions(){
+        Log.d("LOCATION PERMISSION", "request permissions")
+        Log.d("LOCATION PERMISSION", "$context $activity")
         LocationPermissionsUtil.requestPermissions(context!!,activity!!)
     }
 
-    override fun onRequestPermissionsResult(
-        requestCode: Int,
-        permissions: Array<out String>,
-        grantResults: IntArray
-    ) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this)
+    fun requestLocation(){
+        viewModel!!.locationRequestInit(context!!)
     }
-
-    override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
-        Log.d(tag,"Permission granted")
-//        if (NetworkUtil().isNetworkConnected(this.requireContext())) viewModel.locationRequestInit()
-    }
-
-    override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        if(EasyPermissions.somePermissionPermanentlyDenied(this, perms)) {
-            AppSettingsDialog.Builder(this).build().show()
-        } else {
-            requestPermissions()
-        }
-    }
-
 
 
     private fun setListeners(){

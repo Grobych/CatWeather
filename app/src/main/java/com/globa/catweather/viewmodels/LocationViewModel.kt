@@ -9,7 +9,6 @@ import android.util.Log
 import androidx.annotation.MainThread
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import com.globa.catweather.services.LocationBackgroundService
 import com.globa.catweather.utils.LocationPermissionsUtil
 import com.globa.catweather.utils.LocationUtil
 import com.google.android.gms.location.FusedLocationProviderClient
