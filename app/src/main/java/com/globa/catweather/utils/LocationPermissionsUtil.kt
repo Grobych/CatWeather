@@ -13,13 +13,11 @@ object LocationPermissionsUtil {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) {
             EasyPermissions.hasPermissions(
                 context,
-                Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION
             )
         } else {
             EasyPermissions.hasPermissions(
                 context,
-                Manifest.permission.ACCESS_FINE_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,)
         }
 
@@ -33,7 +31,6 @@ object LocationPermissionsUtil {
             "You need to accept location permissions to use this app.",
             context.resources.getInteger(location_permission_code),
             Manifest.permission.ACCESS_COARSE_LOCATION,
-            Manifest.permission.ACCESS_FINE_LOCATION
         )
     }
 
