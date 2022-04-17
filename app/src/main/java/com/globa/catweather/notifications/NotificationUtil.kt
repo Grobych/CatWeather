@@ -4,10 +4,11 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
+import android.app.PendingIntent.FLAG_IMMUTABLE
+import android.app.PendingIntent.FLAG_MUTABLE
 import android.content.Context
 import android.content.Context.NOTIFICATION_SERVICE
 import android.content.Intent
-import android.graphics.BitmapFactory
 import android.graphics.drawable.Drawable
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -16,13 +17,11 @@ import androidx.core.graphics.drawable.toBitmap
 import com.globa.catweather.R
 import com.globa.catweather.activities.MainActivity
 import com.globa.catweather.models.Weather
-import com.globa.catweather.utils.ImageUtil
 
 object NotificationUtil {
 
     private const val channelId = "CatWeatherNotificationChannel"
     const val currentWeatherNotificationId = 1
-    const val locationServiceNotificationId = 2
     private var initialized = false
 
     private lateinit var channel: NotificationChannel
@@ -56,7 +55,7 @@ object NotificationUtil {
         val intent = Intent(context.applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent,0)
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_IMMUTABLE)
 
         val bigText = NotificationCompat.BigTextStyle()
         bigText.setBigContentTitle(context.getString(R.string.current_weather_temperature_template,weather.temp))
@@ -83,7 +82,7 @@ object NotificationUtil {
         )
     }
 
-    fun getLocationServiceNotification(context: Context) : Notification{
+    fun getForegroundServiceNotification(context: Context) : Notification{
         if (!initialized) init(context)
 
         val builder =  NotificationCompat.Builder(context, channelId)
@@ -91,11 +90,11 @@ object NotificationUtil {
         val intent = Intent(context.applicationContext, MainActivity::class.java).apply {
             flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
         }
-        val pendingIntent = PendingIntent.getActivity(context, 0, intent,0)
+        val pendingIntent = PendingIntent.getActivity(context, 0, intent, FLAG_IMMUTABLE)
 
         builder.setContentIntent(pendingIntent)
         builder.setSmallIcon(R.drawable.ic_cloud_test)
-        builder.setContentTitle("Getting location...")
+        builder.setContentTitle("Getting weather in foreground...")
         builder.setContentText("Tap to open app")
         builder.priority = Notification.PRIORITY_DEFAULT
         builder.setContentIntent(pendingIntent)

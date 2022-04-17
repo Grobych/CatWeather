@@ -43,10 +43,8 @@ object WeatherRepository {
     fun getForecastWeather() = forecastWeather
     fun getDetailWeather() = detailDayWeather
 
-    fun setCurrentWeather(current : Weather, city: String){
-        currentWeather = current
-        latestCity = city
-        currentWeatherUptime = System.currentTimeMillis()
+    fun updateForeground(context: Context, data: MutableLiveData<Weather>){
+        if (latestCity != "") updateCurrent(context, latestCity, data)
     }
 
 
@@ -180,4 +178,5 @@ object WeatherRepository {
             jsonAstro.getString("moon_illumination"),
         )
     }
+
 }

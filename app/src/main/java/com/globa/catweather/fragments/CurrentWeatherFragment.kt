@@ -24,7 +24,6 @@ class CurrentWeatherFragment : Fragment(), UpdateInterface {
     private lateinit var binding: CurrentWeatherFragmentBinding
     private lateinit var viewModel: CurrentWeatherViewModel
     private lateinit var locationViewModel: LocationViewModel
-    lateinit var skeletonDelegate: SkeletonDelegate
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
