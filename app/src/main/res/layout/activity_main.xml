@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -21,33 +20,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <androidx.fragment.app.FragmentContainerView
-                android:id="@+id/locationFragmentContainerView"
-                android:name="com.globa.catweather.fragments.LocationFragment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
             <ImageView
                 android:id="@+id/aboutIconImageView"
-                android:layout_alignEnd="@id/locationFragmentContainerView"
                 android:layout_width="40dp"
                 android:layout_marginTop="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginEnd="20dp"
                 android:layout_height="40dp"
                 android:contentDescription="@string/app_name"
                 android:src="@drawable/ic_info2" />
         </RelativeLayout>
-
-
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/mainViewPager"
-            app:layout_constraintBottom_toTopOf="@id/locationFragmentContainerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
     </LinearLayout>
 
