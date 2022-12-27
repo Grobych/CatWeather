@@ -2,16 +2,20 @@ package com.globa.catweather.ui.current
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
+import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.globa.catweather.R
 import com.globa.catweather.ui.ScreenStateType
 import com.globa.catweather.ui.constants.BigWhiteText
 import com.globa.catweather.ui.constants.DefaultWhiteText
@@ -92,19 +96,47 @@ fun MainInfoBlockDone(
                     top = 90.dp
                 )
         ) {
-            Text(
-                text = state.weatherState,
-                style = DefaultWhiteText
-            )
-            Text(
-                text = state.windSpeed.toString(),
-                Modifier.padding(top = 20.dp, bottom = 20.dp),
-                style = DefaultWhiteText
-            )
-            Text(
-                text = state.humidity.toString(),
-                style = DefaultWhiteText
-            )
+            Row() {
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_cloud),
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.padding(end = 12.dp)
+                )
+                Text(
+                    text = state.weatherState,
+                    style = DefaultWhiteText
+                )
+            }
+
+            Row(Modifier.padding(top = 20.dp, bottom = 20.dp)) {
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_wind),
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.padding(end = 12.dp)
+                )
+                Text(
+                    text = state.windSpeed.toString(),
+                    style = DefaultWhiteText
+                )
+            }
+
+            Row {
+                Icon(
+                    imageVector = ImageVector.vectorResource(R.drawable.ic_umbrella),
+                    contentDescription = null,
+                    tint = Color.White,
+                    modifier = Modifier.padding(end = 12.dp)
+                )
+                Text(
+                    text = state.humidity.toString(),
+                    style = DefaultWhiteText
+                )
+            }
+
+
+
 
         }
 
