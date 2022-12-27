@@ -77,7 +77,7 @@ fun MainInfoBlockDone(
                     .height(140.dp)
             ) {
                 Text(
-                    text = state.temperature.toString(),
+                    text = stringResource(id = R.string.temperature_template, state.temperature),
                     style = BigWhiteText)
                 Text(
                     text = stringResource(id = R.string.feels_like, state.feelsLikeTemperature),
