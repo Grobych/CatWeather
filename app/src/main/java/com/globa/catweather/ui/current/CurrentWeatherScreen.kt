@@ -10,6 +10,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -84,7 +85,8 @@ fun MainInfoBlockDone(
                 text = state.temperature.toString(),
                 style = BigWhiteText)
             Text(
-                text = state.feelsLikeTemperature.toString(),
+                text = stringResource(id = R.string.feels_like, state.feelsLikeTemperature),
+                Modifier.fillMaxWidth(0.45f), //will fix this
                 textAlign = TextAlign.Center,
                 style = DefaultWhiteText
             )
@@ -117,7 +119,7 @@ fun MainInfoBlockDone(
                     modifier = Modifier.padding(end = 12.dp)
                 )
                 Text(
-                    text = state.windSpeed.toString(),
+                    text = stringResource(id = R.string.wind_template, state.windSpeed),
                     style = DefaultWhiteText
                 )
             }
@@ -130,7 +132,7 @@ fun MainInfoBlockDone(
                     modifier = Modifier.padding(end = 12.dp)
                 )
                 Text(
-                    text = state.humidity.toString(),
+                    text = stringResource(id = R.string.humidity_template, state.humidity),
                     style = DefaultWhiteText
                 )
             }

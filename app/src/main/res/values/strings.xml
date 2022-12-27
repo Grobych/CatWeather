@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name">Cat Weather</string>
     <string name="weather_api_key">ff946992f1ee4f3d80385853210111</string>
-
+    
+<!--    Current weather screen-->
+    <string name="feels_like">Feelslike %1$.1f°</string>
+    <string name="wind_template">%1$.1f m/sec</string>
+    <string name="humidity_template">%1$d%%</string>
 </resources>
