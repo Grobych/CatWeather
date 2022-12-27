@@ -65,11 +65,10 @@ fun MainInfoBlockDone(
         .width(Dp(360f))
         .background(
             Brush.linearGradient(
-                start = Offset(0.25f, 0.5f),
-                end = Offset(0.75f, 0.5f),
+                start = Offset(0.0f, 0.0f),
+                end = Offset(0.0f, 1000f),
                 colors = listOf(
                     Color(0xFF81BDF5),
-                    Color(0xFF7DB5F6),
                     Color(0xFF6786F4)
                 )
             )
