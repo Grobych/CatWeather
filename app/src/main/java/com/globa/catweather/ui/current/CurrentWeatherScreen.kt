@@ -25,9 +25,9 @@ fun CurrentWeatherScreen() {
     val state = CurrentWeatherScreenState(
         ScreenStateType.DONE,
         "Overcast",
-        -15f,
-        -20f,
-        5f,
+        -15,
+        -20,
+        5,
         20,
         0
     )
@@ -170,9 +170,9 @@ fun CurrentWeatherScreenPreview() {
     val state = CurrentWeatherScreenState(
         ScreenStateType.DONE,
         "Overcast",
-        -15f,
-        -20f,
-        5f,
+        -15,
+        -20,
+        5,
         20,
         0
     )
