@@ -1,10 +1,11 @@
 package com.globa.catweather.ui.current
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.imageResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.globa.catweather.R
@@ -24,7 +25,9 @@ fun MainImageBlockDone(image: Int) {
     Image(
         bitmap = ImageBitmap.imageResource(id = image),
         contentDescription = null,
-        modifier = Modifier.fillMaxSize())
+        modifier = Modifier.fillMaxWidth(),
+        contentScale = ContentScale.Crop
+    )
 }
 
 @Composable

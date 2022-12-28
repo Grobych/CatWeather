@@ -9,10 +9,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.res.vectorResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.globa.catweather.R
 import com.globa.catweather.ui.ScreenStateType
@@ -44,15 +45,18 @@ fun MainInfoBlockLoading() {
 fun MainInfoBlockDone(
     state: MainInfoBlockState
 ) {
-    Box {
+    Box(
+        Modifier
+            .requiredSize(360.dp, 280.dp)
+            .fillMaxWidth()
+    ) {
         Image(
-            imageVector = ImageVector.vectorResource(id = R.drawable.plate),
-            contentDescription = null
+            painter = painterResource(id = R.drawable.plate),
+            null,
+            modifier = Modifier.fillMaxWidth(),
+            contentScale = ContentScale.Crop
         )
-        Row(modifier = Modifier
-            .height(Dp(280f))
-            .width(Dp(360f))
-        ) {
+        Row {
             Column(
                 Modifier
                     .padding(
