@@ -42,7 +42,9 @@ fun CurrentWeatherScreenPreview() {
         width = 360.dp,
         height = 740.dp
     )) {
-        Box(modifier = Modifier.padding(top = 240.dp)){
+        Box(modifier = Modifier
+            .padding(top = 240.dp)
+        ){
             MainImageBlock(state = mainImageState)
         }
         MainInfoBlock(state = mainInfoState)
