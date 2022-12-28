@@ -22,6 +22,27 @@ val DefaultWhiteText = TextStyle(
     fontWeight = FontWeight.Normal
 )
 
+val DefaultBlackText = TextStyle(
+    color = Color(0xFF132145),
+    fontSize = 14.sp,
+    fontFamily = manropeFamily,
+    fontWeight = FontWeight.Normal
+)
+
+val BoldBlackText = TextStyle(
+    color = Color(0xFF132145),
+    fontSize = 14.sp,
+    fontFamily = manropeFamily,
+    fontWeight = FontWeight.Bold
+)
+
+val LittleBlueText = TextStyle(
+    color = Color(0xFF81BDF5),
+    fontSize = 10.sp,
+    fontFamily = manropeFamily,
+    fontWeight = FontWeight.Normal
+)
+
 val BigWhiteText = TextStyle(
     color = Color.White,
     fontSize = 64.sp,
