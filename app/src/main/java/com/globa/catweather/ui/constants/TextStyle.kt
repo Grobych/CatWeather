@@ -36,6 +36,13 @@ val BoldBlackText = TextStyle(
     fontWeight = FontWeight.Bold
 )
 
+val LightBlackText = TextStyle(
+    color = Color(0xFF132145),
+    fontSize = 14.sp,
+    fontFamily = manropeFamily,
+    fontWeight = FontWeight.Light
+)
+
 val LittleBlueText = TextStyle(
     color = Color(0xFF81BDF5),
     fontSize = 10.sp,

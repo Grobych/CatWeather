@@ -61,7 +61,7 @@ fun MainInfoBlockDone(
                 Modifier
                     .padding(
                         start = 45.dp,
-                        top = 90.dp
+                        top = 110.dp
                     )
                     .height(140.dp)
             ) {
@@ -79,7 +79,7 @@ fun MainInfoBlockDone(
                 Modifier
                     .padding(
                         start = 34.dp,
-                        top = 90.dp
+                        top = 110.dp
                     )
             ) {
                 Row(

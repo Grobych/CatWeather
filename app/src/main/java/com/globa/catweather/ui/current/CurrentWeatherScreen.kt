@@ -14,11 +14,6 @@ fun CurrentWeatherScreen() {
 
 }
 
-@Composable
-fun LocationAndDateBlock() {
-
-}
-
 @Preview
 @Composable
 fun CurrentWeatherScreenPreview() {
@@ -45,6 +40,14 @@ fun CurrentWeatherScreenPreview() {
             "20:00" to -13
         )
     )
+    val locationAndDateBlockState = LocationAndDateBlockState(
+        state = ScreenStateType.DONE,
+        location = "Minsk",
+        dayOfWeek = "Thursday",
+        dayOfMonth = 15
+    )
+
+
     Box(modifier = Modifier.size(
         width = 360.dp,
         height = 740.dp
@@ -59,6 +62,13 @@ fun CurrentWeatherScreenPreview() {
             .align(Alignment.BottomCenter)
             .fillMaxWidth()) {
             MainScreenFooterBlock(state = footerState)
+        }
+        Box(
+            modifier = Modifier
+                .align(Alignment.TopStart)
+                .padding(top = 20.dp)
+        ) {
+            LocationAndDateBlock(state = locationAndDateBlockState)
         }
     }
 }
