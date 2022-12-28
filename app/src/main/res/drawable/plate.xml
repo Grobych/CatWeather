@@ -2,9 +2,9 @@
     xmlns:aapt="http://schemas.android.com/aapt"
     xmlns:tools="http://schemas.android.com/tools"
     android:width="360dp"
-    android:height="279dp"
+    android:height="280dp"
     android:viewportWidth="360"
-    android:viewportHeight="279"
+    android:viewportHeight="280"
     tools:ignore="VectorRaster">
   <path
       android:pathData="M360,0H0V270.2C24.9,276.33 90.55,285.35 153.99,272.35C178.15,267.4 195.41,263.56 208.86,260.57C239.55,253.74 250.34,251.34 277.76,250.27C309.32,249.05 345.73,248.74 360,248.74V0Z">
@@ -13,7 +13,7 @@
           android:startX="180"
           android:startY="0"
           android:endX="180"
-          android:endY="279"
+          android:endY="280"
           android:type="linear">
         <item android:offset="0" android:color="#FF81BDF5"/>
         <item android:offset="0" android:color="#FF7DB5F6"/>
